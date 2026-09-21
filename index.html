@@ -656,8 +656,8 @@
       <div class="overview-grid">
         <div class="stat-card">
           <div class="stat-label">Active Crews / WIP</div>
-          <div class="stat-value">4 <span style="font-size:16px;color:var(--fg-muted);">/ 8 max</span></div>
-          <div class="stat-sub">Strict per-crew capacity enforced</div>
+          <div class="stat-value">6 <span style="font-size:16px;color:var(--fg-muted);">/ 12 max</span></div>
+          <div class="stat-sub">Across 7 reporting projects</div>
         </div>
         <div class="stat-card">
           <div class="stat-label">Cursor In-Flight</div>
@@ -716,28 +716,39 @@
         <div class="board-col">
           <div class="board-col-header">
             <span>1. SPEC & BRIEF</span>
-            <span class="board-col-count">2</span>
+            <span class="board-col-count">3</span>
           </div>
           <div class="card-list" data-col="spec">
-            <div class="yard-card" data-id="AUTH-201" data-agent="Cursor Agent (gpt-5.6-sol / Sonnet 5)" data-crew="Security" data-state="Spec & Brief" data-logs="[19:00:10] Spec written in openspec/specs/auth.md&#10;[19:01:20] Human PO accepted brief&#10;[19:02:00] Ready for Cursor pick" tabindex="0">
+            <div class="yard-card" data-id="AUTH-201" data-project="mowgli42/yard-console" data-agent="Cursor Agent (gpt-5.6-sol / Sonnet 5)" data-crew="Security" data-state="Spec & Brief" data-logs="[19:00:10] Spec written in openspec/specs/auth.md&#10;[19:01:20] Human PO accepted brief&#10;[19:02:00] Ready for Cursor pick" tabindex="0">
               <div class="card-meta">
                 <span class="card-id">AUTH-201</span>
                 <span class="card-runtime runtime-cursor">Cursor</span>
               </div>
               <div class="card-title">Token refresh rotation with Hyprland keyring</div>
               <div class="card-footer">
-                <span>Crew: Security</span>
+                <span style="color:var(--accent-cyan);">yard-console</span>
                 <span class="card-tokens">0 / 40k</span>
               </div>
             </div>
-            <div class="yard-card" data-id="API-205" data-agent="Cursor Agent (composer-2.5)" data-crew="Core" data-state="Spec & Brief" data-logs="[19:05:00] OpenSpec schema drafted&#10;[19:06:15] Gherkin scenarios verified&#10;[19:07:00] Ready for implementation" tabindex="0">
+            <div class="yard-card" data-id="TRAIN-301" data-project="mowgli42/bookish-train" data-agent="Cursor Agent (Sonnet 5)" data-crew="Edge Backup Fleet" data-state="Spec & Brief" data-logs="[19:15:00] Ingested backup engine timetable&#10;[19:16:00] Dispatcher API route spec defined&#10;[19:17:00] Gherkin scenarios ready" tabindex="0">
+              <div class="card-meta">
+                <span class="card-id">TRAIN-301</span>
+                <span class="card-runtime runtime-cursor">Cursor</span>
+              </div>
+              <div class="card-title">S3 switch list resume and checksum verification</div>
+              <div class="card-footer">
+                <span style="color:var(--accent-cyan);">bookish-train</span>
+                <span class="card-tokens">0 / 45k</span>
+              </div>
+            </div>
+            <div class="yard-card" data-id="API-205" data-project="mowgli42/yard-console" data-agent="Cursor Agent (composer-2.5)" data-crew="Core" data-state="Spec & Brief" data-logs="[19:05:00] OpenSpec schema drafted&#10;[19:06:15] Gherkin scenarios verified&#10;[19:07:00] Ready for implementation" tabindex="0">
               <div class="card-meta">
                 <span class="card-id">API-205</span>
                 <span class="card-runtime runtime-cursor">Cursor</span>
               </div>
               <div class="card-title">OpenSpec schema validator hook for git commit</div>
               <div class="card-footer">
-                <span>Crew: Core</span>
+                <span style="color:var(--accent-cyan);">yard-console</span>
                 <span class="card-tokens">0 / 25k</span>
               </div>
             </div>
@@ -748,28 +759,39 @@
         <div class="board-col">
           <div class="board-col-header">
             <span>2. CURSOR BUILD</span>
-            <span class="board-col-count">2</span>
+            <span class="board-col-count">3</span>
           </div>
           <div class="card-list" data-col="build">
-            <div class="yard-card alarming" data-id="CORE-104" data-agent="Cursor Cloud Agent (bc-709a / gpt-5.6-sol)" data-crew="Core Control Plane" data-state="Cursor In-Progress (2x Overrun)" data-logs="[18:40:12] Agent assigned story CORE-104&#10;[18:41:00] Pushed branch cursor/heartbeat-stream-709a&#10;[18:41:45] Opened PR #44: FastAPI heartbeat stream&#10;[18:42:05] WARNING: Token budget 2x exceeded (185,420 tokens vs 80k baseline)&#10;[18:42:06] ALERT: Repeated tool signature pytest tests/test_fastapi_stream.py (x3)&#10;[18:42:07] Local watch detector flagged card on yard board (SIG-901)" tabindex="0">
+            <div class="yard-card alarming" data-id="CORE-104" data-project="mowgli42/yard-console" data-agent="Cursor Cloud Agent (bc-709a / gpt-5.6-sol)" data-crew="Core Control Plane" data-state="Cursor In-Progress (2x Overrun)" data-logs="[18:40:12] Agent assigned story CORE-104&#10;[18:41:00] Pushed branch cursor/heartbeat-stream-709a&#10;[18:41:45] Opened PR #44: FastAPI heartbeat stream&#10;[18:42:05] WARNING: Token budget 2x exceeded (185,420 tokens vs 80k baseline)&#10;[18:42:06] ALERT: Repeated tool signature pytest tests/test_fastapi_stream.py (x3)&#10;[18:42:07] Local watch detector flagged card on yard board (SIG-901)" tabindex="0">
               <div class="card-meta">
                 <span class="card-id">CORE-104</span>
                 <span class="card-runtime runtime-cursor">Cursor</span>
               </div>
               <div class="card-title">FastAPI streaming response for heartbeat ledger</div>
               <div class="card-footer">
-                <span style="color:var(--accent-red);">⚠ Token 2x Exceeded</span>
+                <span style="color:var(--accent-red);">⚠ Token 2x (yard-console)</span>
                 <span class="card-tokens">185k / 80k</span>
               </div>
             </div>
-            <div class="yard-card" data-id="UI-301" data-agent="Cursor Local Agent (Sonnet 5)" data-crew="Desktop Integration" data-state="Cursor Build (PR Open)" data-logs="[18:20:10] Created branch cursor/tokyo-night-palette-709a&#10;[18:22:40] Implemented CSS variables and contrast checks&#10;[18:24:15] Golden eval 8/8 passing&#10;[18:25:30] PR #42 open, awaiting merge" tabindex="0">
+            <div class="yard-card" data-id="SCHW-102" data-project="mowgli42/schwerpunkt" data-agent="Cursor Agent (gemini-3.8-flash)" data-crew="OODA Orientation Core" data-state="Cursor In-Progress" data-logs="[18:35:10] Loaded world model contradiction fixtures&#10;[18:36:20] Generated LangGraph orientation phase node&#10;[18:38:00] Gherkin scenarios 5/5 passing" tabindex="0">
+              <div class="card-meta">
+                <span class="card-id">SCHW-102</span>
+                <span class="card-runtime runtime-cursor">Cursor</span>
+              </div>
+              <div class="card-title">LangGraph orientation checkpointing & world model</div>
+              <div class="card-footer">
+                <span style="color:var(--accent-cyan);">schwerpunkt</span>
+                <span class="card-tokens">38k / 60k</span>
+              </div>
+            </div>
+            <div class="yard-card" data-id="UI-301" data-project="mowgli42/yard-console" data-agent="Cursor Local Agent (Sonnet 5)" data-crew="Desktop Integration" data-state="Cursor Build (PR Open)" data-logs="[18:20:10] Created branch cursor/tokyo-night-palette-709a&#10;[18:22:40] Implemented CSS variables and contrast checks&#10;[18:24:15] Golden eval 8/8 passing&#10;[18:25:30] PR #42 open, awaiting merge" tabindex="0">
               <div class="card-meta">
                 <span class="card-id">UI-301</span>
                 <span class="card-runtime runtime-cursor">Cursor</span>
               </div>
               <div class="card-title">Tokyo Night Tokyo palette sync with Omarchy theme</div>
               <div class="card-footer">
-                <span>PR #42 open</span>
+                <span>PR #42 (yard-console)</span>
                 <span class="card-tokens">42k / 50k</span>
               </div>
             </div>
@@ -780,10 +802,21 @@
         <div class="board-col">
           <div class="board-col-header">
             <span>3. GOLDEN EVAL</span>
-            <span class="board-col-count">1</span>
+            <span class="board-col-count">2</span>
           </div>
           <div class="card-list" data-col="eval">
-            <div class="yard-card" data-id="DATA-112" data-agent="Cursor Agent (gemini-3.8-flash)" data-crew="Core" data-state="Golden Eval" data-logs="[18:10:00] Generated SQLite WAL stress test suite&#10;[18:12:30] Ran 14 eval scenarios in container&#10;[18:14:00] All 14 golden evals GREEN&#10;[18:15:00] Image tag sha-112-wal ready for Grok" tabindex="0">
+            <div class="yard-card" data-id="FUZZ-018" data-project="mowgli42/fuzzy-reconciler" data-agent="Cursor Agent (composer-2.5)" data-crew="Entity Reconciliation" data-state="Golden Eval" data-logs="[18:18:00] Temporal entity matching benchmarks executed&#10;[18:20:00] 20/20 golden eval test cases green&#10;[18:21:00] PR ready for Grok tag" tabindex="0">
+              <div class="card-meta">
+                <span class="card-id">FUZZ-018</span>
+                <span class="card-runtime runtime-cursor">Cursor</span>
+              </div>
+              <div class="card-title">Spatial candidate scoring with Svelte/FastAPI map</div>
+              <div class="card-footer">
+                <span class="badge badge-pass">Eval 20/20 (fuzzy)</span>
+                <span class="card-tokens">28k / 50k</span>
+              </div>
+            </div>
+            <div class="yard-card" data-id="DATA-112" data-project="mowgli42/yard-console" data-agent="Cursor Agent (gemini-3.8-flash)" data-crew="Core" data-state="Golden Eval" data-logs="[18:10:00] Generated SQLite WAL stress test suite&#10;[18:12:30] Ran 14 eval scenarios in container&#10;[18:14:00] All 14 golden evals GREEN&#10;[18:15:00] Image tag sha-112-wal ready for Grok" tabindex="0">
               <div class="card-meta">
                 <span class="card-id">DATA-112</span>
                 <span class="card-runtime runtime-cursor">Cursor</span>
@@ -804,14 +837,14 @@
             <span class="board-col-count">1</span>
           </div>
           <div class="card-list" data-col="ship">
-            <div class="yard-card warning" data-id="EDGE-89" data-agent="xAI Grok Release Agent (grok-4.6)" data-crew="Release & Canary" data-state="Grok Canary (10% Traffic)" data-logs="[18:30:00] Tagged v1.4.2-rc1 (commit 983095c)&#10;[18:31:00] Dispatched canary rollout to edge nodes (10% traffic)&#10;[18:40:00] Canary health score: 99.8% (0.02% error variance)&#10;[18:45:00] 15m soak elapsed; armed rollback target: v1.4.1-stable" tabindex="0">
+            <div class="yard-card warning" data-id="EDGE-89" data-project="mowgli42/yard-console" data-agent="xAI Grok Release Agent (grok-4.6)" data-crew="Release & Canary" data-state="Grok Canary (10% Traffic)" data-logs="[18:30:00] Tagged v1.4.2-rc1 (commit 983095c)&#10;[18:31:00] Dispatched canary rollout to edge nodes (10% traffic)&#10;[18:40:00] Canary health score: 99.8% (0.02% error variance)&#10;[18:45:00] 15m soak elapsed; armed rollback target: v1.4.1-stable" tabindex="0">
               <div class="card-meta">
                 <span class="card-id">EDGE-89</span>
                 <span class="card-runtime runtime-grok">Grok</span>
               </div>
               <div class="card-title">Tag v1.4.2-rc1 Canary Deployment</div>
               <div class="card-footer">
-                <span style="color:var(--accent-yellow);">Canary 10% (15m)</span>
+                <span style="color:var(--accent-yellow);">Canary 10% (yard)</span>
                 <span class="card-tokens">v1.4.2-rc1</span>
               </div>
             </div>
@@ -825,7 +858,7 @@
             <span class="board-col-count">2</span>
           </div>
           <div class="card-list" data-col="done">
-            <div class="yard-card" data-id="OPS-045" data-agent="Local Watcher (Ollama / Qwen 2.5 Coder 14B)" data-crew="Local Watch" data-state="Accepted & Quiet" data-logs="[Yesterday] Ingested 14,200 journald records&#10;[Yesterday] Zero egress verified by iptables ledger&#10;[Today] No anomaly spikes for 48 hours&#10;[Today] Accepted by PO" tabindex="0">
+            <div class="yard-card" data-id="OPS-045" data-project="system-observability" data-agent="Local Watcher (Ollama / Qwen 2.5 Coder 14B)" data-crew="Local Watch" data-state="Accepted & Quiet" data-logs="[Yesterday] Ingested 14,200 journald records&#10;[Yesterday] Zero egress verified by iptables ledger&#10;[Today] No anomaly spikes for 48 hours&#10;[Today] Accepted by PO" tabindex="0">
               <div class="card-meta">
                 <span class="card-id">OPS-045</span>
                 <span class="card-runtime runtime-local">Local</span>
@@ -836,7 +869,7 @@
                 <span class="card-tokens">Quiet 48h</span>
               </div>
             </div>
-            <div class="yard-card" data-id="SHELL-010" data-agent="Local Watcher (llama.cpp / DeepSeek R1 14B)" data-crew="Desktop Integration" data-state="Accepted & Quiet" data-logs="[Yesterday] Verified Quickshell IPC socket&#10;[Yesterday] Bar widget slot layout validated&#10;[Today] Quiet 12 hours" tabindex="0">
+            <div class="yard-card" data-id="SHELL-010" data-project="omarchy-plugins" data-agent="Local Watcher (llama.cpp / DeepSeek R1 14B)" data-crew="Desktop Integration" data-state="Accepted & Quiet" data-logs="[Yesterday] Verified Quickshell IPC socket&#10;[Yesterday] Bar widget slot layout validated&#10;[Today] Quiet 12 hours" tabindex="0">
               <div class="card-meta">
                 <span class="card-id">SHELL-010</span>
                 <span class="card-runtime runtime-local">Local</span>
@@ -854,47 +887,88 @@
 
     <!-- View 3: Crews -->
     <div class="view-container" id="view-3">
-      <div class="section-title">Active Domain Crews & WIP Caps</div>
+      <div style="background:var(--bg-surface);border:1px solid var(--border-subtle);border-radius:6px;padding:8px 14px;margin-bottom:14px;display:flex;justify-content:space-between;align-items:center;">
+        <span style="font-family:var(--font-mono);font-size:11px;color:var(--accent-cyan);">ACTIVE PROJECTS REPORTING TO YARD: 7 Distributed Repositories · 6 Crews · Per-Crew WIP Caps Enforced</span>
+        <span class="badge badge-pass">Fleet Heartbeat Live</span>
+      </div>
+      <div class="section-title">Multi-Project Domain Crews & WIP Allocation</div>
       <div class="table-container">
         <table class="data-table">
           <thead>
             <tr>
               <th>Domain Crew</th>
+              <th>Reporting Project / Repo</th>
               <th>Product Owner</th>
               <th>Scrum Master Agent</th>
-              <th>Builder Runtime</th>
-              <th>WIP Limit</th>
-              <th>Active Stories</th>
+              <th>Assigned AI Runtime</th>
+              <th>WIP Cap</th>
+              <th>Active Tasks</th>
               <th>Cycle Time</th>
-              <th>Status</th>
+              <th>Telemetry Status</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td><strong>Core Control Plane</strong></td>
+              <td><code>mowgli42/yard-console</code></td>
               <td>Human (tprettol)</td>
               <td>agent-scrum-core</td>
               <td><span class="badge badge-info">Cursor (gpt-5.6-sol / bc-709a)</span></td>
               <td>2 Stories</td>
               <td>1 in progress</td>
               <td>14 min</td>
-              <td><span class="badge badge-pass">Nominal</span></td>
+              <td><span class="badge badge-alert">Alert (2x Token)</span></td>
             </tr>
             <tr>
-              <td><strong>Release & Canary</strong></td>
+              <td><strong>Edge Backup Fleet</strong></td>
+              <td><code>mowgli42/bookish-train</code></td>
+              <td>Human (tprettol)</td>
+              <td>agent-scrum-backup</td>
+              <td><span class="badge badge-info">Cursor (Sonnet 5)</span></td>
+              <td>2 Stories</td>
+              <td>1 in progress</td>
+              <td>11 min</td>
+              <td><span class="badge badge-pass">Syncing Manifests</span></td>
+            </tr>
+            <tr>
+              <td><strong>OODA Orientation Core</strong></td>
+              <td><code>mowgli42/schwerpunkt</code></td>
+              <td>Architecture Lead</td>
+              <td>agent-scrum-ooda</td>
+              <td><span class="badge badge-info">Cursor (gemini-3.8-flash)</span></td>
+              <td>2 Stories</td>
+              <td>1 in progress</td>
+              <td>16 min</td>
+              <td><span class="badge badge-pass">World Model Green</span></td>
+            </tr>
+            <tr>
+              <td><strong>Entity Reconciliation</strong></td>
+              <td><code>mowgli42/fuzzy-reconciler</code></td>
+              <td>Data Ops Lead</td>
+              <td>agent-scrum-reconcile</td>
+              <td><span class="badge badge-info">Cursor (composer-2.5)</span></td>
+              <td>1 Story</td>
+              <td>0 active (idle)</td>
+              <td>8 min</td>
+              <td><span class="badge badge-pass">Quiet / Standby</span></td>
+            </tr>
+            <tr>
+              <td><strong>Fleet Release & Canary</strong></td>
+              <td><code>mowgli42/yard-console</code></td>
               <td>Human (tprettol)</td>
               <td>agent-scrum-release</td>
               <td><span class="badge" style="background:rgba(187,154,247,0.2);color:var(--accent-purple);">xAI Grok (grok-4.6)</span></td>
               <td>1 Canary</td>
               <td>1 active</td>
               <td>22 min</td>
-              <td><span class="badge badge-warn">Canary Staging</span></td>
+              <td><span class="badge badge-warn">Canary 10% Staging</span></td>
             </tr>
             <tr>
-              <td><strong>Local Watch & Log Triage</strong></td>
+              <td><strong>Local Watch & Zero Egress</strong></td>
+              <td><code>*All System Repos*</code></td>
               <td>Platform Lead</td>
               <td>agent-scrum-watch</td>
-              <td><span class="badge" style="background:rgba(158,206,106,0.2);color:var(--accent-green);">Local LLM (Ollama / Qwen 2.5 Coder 14B)</span></td>
+              <td><span class="badge" style="background:rgba(158,206,106,0.2);color:var(--accent-green);">Local LLM (Qwen 2.5 Coder 14B)</span></td>
               <td>3 Detectors</td>
               <td>1 alert raised</td>
               <td>Real-time</td>
@@ -902,13 +976,14 @@
             </tr>
             <tr>
               <td><strong>Desktop Integration</strong></td>
+              <td><code>omarchy-quattro / plugins</code></td>
               <td>Human (tprettol)</td>
               <td>agent-scrum-omarchy</td>
               <td><span class="badge badge-info">Cursor (Sonnet 5)</span></td>
               <td>2 Stories</td>
-              <td>0 in progress</td>
+              <td>0 active (idle)</td>
               <td>19 min</td>
-              <td><span class="badge badge-pass">Idle / Ready</span></td>
+              <td><span class="badge badge-pass">Quickshell Ready</span></td>
             </tr>
           </tbody>
         </table>
@@ -923,6 +998,7 @@
           <thead>
             <tr>
               <th>Story</th>
+              <th>Reporting Project</th>
               <th>Assigned Builder Agent</th>
               <th>Branch</th>
               <th>Pull Request</th>
@@ -935,6 +1011,7 @@
           <tbody>
             <tr>
               <td><code>CORE-104</code></td>
+              <td><code>mowgli42/yard-console</code></td>
               <td><strong>Cursor Cloud Agent (bc-709a / gpt-5.6-sol)</strong></td>
               <td><code>cursor/heartbeat-stream-709a</code></td>
               <td><a href="#" style="color:var(--accent-blue);text-decoration:none;">#44 FastAPI stream</a></td>
@@ -947,7 +1024,50 @@
               <td><span class="badge badge-alert">2x Overrun</span></td>
             </tr>
             <tr>
+              <td><code>TRAIN-301</code></td>
+              <td><code>mowgli42/bookish-train</code></td>
+              <td><strong>Cursor Agent (Sonnet 5)</strong></td>
+              <td><code>cursor/s3-switch-list-709a</code></td>
+              <td><a href="#" style="color:var(--accent-blue);text-decoration:none;">#19 S3 switch-list resume</a></td>
+              <td>38,400 tokens</td>
+              <td>
+                <div>64%</div>
+                <div class="meter-bar"><div class="meter-fill" style="width:64%;"></div></div>
+              </td>
+              <td><span class="badge badge-pass">10/10 passing</span></td>
+              <td><span class="badge badge-pass">PR Open</span></td>
+            </tr>
+            <tr>
+              <td><code>SCHW-102</code></td>
+              <td><code>mowgli42/schwerpunkt</code></td>
+              <td><strong>Cursor Agent (gemini-3.8-flash)</strong></td>
+              <td><code>cursor/langgraph-orient-709a</code></td>
+              <td><a href="#" style="color:var(--accent-blue);text-decoration:none;">#12 LangGraph world model</a></td>
+              <td>34,120 tokens</td>
+              <td>
+                <div>56%</div>
+                <div class="meter-bar"><div class="meter-fill" style="width:56%;"></div></div>
+              </td>
+              <td><span class="badge badge-pass">5/5 passing</span></td>
+              <td><span class="badge badge-pass">PR Open</span></td>
+            </tr>
+            <tr>
+              <td><code>FUZZ-018</code></td>
+              <td><code>mowgli42/fuzzy-reconciler</code></td>
+              <td><strong>Cursor Agent (composer-2.5)</strong></td>
+              <td><code>cursor/spatial-candidate-score-709a</code></td>
+              <td><a href="#" style="color:var(--accent-blue);text-decoration:none;">#8 Candidate scoring map</a></td>
+              <td>28,150 tokens</td>
+              <td>
+                <div>56%</div>
+                <div class="meter-bar"><div class="meter-fill" style="width:56%;"></div></div>
+              </td>
+              <td><span class="badge badge-pass">20/20 passing</span></td>
+              <td><span class="badge badge-pass">Eval Green</span></td>
+            </tr>
+            <tr>
               <td><code>UI-301</code></td>
+              <td><code>mowgli42/yard-console</code></td>
               <td><strong>Cursor Local Agent (Sonnet 5)</strong></td>
               <td><code>cursor/tokyo-night-palette-709a</code></td>
               <td><a href="#" style="color:var(--accent-blue);text-decoration:none;">#42 Tokyo Night sync</a></td>
@@ -961,6 +1081,7 @@
             </tr>
             <tr>
               <td><code>DATA-112</code></td>
+              <td><code>mowgli42/yard-console</code></td>
               <td><strong>Cursor Agent (gemini-3.8-flash)</strong></td>
               <td><code>cursor/sqlite-wal-709a</code></td>
               <td><a href="#" style="color:var(--accent-blue);text-decoration:none;">#41 Concurrency fix</a></td>
@@ -985,6 +1106,7 @@
           <thead>
             <tr>
               <th>Image Tag</th>
+              <th>Reporting Project</th>
               <th>Assigned Release Agent</th>
               <th>Commit SHA</th>
               <th>Canary Traffic</th>
@@ -997,6 +1119,7 @@
           <tbody>
             <tr>
               <td><code>v1.4.2-rc1</code></td>
+              <td><code>mowgli42/yard-console</code></td>
               <td><strong>xAI Grok Release Agent (grok-4.6)</strong></td>
               <td><code>983095c</code></td>
               <td>10% (Live 15m)</td>
@@ -1006,7 +1129,19 @@
               <td><button class="nav-btn" style="border:1px solid var(--border-subtle);">Inspect Diff</button></td>
             </tr>
             <tr>
+              <td><code>v2.1.0-rc3</code></td>
+              <td><code>mowgli42/bookish-train</code></td>
+              <td><strong>xAI Grok Release Agent (grok-4.6)</strong></td>
+              <td><code>f3b2190</code></td>
+              <td>25% (Edge Yard)</td>
+              <td><span style="color:var(--accent-green);font-weight:bold;">100.0%</span></td>
+              <td><code>v2.0.4-stable</code></td>
+              <td><span class="badge badge-pass">Soak Passed (Ready)</span></td>
+              <td><button class="nav-btn" style="border:1px solid var(--border-subtle);">Promote Tag</button></td>
+            </tr>
+            <tr>
               <td><code>v1.4.1-stable</code></td>
+              <td><code>mowgli42/yard-console</code></td>
               <td><strong>xAI Grok Release Agent (grok-4.6)</strong></td>
               <td><code>595ffc4</code></td>
               <td>100% (Production)</td>
@@ -1037,6 +1172,7 @@
           <thead>
             <tr>
               <th>Session ID</th>
+              <th>Reporting Project</th>
               <th>Target Story</th>
               <th>Assigned Local LLM Watcher</th>
               <th>Mean Step Interval</th>
@@ -1049,6 +1185,7 @@
           <tbody>
             <tr>
               <td><code>sess-c709a-1</code></td>
+              <td><code>mowgli42/yard-console</code></td>
               <td>CORE-104</td>
               <td><strong>Local Watcher (Ollama / Qwen 2.5 Coder 14B)</strong></td>
               <td>14.2s</td>
@@ -1059,22 +1196,46 @@
             </tr>
             <tr>
               <td><code>sess-c709a-2</code></td>
+              <td><code>mowgli42/bookish-train</code></td>
+              <td>TRAIN-301</td>
+              <td><strong>Local Watcher (Ollama / Qwen 2.5 Coder 14B)</strong></td>
+              <td>16.5s</td>
+              <td>5.2s ago</td>
+              <td>0</td>
+              <td>0.94 (High Alignment)</td>
+              <td><span class="badge badge-pass">Clean</span></td>
+            </tr>
+            <tr>
+              <td><code>sess-c709a-3</code></td>
+              <td><code>mowgli42/schwerpunkt</code></td>
+              <td>SCHW-102</td>
+              <td><strong>Local Watcher (llama.cpp / DeepSeek R1 14B)</strong></td>
+              <td>18.1s</td>
+              <td>8.0s ago</td>
+              <td>0</td>
+              <td>0.91 (High Alignment)</td>
+              <td><span class="badge badge-pass">Clean</span></td>
+            </tr>
+            <tr>
+              <td><code>sess-c709a-4</code></td>
+              <td><code>mowgli42/fuzzy-reconciler</code></td>
+              <td>FUZZ-018</td>
+              <td><strong>Local Watcher (Ollama / Mistral NeMo)</strong></td>
+              <td>10.4s</td>
+              <td>2.0s ago</td>
+              <td>0</td>
+              <td>0.89 (High Alignment)</td>
+              <td><span class="badge badge-pass">Clean</span></td>
+            </tr>
+            <tr>
+              <td><code>sess-c709a-5</code></td>
+              <td><code>mowgli42/yard-console</code></td>
               <td>UI-301</td>
               <td><strong>Local Watcher (llama.cpp / DeepSeek R1 14B)</strong></td>
               <td>11.8s</td>
               <td>4.5s ago</td>
               <td>0</td>
               <td>0.92 (High Alignment)</td>
-              <td><span class="badge badge-pass">Clean</span></td>
-            </tr>
-            <tr>
-              <td><code>sess-c709a-3</code></td>
-              <td>DATA-112</td>
-              <td><strong>Local Watcher (Ollama / Mistral NeMo)</strong></td>
-              <td>22.0s</td>
-              <td>12.0s ago</td>
-              <td>0</td>
-              <td>0.88 (High Alignment)</td>
               <td><span class="badge badge-pass">Clean</span></td>
             </tr>
           </tbody>
@@ -1084,41 +1245,41 @@
 
     <!-- View 7: Signals -->
     <div class="view-container" id="view-7">
-      <div class="section-title">Signals & Anomaly Stream</div>
+      <div class="section-title">Signals & Anomaly Stream Across Repositories</div>
       <div style="display:flex;flex-direction:column;gap:10px;">
         <div class="stat-card" style="border-left:4px solid var(--accent-red);">
           <div style="display:flex;justify-content:space-between;">
             <div style="font-family:var(--font-mono);font-size:12px;color:var(--accent-red);font-weight:bold;">
-              [SIG-901] Repeated Tool Signature Loop · Story CORE-104 (Agent: Cursor Cloud Agent bc-709a)
+              [SIG-901] Repeated Tool Signature Loop · Story CORE-104 (mowgli42/yard-console)
             </div>
             <div style="font-family:var(--font-mono);font-size:11px;color:var(--fg-muted);">18:42:05 UTC · Detected by Local Watcher (Qwen 2.5 Coder 14B)</div>
           </div>
           <p style="margin-top:6px;color:var(--fg-secondary);">
-            Cursor session <code>sess-c709a-1</code> executed identical tool call <code>pytest tests/test_stream.py</code> 3 consecutive times without modifying test or source files.
+            Cursor session <code>sess-c709a-1</code> in <code>mowgli42/yard-console</code> executed identical tool call <code>pytest tests/test_fastapi_stream.py</code> 3 consecutive times without modifying test or source files.
           </p>
           <div style="margin-top:8px;font-family:var(--font-mono);font-size:10px;color:var(--accent-yellow);">
             Detector recommendation: Pause run or inject clarifying hint into session prompt.
           </div>
         </div>
 
-        <div class="stat-card" style="border-left:4px solid var(--accent-yellow);">
+        <div class="stat-card" style="border-left:4px solid var(--accent-green);">
           <div style="display:flex;justify-content:space-between;">
-            <div style="font-family:var(--font-mono);font-size:12px;color:var(--accent-yellow);font-weight:bold;">
-              [SIG-900] Token Budget 2x Threshold Exceeded · Story CORE-104 (Agent: Cursor Cloud Agent bc-709a)
+            <div style="font-family:var(--font-mono);font-size:12px;color:var(--accent-green);font-weight:bold;">
+              [SIG-900] Dispatcher Route Verified · Story TRAIN-301 (mowgli42/bookish-train)
             </div>
-            <div style="font-family:var(--font-mono);font-size:11px;color:var(--fg-muted);">18:39:12 UTC · Detected by Local Watcher (Qwen 2.5 Coder 14B)</div>
+            <div style="font-family:var(--font-mono);font-size:11px;color:var(--fg-muted);">18:38:14 UTC · Verified by Local Watcher (Qwen 2.5 Coder 14B)</div>
           </div>
           <p style="margin-top:6px;color:var(--fg-secondary);">
-            Cumulative token count reached 185,420 tokens against 80,000 baseline cap. Hard-stop armed at 320,000 tokens (4x).
+            Backup engine route verification passed 10/10 checksum checks against local TrueNAS yard. Switched consist ready for S3 manifest export.
           </p>
         </div>
 
         <div class="stat-card" style="border-left:4px solid var(--accent-green);">
           <div style="display:flex;justify-content:space-between;">
             <div style="font-family:var(--font-mono);font-size:12px;color:var(--accent-green);font-weight:bold;">
-              [SIG-899] Golden Eval Passed · PR #42 (Agent: Cursor Sonnet 5 / Validated by Grok Release Agent)
+              [SIG-899] Golden Eval Passed · PR #42 (mowgli42/yard-console)
             </div>
-            <div style="font-family:var(--font-mono);font-size:11px;color:var(--fg-muted);">18:25:30 UTC</div>
+            <div style="font-family:var(--font-mono);font-size:11px;color:var(--fg-muted);">18:25:30 UTC · Agent: Cursor Sonnet 5 / Validated by Grok Release Agent</div>
           </div>
           <p style="margin-top:6px;color:var(--fg-secondary);">
             All 8 visual regressions and palette tests verified. Tag signature <code>sha-420-ui-green</code> generated.
@@ -1236,13 +1397,14 @@
         const runtime = card.querySelector('.card-runtime')?.innerText || 'Cursor';
         const tokens = card.querySelector('.card-tokens')?.innerText || '0 tokens';
         const agent = card.dataset.agent || `${runtime} Agent`;
+        const project = card.dataset.project || 'mowgli42/yard-console';
         const crew = card.dataset.crew || 'Core Plane';
         const state = card.dataset.state || 'In Progress';
         const logs = card.dataset.logs || '[No logs available]';
 
         document.getElementById('modalCardId').innerText = `STORY DETAIL — ${id}`;
         document.getElementById('modalTitle').innerText = title;
-        document.getElementById('modalCrew').innerText = `Crew: ${crew} · Acceptance Gate: PO Signoff`;
+        document.getElementById('modalCrew').innerText = `Project: ${project} · Crew: ${crew} · Acceptance Gate: PO Signoff`;
         document.getElementById('modalRuntime').innerText = runtime;
         document.getElementById('modalRuntime').className = `badge ${runtime === 'Cursor' ? 'badge-info' : runtime === 'Grok' ? 'badge-warn' : 'badge-pass'}`;
         document.getElementById('modalAgent').innerText = agent;

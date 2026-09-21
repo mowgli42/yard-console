@@ -26,11 +26,17 @@ Open `index.html`. Tokyo Night. Keyboard first.
 | `return` | open detail |
 | `esc` | close / dismiss |
 
+## Agent Crews Across Projects
+
+The **Crews View (`3`)** manages autonomous agile crews working concurrently across distinct repositories, each assigned a dedicated scrum-master agent and runtime budget:
+
+![Agent Crews Working Distributed Projects](docs/images/04_crews_wip.png)
+
 ## Views
 
 1. **overview:** Fleet summary, agent roster, pipeline flow, and anomaly alerts.
 2. **the yard:** 5-column Kanban board (Spec & Brief, Cursor Build, Golden Eval, Grok Ship, Watch & Accept).
-3. **crews:** Domain teams, human POs, scrum-master agents, and per-crew WIP caps.
+3. **crews:** Multi-project domain teams (`yard-console`, `bookish-train`, `schwerpunkt`, `fuzzy-reconciler`, `omarchy-quattro`), POs, scrum-master agents, and per-crew WIP caps.
 4. **cursor build:** Builder fleet tracking, branch references, PR status, token spend, and golden evals.
 5. **grok ship:** Image tags, commit SHAs, canary traffic allocation, and rollback targets.
 6. **local watch:** On-premise zero-egress telemetry, heartbeat intervals, tool loop detection, and goal drift.
@@ -44,9 +50,9 @@ Open `index.html`. Tokyo Night. Keyboard first.
 | **Hero Metric Cards (View 1)** | `Cursor Cloud & Sonnet 5`, `xAI Grok Release Agent`, `Local LLM (Qwen 2.5 Coder 14B)` | Real-time ownership of in-flight stories, canaries, and alerts. |
 | **Kanban Card Badges (View 2)** | `Cursor` (Blue), `Grok` (Purple), `Local` (Green) | At-a-glance runtime delegation on the board. |
 | **Card Detail Drawer (`return`)** | Full Model Spec & Agent ID (e.g. `Cursor Cloud Agent bc-709a / gpt-5.6-sol`) | Forensic execution telemetry, tool signature loops, token overruns. |
-| **Crews Matrix (View 3)** | `agent-scrum-core`, `agent-scrum-release`, `agent-scrum-watch`, `agent-scrum-omarchy` | Scrum-master agents capping WIP per functional domain. |
-| **Cursor Build Table (View 4)** | `Cursor Cloud (bc-709a / gpt-5.6-sol)`, `Cursor Local (Sonnet 5)`, `gemini-3.8-flash` | Granular builder model attribution per branch & PR. |
-| **Local Watch Table (View 6)** | `Ollama / Qwen 2.5 Coder 14B`, `llama.cpp / DeepSeek R1 14B`, `Mistral NeMo` | Zero-egress local observer models watching heartbeats. |
+| **Crews Matrix (View 3)** | `agent-scrum-core`, `agent-scrum-backup`, `agent-scrum-ooda`, `agent-scrum-reconcile`, `agent-scrum-release`, `agent-scrum-watch`, `agent-scrum-omarchy` | Scrum-master agents capping WIP across 7 distributed repositories. |
+| **Cursor Build Table (View 4)** | `Cursor Cloud (bc-709a / gpt-5.6-sol)`, `Cursor Local (Sonnet 5)`, `gemini-3.8-flash`, `composer-2.5` | Granular builder model attribution per branch, repo & PR. |
+| **Local Watch Table (View 6)** | `Ollama / Qwen 2.5 Coder 14B`, `llama.cpp / DeepSeek R1 14B`, `Mistral NeMo` | Zero-egress local observer models watching heartbeats across repos. |
 | **Persistent Footer Status Bar** | `Cursor Cloud Agent: Active`, `Grok Release Agent: Canary 10%`, `Local Watcher: 1 Alert` | Always-visible agent health LEDs across all views. |
 
 ## What this is not
