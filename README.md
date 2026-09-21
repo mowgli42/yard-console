@@ -72,6 +72,55 @@ The **Crews View (`3`)** manages autonomous agile crews working concurrently acr
 | **OpenSpec Baseball Card (`b`)** | Assigned agent (`Cursor Cloud bc-709a`), engine model (`gemini-3.8-flash`), token burn | Glanceable athlete-card stats, formal `SHALL` spec requirement, and Gherkin BDD scenario. |
 | **Persistent Footer Status Bar** | `Cursor Cloud Agent: Active`, `Grok Release Agent: Canary 10%`, `Local Watcher: 1 Alert` | Always-visible agent health LEDs across all views. |
 
+## Live Operation & Repository Management
+
+The console is fully functional and monitors real repository state:
+1. **Local State Daemon (`yard-sync`):** Continuously scans `.beads/issues.jsonl` and `openspec/specs/` across all configured repositories, formatting unified status JSON into `~/.local/state/yard/status.json` and `data/status.json`.
+2. **Web Live Polling:** The console polls `data/status.json` and updates the active bead ribbon, project selector, and baseball cards in real time without refreshing.
+3. **Omarchy Quickshell Plugin:** The status script (`plugin/omarchy/bin/yard-status`) reads this same state, updating the Linux desktop bar and HUD.
+
+### Starting the Live Console
+
+Run the bundled launcher:
+```bash
+./scripts/yard-start.sh
+```
+This runs the background `yard-sync` daemon and serves `http://localhost:8000`.
+
+### Adding an Existing Repository
+
+To link an existing workspace repository to the YARD console:
+```bash
+./scripts/yard-add-repo.py /path/to/my-repo \
+  --crew "Backend Core" \
+  --agent "Cursor Cloud Agent (bc-709a)" \
+  --model "gemini-3.8-flash"
+```
+The script will:
+- Auto-detect git origin remote slug or directory name.
+- Verify or initialize `.beads/` and `openspec/`.
+- Register the repo in `config/repos.json`.
+- Trigger an immediate sync so it appears in the console project selector.
+
+### Adding a New Repository from Scratch
+
+To create and scaffold a brand new repository with Beads issue tracking and OpenSpec living specs:
+```bash
+./scripts/yard-add-repo.py /home/tprettol/repo/new-service \
+  --new \
+  --slug "mowgli42/new-service" \
+  --crew "Telemetry Stream" \
+  --init-beads \
+  --init-openspec
+```
+This creates:
+- Initialized Git repository (`git init`).
+- `.beads/config.yaml` and starter issue in `.beads/issues.jsonl`.
+- `openspec/project.md` and initial capability contract in `openspec/specs/core-capability/spec.md`.
+- Immediate registration in YARD fleet config.
+
+---
+
 ## What this is not
 
 Not a waitlist. Not a model vendor. Not a replacement for Cursor, Grok, or the box that runs the local model. It is the board those three report to.

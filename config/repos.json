@@ -1,0 +1,42 @@
+{
+  "repos": [
+    {
+      "id": "schwerpunkt",
+      "slug": "mowgli42/schwerpunkt",
+      "path": "/home/tprettol/repo/schwerpunkt",
+      "crew": "OODA Orientation Core",
+      "runtime": "Cursor",
+      "agent": "Cursor Cloud Agent (bc-709a)",
+      "model": "gemini-3.8-flash"
+    },
+    {
+      "id": "yard-console",
+      "slug": "mowgli42/yard-console",
+      "path": "/home/tprettol/repo/yard-console",
+      "crew": "Core Control Plane",
+      "runtime": "Cursor",
+      "agent": "Cursor Cloud Agent (bc-709a)",
+      "model": "gemini-3.8-flash"
+    },
+    {
+      "id": "o-my-sim",
+      "slug": "mowgli42/o-my-sim",
+      "path": "/home/tprettol/repo/o-my-sim",
+      "crew": "Sim Engine & Telemetry",
+      "runtime": "Cursor",
+      "agent": "Cursor Cloud Agent (bc-709a)",
+      "model": "gpt-5.6-sol-high"
+    },
+    {
+      "id": "verified-xfer",
+      "slug": "mowgli42/verified-xfer",
+      "path": "/home/tprettol/repo/verified-xfer",
+      "crew": "Secure Mesh & QUIC",
+      "runtime": "Cursor",
+      "agent": "Cursor Agent",
+      "model": "claude-fable-5-1"
+    }
+  ],
+  "pollIntervalSec": 5,
+  "stateOutputFile": "/home/tprettol/.local/state/yard/status.json"
+}

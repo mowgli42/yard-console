@@ -2587,6 +2587,49 @@
         }
       }
 
+      function updateBeadsSelectOptions() {
+        beadsProjectSelect.innerHTML = '';
+        Object.keys(BEADS_DATA).forEach(slug => {
+          const opt = document.createElement('option');
+          opt.value = slug;
+          const crew = BEADS_DATA[slug].crew || 'Fleet';
+          opt.innerText = `${slug} (${crew})`;
+          if (slug === activeProjectKey) opt.selected = true;
+          beadsProjectSelect.appendChild(opt);
+        });
+      }
+
+      function loadLiveFleetData() {
+        fetch('data/status.json')
+          .then(res => {
+            if (!res.ok) throw new Error(`HTTP ${res.status}`);
+            return res.json();
+          })
+          .then(data => {
+            if (data && data.allProjects && Object.keys(data.allProjects).length > 0) {
+              Object.keys(data.allProjects).forEach(key => {
+                BEADS_DATA[key] = data.allProjects[key];
+              });
+              updateBeadsSelectOptions();
+              if (!BEADS_DATA[activeProjectKey]) {
+                activeProjectKey = Object.keys(BEADS_DATA)[0];
+              }
+              updateBeadsRibbon();
+              if (baseballModal.classList.contains('active')) {
+                openBaseballCard(activeBeadPosition);
+              }
+            }
+          })
+          .catch(() => {
+            // Nominal fallback to embedded mock registry when offline or static file://
+          });
+      }
+
+      // Initial project options & live polling every 5s
+      updateBeadsSelectOptions();
+      loadLiveFleetData();
+      setInterval(loadLiveFleetData, 5000);
+
       window.addEventListener('hashchange', checkHashParams);
       checkHashParams();
     })();
