@@ -11,10 +11,10 @@ Define the interface connecting YARD to OpenSpec project definitions and Beads i
 The YARD Console SHALL continuously identify and display the current active bead being worked across projects, highlighting the 3-step pipeline: the last completed bead, the currently in-work bead, and the next queued bead.
 
 #### Scenario: Displaying current active bead in persistent console header
-- **GIVEN** an active agent crew working on a project repository (e.g., `schwerpunkt` or `yard-console`)
+- **GIVEN** an active agent crew working on a project repository (e.g., `schwerpunkt`, `appliance-keeper`, `fluffy-spoon`, or `OnePage-PM`)
 - **WHEN** the YARD Web Console loads or updates
 - **THEN** the console SHALL display a persistent Current Bead indicator pill showing:
-  - Bead Issue ID (e.g. `schwerpunkt-i0i.3.1`)
+  - Bead Issue ID (e.g. `schwerpunkt-i0i.3.1`, `appliance-keeper-o4o`)
   - Project repository name
   - Issue title
   - Assigned agent and model

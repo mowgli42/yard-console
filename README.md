@@ -91,16 +91,24 @@ This runs the background `yard-sync` daemon and serves `http://localhost:8000`.
 
 To link an existing workspace repository to the YARD console:
 ```bash
-./scripts/yard-add-repo.py /path/to/my-repo \
-  --crew "Backend Core" \
-  --agent "Cursor Cloud Agent (bc-709a)" \
-  --model "gemini-3.8-flash"
+./scripts/yard-add-repo.py /home/tprettol/repo/appliance-keeper \
+  --crew "Household Care & Inventory" \
+  --agent "Claude Sonnet (Claude-3.7)" \
+  --model "claude-sonnet-5-thinking-high"
 ```
 The script will:
 - Auto-detect git origin remote slug or directory name.
 - Verify or initialize `.beads/` and `openspec/`.
 - Register the repo in `config/repos.json`.
 - Trigger an immediate sync so it appears in the console project selector.
+
+### Active Test Repositories
+
+The YARD control plane monitors the following real workspace repositories:
+- `mowgli42/appliance-keeper`: Local-first household care, appliance registry, and filter schedule tracker. OpenSpec living specs under `openspec/specs/filter-schedule/spec.md`.
+- `mowgli42/fluffy-spoon`: Static recipe system with XML catalog and client-side recipe box. OpenSpec under `docs/OPENSPEC.md` and BDD features under `features/recipe-box.feature`.
+- `mowgli42/OnePage-PM`: One-Page Project Management (OPPM) matrix with FastAPI backend and Svelte frontend. OpenSpec contracts in `openspec.md` and BDD scenarios in `features/oppm-plan.feature`.
+- `mowgli42/schwerpunkt`: Boyd OODA orientation-first platform with active beads and living specs in `openspec/specs/`.
 
 ### Adding a New Repository from Scratch
 

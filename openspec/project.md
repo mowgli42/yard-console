@@ -39,3 +39,7 @@ YARD is a mixed-fleet control plane designed to orchestrate agentic software eng
 
 - OpenSpec specs define formal **SHALL** requirements.
 - Gherkin feature files mirror specifications in `openspec/features/*.feature` for automated testing via `pytest-bdd` or Cucumber.
+- Active integration test systems configured in YARD fleet:
+  - `mowgli42/appliance-keeper`: Local-first household appliance & filter schedule tracker.
+  - `mowgli42/fluffy-spoon`: XML catalog and recipe-box static generation engine.
+  - `mowgli42/OnePage-PM`: One-page project management (OPPM) matrix with FastAPI backend and Svelte frontend.

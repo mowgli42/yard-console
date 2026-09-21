@@ -1090,6 +1090,9 @@
       <select class="beads-select" id="beadsProjectSelect">
         <option value="mowgli42/schwerpunkt">mowgli42/schwerpunkt (Boyd OODA)</option>
         <option value="mowgli42/yard-console">mowgli42/yard-console (Control Plane)</option>
+        <option value="mowgli42/appliance-keeper">mowgli42/appliance-keeper (Household Care)</option>
+        <option value="mowgli42/fluffy-spoon">mowgli42/fluffy-spoon (Recipe Engine)</option>
+        <option value="mowgli42/OnePage-PM">mowgli42/OnePage-PM (Plan Matrix)</option>
         <option value="mowgli42/o-my-sim">mowgli42/o-my-sim (Mission Simulation)</option>
         <option value="mowgli42/verified-xfer">mowgli42/verified-xfer (Encrypted Mesh)</option>
       </select>
@@ -1460,6 +1463,39 @@
               <td>1 alert raised</td>
               <td>Real-time</td>
               <td><span class="badge badge-alert">Alert Triaged</span></td>
+            </tr>
+            <tr>
+              <td><strong>Household Care & Inventory</strong></td>
+              <td><code>mowgli42/appliance-keeper</code></td>
+              <td>Human (tprettol)</td>
+              <td>agent-scrum-appliance</td>
+              <td><span class="badge badge-info">Cursor (Claude Sonnet 3.7)</span></td>
+              <td>2 Stories</td>
+              <td>1 in progress</td>
+              <td>12 min</td>
+              <td><span class="badge badge-pass">Local-First Green</span></td>
+            </tr>
+            <tr>
+              <td><strong>Culinary Knowledge & Engine</strong></td>
+              <td><code>mowgli42/fluffy-spoon</code></td>
+              <td>Human (tprettol)</td>
+              <td>agent-scrum-culinary</td>
+              <td><span class="badge badge-info">Cursor (gemini-3.8-flash)</span></td>
+              <td>2 Stories</td>
+              <td>1 in progress</td>
+              <td>9 min</td>
+              <td><span class="badge badge-pass">Cookbook Synced</span></td>
+            </tr>
+            <tr>
+              <td><strong>Product & Plan Matrix Core</strong></td>
+              <td><code>mowgli42/OnePage-PM</code></td>
+              <td>Human (tprettol)</td>
+              <td>agent-scrum-oppm</td>
+              <td><span class="badge badge-info">Cursor (gpt-5.6-sol-high)</span></td>
+              <td>2 Stories</td>
+              <td>1 in progress</td>
+              <td>15 min</td>
+              <td><span class="badge badge-pass">FastAPI + Svelte OK</span></td>
             </tr>
             <tr>
               <td><strong>Desktop Integration</strong></td>
@@ -2218,6 +2254,206 @@
   THEN the TPM SHALL refuse to release decryption keys
   AND SHALL trigger a secure lockdown alert`,
             cliCmd: "bd show vx-103"
+          }
+        },
+        "mowgli42/appliance-keeper": {
+          project: "mowgli42/appliance-keeper",
+          crew: "Household Care & Inventory",
+          completed: {
+            id: "appliance-keeper-rnc",
+            title: "Apply AGENTS.md and initial household schema",
+            status: "closed",
+            role: "completed",
+            badge: "COMPLETED",
+            owner: "tprettol@yahoo.com",
+            agent: "Claude Sonnet (Claude-3.7)",
+            model: "claude-sonnet-5-thinking-high",
+            tokens: "21,400 / 45,000 (47%)",
+            health: "Verified Green",
+            specPath: "openspec/specs/appliance/spec.md",
+            purpose: "Households SHALL be able to keep a plain-language list of appliances with room and type so family members can find the right machine without serial numbers.",
+            requirement: "The system SHALL store an appliance with a human name, kind, and room.",
+            gherkin: `Scenario: Add named appliance
+  GIVEN an empty or existing household
+  WHEN a user adds an appliance named "Kitchen fridge" of kind refrigerator in the kitchen
+  THEN the appliance SHALL appear in the appliance list
+  AND its detail page SHALL be reachable by id`,
+            cliCmd: "bd update appliance-keeper-rnc --status closed"
+          },
+          inWork: {
+            id: "appliance-keeper-o4o",
+            title: "Phase 1: filter mark-changed UX polish",
+            status: "open",
+            role: "in-work",
+            badge: "IN WORK",
+            owner: "tprettol@yahoo.com",
+            agent: "Claude Sonnet (Claude-3.7)",
+            model: "claude-sonnet-5-thinking-high",
+            tokens: "18,200 / 45,000 (40%)",
+            health: "Nominal · Active Loop",
+            specPath: "openspec/specs/filter-schedule/spec.md",
+            purpose: "Families SHALL track recurring filter (or similar) care with a due date derived from last-changed date and interval.",
+            requirement: "The system SHALL compute nextDueAt = lastChangedAt + intervalDays in calendar days.",
+            gherkin: `Scenario: Mark changed today
+  GIVEN a filter due in the past
+  WHEN the user marks it changed on 2026-08-01
+  THEN lastChangedAt SHALL be 2026-08-01
+  AND the next due date SHALL be intervalDays after that date`,
+            cliCmd: "bd update appliance-keeper-o4o --status in_progress"
+          },
+          next: {
+            id: "appliance-keeper-5e0",
+            title: "Phase 1: add warranty/service forms",
+            status: "open",
+            role: "next",
+            badge: "NEXT QUEUED",
+            owner: "tprettol@yahoo.com",
+            agent: "Claude Sonnet (Claude-3.7)",
+            model: "claude-sonnet-5-thinking-high",
+            tokens: "0 / 45,000 (0%)",
+            health: "Queued · Ready for implementation",
+            specPath: "openspec/specs/warranty/spec.md",
+            purpose: "Families SHALL record warranty coverage windows and document location notes without needing cloud storage.",
+            requirement: "The system SHALL store a warranty with label, start date, end date, and optional provider / document note linked to an appliance.",
+            gherkin: `Scenario: Manufacturer warranty on file
+  GIVEN an appliance
+  WHEN a warranty ending on a known date is stored
+  THEN attention logic SHALL use the end date for expiry surfacing`,
+            cliCmd: "bd show appliance-keeper-5e0"
+          }
+        },
+        "mowgli42/fluffy-spoon": {
+          project: "mowgli42/fluffy-spoon",
+          crew: "Culinary Knowledge & Static Engine",
+          completed: {
+            id: "fluffy-spoon-rnc",
+            title: "Apply AGENTS.md and Beads setup",
+            status: "closed",
+            role: "completed",
+            badge: "COMPLETED",
+            owner: "tprettol@yahoo.com",
+            agent: "Cursor Cloud Agent (bc-709a)",
+            model: "gemini-3.8-flash",
+            tokens: "14,500 / 40,000 (36%)",
+            health: "Verified Green",
+            specPath: "docs/OPENSPEC.md",
+            purpose: "FluffySpoon is an agent-oriented static recipe engine with XML catalogs, automated HTML rendering, and client-side searchable recipe-box.",
+            requirement: "The build system SHALL generate recipe-box.html from XML catalog with embedded recipe metadata.",
+            gherkin: `Scenario: Build recipe-box.html from the XML catalog
+  WHEN I run "python3 cookbook-pkg.py" from "recipe-system/scripts"
+  THEN "recipe-system/web/recipe-box.html" is generated
+  AND the page embeds metadata for each recipe
+  AND each recipe links to its generated page under "recipes/"`,
+            cliCmd: "bd update fluffy-spoon-rnc --status closed"
+          },
+          inWork: {
+            id: "fluffy-spoon-box",
+            title: "Searchable recipe-box filter and tag indexing",
+            status: "in_progress",
+            role: "in-work",
+            badge: "IN WORK",
+            owner: "tprettol@yahoo.com",
+            agent: "Cursor Cloud Agent (bc-709a)",
+            model: "gemini-3.8-flash",
+            tokens: "26,100 / 40,000 (65%)",
+            health: "Nominal · 14 Recipes Indexed",
+            specPath: "docs/OPENSPEC.md",
+            purpose: "Searchable index of all recipes so visitors can find meals by name, description, difficulty, or time.",
+            requirement: "The system SHALL filter recipes dynamically on client-side search input and tag selections.",
+            gherkin: `Scenario: Search recipes by text in the recipe box
+  GIVEN "recipe-system/web/recipe-box.html" has been generated
+  WHEN a visitor enters a search term in the search input
+  THEN recipes whose title or description match the term remain visible
+  AND non-matching recipes are hidden from the results list`,
+            cliCmd: "bd update fluffy-spoon-box --status in_progress"
+          },
+          next: {
+            id: "fluffy-spoon-mealplan",
+            title: "Weekly meal-plan generator CLI and holiday tags",
+            status: "open",
+            role: "next",
+            badge: "NEXT QUEUED",
+            owner: "tprettol@yahoo.com",
+            agent: "Cursor Cloud Agent (bc-709a)",
+            model: "gemini-3.8-flash",
+            tokens: "0 / 40,000 (0%)",
+            health: "Queued · Next in sprint",
+            specPath: "docs/OPENSPEC.md",
+            purpose: "CLI demo weekly / 52-week plan printer with seasonal theme recipes.",
+            requirement: "The meal plan CLI SHALL output titled weekly meal plans with weekday easy/crockpot themes and weekend batch/BBQ recipes.",
+            gherkin: `Scenario: Generate a single-week meal plan
+  WHEN I run "python3 meal-plan-generator.py --week 28 --year 2026" from "recipe-system/scripts"
+  THEN the output includes a titled weekly meal plan for week 28 of 2026
+  AND each day from Monday through Sunday has a theme and meal suggestion`,
+            cliCmd: "bd show fluffy-spoon-mealplan"
+          }
+        },
+        "mowgli42/OnePage-PM": {
+          project: "mowgli42/OnePage-PM",
+          crew: "Product & Plan Matrix Core",
+          completed: {
+            id: "OnePage-PM-oti",
+            title: "Apply AGENTS.md and Beads setup",
+            status: "closed",
+            role: "completed",
+            badge: "COMPLETED",
+            owner: "tprettol@yahoo.com",
+            agent: "Cursor Cloud Agent (bc-709a)",
+            model: "gpt-5.6-sol-high",
+            tokens: "18,200 / 50,000 (36%)",
+            health: "Verified Green",
+            specPath: "openspec.md",
+            purpose: "Single source-of-truth for architecture, API contracts, and data models for One-Page Project Management (OPPM).",
+            requirement: "The health endpoint SHALL return HTTP 200 with JSON status ok.",
+            gherkin: `Scenario: Health returns ok
+  GIVEN the backend is available
+  WHEN I GET "/health"
+  THEN the response status is 200
+  AND the response body is {"status": "ok"}`,
+            cliCmd: "bd update OnePage-PM-oti --status closed"
+          },
+          inWork: {
+            id: "OnePage-PM-oppm",
+            title: "OPPM plan view and persistence matrix",
+            status: "in_progress",
+            role: "in-work",
+            badge: "IN WORK",
+            owner: "tprettol@yahoo.com",
+            agent: "Cursor Cloud Agent (bc-709a)",
+            model: "gpt-5.6-sol-high",
+            tokens: "34,800 / 50,000 (69%)",
+            health: "Nominal · FastAPI + Svelte Sync",
+            specPath: "openspec.md",
+            purpose: "One-page OPPM matrix linking objectives to quarters, risk ratings, budget tracking, and owner delegations.",
+            requirement: "The system SHALL persist OPPM plan documents via PUT /plan and reload them into the reactive Svelte view.",
+            gherkin: `Scenario: OPPM view loads and shows plan
+  GIVEN the backend is available
+  WHEN I open the app at "/?view=oppm"
+  THEN the OPPM view is visible
+  AND the plan header shows project information
+  AND the objectives x quarters matrix is visible`,
+            cliCmd: "bd update OnePage-PM-oppm --status in_progress"
+          },
+          next: {
+            id: "OnePage-PM-todos",
+            title: "Reactive Todos CRUD and fast-filter drawer",
+            status: "open",
+            role: "next",
+            badge: "NEXT QUEUED",
+            owner: "tprettol@yahoo.com",
+            agent: "Cursor Cloud Agent (bc-709a)",
+            model: "gpt-5.6-sol-high",
+            tokens: "0 / 50,000 (0%)",
+            health: "Queued · Blocked on OPPM persistence",
+            specPath: "openspec.md",
+            purpose: "Rapid in-memory todo item list with instant filter and completion toggling.",
+            requirement: "The todos service SHALL support GET /todos, POST /todos, and PATCH /todos/{id} with input validation.",
+            gherkin: `Scenario: Create and list todos
+  GIVEN the backend is running
+  WHEN I POST "/todos" with title "Ship OPPM 2.0"
+  THEN the response status is 201
+  AND GET "/todos" includes the newly created todo`,
+            cliCmd: "bd show OnePage-PM-todos"
           }
         }
       };

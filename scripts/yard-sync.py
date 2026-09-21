@@ -53,8 +53,13 @@ def parse_beads(repo_path: Path) -> Dict[str, Any]:
     # Sort pending by priority (1 is highest priority), then created_at
     pending.sort(key=lambda x: (x.get("priority", 99), x.get("created_at") or ""))
 
-    active_bead = in_progress[0] if in_progress else (pending[0] if pending else None)
-    last_completed = closed[0] if closed else None
+    active_bead = in_progress[0] if in_progress else (pending[0] if pending else (closed[0] if closed else None))
+    # If the only bead is active_bead, don't duplicate it as last_completed unless there are other closed beads
+    if in_progress or pending:
+        last_completed = closed[0] if closed else None
+    else:
+        # only closed beads exist: the most recent is active_bead, and it's also completed
+        last_completed = closed[0] if closed else None
     next_bead = None
 
     if active_bead:
@@ -90,14 +95,49 @@ def extract_openspec_for_bead(repo_path: Path, bead: Optional[Dict[str, Any]]) -
             target_file = candidate
         elif (repo_path / "openspec" / "specs" / spec_id).is_file():
             target_file = repo_path / "openspec" / "specs" / spec_id
+        elif (repo_path / "openspec" / spec_id).is_file():
+            target_file = repo_path / "openspec" / spec_id
+        elif (repo_path / "openspec" / "specs" / f"{spec_id}.md").is_file():
+            target_file = repo_path / "openspec" / "specs" / f"{spec_id}.md"
+        elif (repo_path / "openspec" / "specs" / spec_id / "spec.md").is_file():
+            target_file = repo_path / "openspec" / "specs" / spec_id / "spec.md"
 
-    # Fallback to scanning openspec/specs/
+    # Match by bead title or description keywords if spec_id not set
+    if not target_file:
+        title_lower = (bead.get("title", "") + " " + bead.get("description", "")).lower()
+        specs_dir = repo_path / "openspec" / "specs"
+        if specs_dir.is_dir():
+            all_specs = [f for f in sorted(list(specs_dir.rglob("*.md"))) if f.name.lower() != "readme.md"]
+            for spec_candidate in all_specs:
+                stem = spec_candidate.parent.name.lower()
+                if stem and stem in title_lower:
+                    target_file = spec_candidate
+                    break
+            # If no keyword matched, prefer the first spec.md (not README.md)
+            if not target_file and all_specs:
+                target_file = all_specs[0]
+
+    # Fallback to scanning openspec/specs/ or openspec.md or docs/OPENSPEC.md
     if not target_file:
         specs_dir = repo_path / "openspec" / "specs"
         if specs_dir.is_dir():
-            md_files = list(specs_dir.rglob("*.md"))
+            # Prefer spec.md files rather than README.md
+            md_files = [f for f in sorted(list(specs_dir.rglob("*.md"))) if f.name.lower() != "readme.md"]
+            if not md_files:
+                md_files = sorted(list(specs_dir.rglob("*.md")))
             if md_files:
                 target_file = md_files[0]
+
+    if not target_file:
+        for candidate_path in [
+            repo_path / "openspec.md",
+            repo_path / "docs" / "OPENSPEC.md",
+            repo_path / "docs" / "openspec.md",
+            repo_path / "openspec" / "project.md"
+        ]:
+            if candidate_path.is_file():
+                target_file = candidate_path
+                break
 
     if not target_file or not target_file.is_file():
         # Check docs/
@@ -114,6 +154,8 @@ def extract_openspec_for_bead(repo_path: Path, bead: Optional[Dict[str, Any]]) -
         # Extract Purpose
         purpose = ""
         p_match = re.search(r'##\s*Purpose\s*\n+([\s\S]*?)(?=\n##|\Z)', content)
+        if not p_match:
+            p_match = re.search(r'#\s*[^\n]+\n+([\s\S]*?)(?=\n##|\Z)', content)
         if p_match:
             purpose = p_match.group(1).strip()
             # take first 1-2 paragraphs
@@ -134,7 +176,13 @@ def extract_openspec_for_bead(repo_path: Path, bead: Optional[Dict[str, Any]]) -
             if shall_match:
                 requirement = shall_match.group(1).strip()
             else:
-                requirement = bead.get("acceptance_criteria") or "The system SHALL satisfy specification constraints."
+                # Look for contract or purpose statement
+                if bead.get("acceptance_criteria"):
+                    requirement = bead.get("acceptance_criteria")
+                elif purpose:
+                    requirement = f"The system SHALL satisfy {purpose}"
+                else:
+                    requirement = "The system SHALL satisfy specification constraints."
 
         # Extract Gherkin Scenario
         gherkin = ""
@@ -153,6 +201,31 @@ def extract_openspec_for_bead(repo_path: Path, bead: Optional[Dict[str, Any]]) -
                 clean = clean.replace("**THEN**", "THEN").replace("**AND**", "AND")
                 gherkin_lines.append(clean)
             gherkin = "\n".join(gherkin_lines[:10])
+
+        # If no Gherkin scenario found in spec markdown, scan features/ directory for .feature files
+        if not gherkin:
+            features_dir = repo_path / "features"
+            if features_dir.is_dir():
+                feature_files = sorted(list(features_dir.rglob("*.feature")))
+                # Try to find a feature file matching bead keywords
+                title_words = [w.lower() for w in re.findall(r'\b[a-zA-Z]{3,}\b', bead.get("title", "")) if w.lower() not in ("phase", "task", "apply", "polish")]
+                matched_file = None
+                for ff in feature_files:
+                    if any(tw in ff.name.lower() for tw in title_words):
+                        matched_file = ff
+                        break
+                if not matched_file and feature_files:
+                    matched_file = feature_files[0]
+
+                if matched_file:
+                    try:
+                        f_text = matched_file.read_text(encoding="utf-8")
+                        s_match = re.search(r'(Scenario:[^\n]*\n+[\s\S]*?)(?=\n\s*Scenario:|\Z)', f_text)
+                        if s_match:
+                            scenario_lines = [line.rstrip() for line in s_match.group(1).splitlines() if line.strip()]
+                            gherkin = "\n".join(scenario_lines[:8])
+                    except Exception:
+                        pass
 
         return {
             "specPath": rel_path,
@@ -244,6 +317,11 @@ def sync_all_repos(config_path: Path) -> Dict[str, Any]:
         completed_raw = beads_res.get("completed")
         next_raw = beads_res.get("next")
 
+        # If inWork is the same task as completed (e.g. only 1 task closed), adjust role & badge
+        in_work_role = "in-work"
+        if in_work_raw and completed_raw and in_work_raw.get("id") == completed_raw.get("id") and in_work_raw.get("status") in ("closed", "done", "verified"):
+            in_work_role = "completed"
+
         spec_in_work = extract_openspec_for_bead(repo_path, in_work_raw)
         spec_completed = extract_openspec_for_bead(repo_path, completed_raw)
         spec_next = extract_openspec_for_bead(repo_path, next_raw)
@@ -253,7 +331,7 @@ def sync_all_repos(config_path: Path) -> Dict[str, Any]:
             "path": str(repo_path),
             "crew": repo_info.get("crew", "Core Team"),
             "completed": format_bead_object(completed_raw, "completed", repo_info, spec_completed),
-            "inWork": format_bead_object(in_work_raw, "in-work", repo_info, spec_in_work),
+            "inWork": format_bead_object(in_work_raw, in_work_role, repo_info, spec_in_work),
             "next": format_bead_object(next_raw, "next", repo_info, spec_next),
             "stats": {
                 "totalBeads": beads_res.get("totalCount", 0),

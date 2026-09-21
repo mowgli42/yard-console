@@ -9,6 +9,9 @@ Feature: OpenSpec and Beads Baseball Card Progress Interface
       | project                 | current_bead         | spec_id                                    |
       | mowgli42/schwerpunkt    | schwerpunkt-i0i.3.1  | openspec/specs/orientation-layer/spec.md   |
       | mowgli42/yard-console   | yard-042             | openspec/specs/beads-openspec-interface/   |
+      | mowgli42/appliance-keeper | appliance-keeper-o4o | openspec/specs/filter-schedule/spec.md   |
+      | mowgli42/fluffy-spoon   | fluffy-spoon-box     | docs/OPENSPEC.md                           |
+      | mowgli42/OnePage-PM     | OnePage-PM-oppm      | openspec.md                                |
       | mowgli42/o-my-sim       | o-my-sim-u1n.1       | docs/MISSION-PLAN-INGEST.md                |
 
   Scenario: Persistent current bead ticker on console header

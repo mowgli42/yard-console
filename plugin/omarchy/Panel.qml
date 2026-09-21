@@ -272,24 +272,24 @@ Panel {
           }
         }
 
-        Item {
-          width: parent.width
-          implicitHeight: Style.space(18)
-          Text {
-            text: "OpenSpec"
-            color: root.dim
-            font.family: root.fontFamily
-            font.pixelSize: Style.font.caption
-            anchors.left: parent.left
-          }
-          Text {
-            text: (root.fleetData && root.fleetData.beads && root.fleetData.beads.inWork) ? root.fleetData.beads.inWork.specId : "orientation-layer/spec.md"
-            color: root.dim
-            font.family: root.fontFamily
-            font.pixelSize: Style.font.caption
-            anchors.right: parent.right
-          }
-        }
+            Item {
+              width: parent.width
+              implicitHeight: Style.space(18)
+              Text {
+                text: "OpenSpec"
+                color: root.dim
+                font.family: root.fontFamily
+                font.pixelSize: Style.font.caption
+                anchors.left: parent.left
+              }
+              Text {
+                text: (root.fleetData && root.fleetData.beads && root.fleetData.beads.inWork) ? (root.fleetData.beads.inWork.specPath || root.fleetData.beads.inWork.specId || "orientation-layer/spec.md") : "orientation-layer/spec.md"
+                color: root.dim
+                font.family: root.fontFamily
+                font.pixelSize: Style.font.caption
+                anchors.right: parent.right
+              }
+            }
       }
 
       // Quick Launch Button

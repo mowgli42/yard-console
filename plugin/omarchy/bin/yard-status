@@ -54,6 +54,7 @@ else
       "status": "in_progress",
       "agent": "Cursor Cloud Agent (bc-709a)",
       "model": "gemini-3.8-flash",
+      "specPath": "openspec/specs/orientation-layer/spec.md",
       "specId": "openspec/specs/orientation-layer/spec.md"
     },
     "next": {

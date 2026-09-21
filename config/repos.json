@@ -19,6 +19,33 @@
       "model": "gemini-3.8-flash"
     },
     {
+      "id": "appliance-keeper",
+      "slug": "mowgli42/appliance-keeper",
+      "path": "/home/tprettol/repo/appliance-keeper",
+      "crew": "Household Care & Inventory",
+      "runtime": "Cursor",
+      "agent": "Claude Sonnet (Claude-3.7)",
+      "model": "claude-sonnet-5-thinking-high"
+    },
+    {
+      "id": "fluffy-spoon",
+      "slug": "mowgli42/fluffy-spoon",
+      "path": "/home/tprettol/repo/fluffy-spoon",
+      "crew": "Culinary Knowledge & Static Engine",
+      "runtime": "Cursor",
+      "agent": "Cursor Cloud Agent (bc-709a)",
+      "model": "gemini-3.8-flash"
+    },
+    {
+      "id": "OnePage-PM",
+      "slug": "mowgli42/OnePage-PM",
+      "path": "/home/tprettol/repo/OnePage-PM",
+      "crew": "Product & Plan Matrix Core",
+      "runtime": "Cursor",
+      "agent": "Cursor Cloud Agent (bc-709a)",
+      "model": "gpt-5.6-sol-high"
+    },
+    {
       "id": "o-my-sim",
       "slug": "mowgli42/o-my-sim",
       "path": "/home/tprettol/repo/o-my-sim",
