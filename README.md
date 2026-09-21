@@ -39,3 +39,11 @@ Not a waitlist. Not a model vendor. Not a replacement for Cursor, Grok, or the b
 ## Status
 
 Stealth preview. Contracts and detector rules are documented in `docs/ARCHITECTURE.md`.
+
+## Documentation & Architecture
+
+- **C4 Architecture & Pipeline Flow:** [`docs/C4-ARCHITECTURE.md`](docs/C4-ARCHITECTURE.md) (Context, Containers, Components, Pipeline Flow)
+- **AI Tools Integration Matrix:** [`docs/AI-INTEGRATIONS.md`](docs/AI-INTEGRATIONS.md) (Cursor, Grok, Local LLMs, Claude Code, MCP servers)
+- **Omarchy Shell Plugin Plan:** [`docs/OMARCHY-PLUGIN-PLAN.md`](docs/OMARCHY-PLUGIN-PLAN.md) (Quattro bar widget & Quickshell HUD)
+- **OpenSpec & Gherkin Specs:** [`openspec/project.md`](openspec/project.md) and [`openspec/features/`](openspec/features/)
+- **Native Omarchy Plugin:** [`plugin/omarchy/`](plugin/omarchy/) (`manifest.json`, `BarWidget.qml`, `Panel.qml`, `bin/yard-status`)

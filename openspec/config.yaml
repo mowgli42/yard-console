@@ -1,0 +1,15 @@
+schema: spec-driven
+
+context: |
+  YARD: Mixed-fleet control plane (Cursor build, Grok ship, Local LLM watch).
+  Tokyo Night keyboard-first console + Omarchy Shell Plugin companion.
+  Strict three-runtime isolation, per-crew WIP limits, passive local detectors.
+
+rules:
+  proposal:
+    - Specify runtime boundary contracts (allowed vs forbidden actions)
+    - Enforce Gherkin scenarios for every requirement
+    - Maintain zero egress rule for local watch runtime
+  tasks:
+    - Map tasks to OpenSpec spec paths (--spec-id)
+    - Break into implementable chunks per runtime and UI interface

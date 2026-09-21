@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+# YARD status provider CLI for Omarchy Quickshell plugin
+
+STATUS_FILE="${XDG_STATE_HOME:-$HOME/.local/state}/yard/status.json"
+
+if [[ -f "$STATUS_FILE" ]]; then
+  cat "$STATUS_FILE"
+else
+  # Emit sensible fallback fixture if state file not yet initialized
+  cat <<'EOF'
+{
+  "version": 1,
+  "updatedAt": "2026-09-20T21:00:00Z",
+  "fleet": {
+    "activeCrews": 4,
+    "maxCrews": 8,
+    "alarming": true,
+    "alarmCount": 1
+  },
+  "cursor": {
+    "storiesCount": 3,
+    "tokenBurn": 124000,
+    "activePr": "#42 Tokyo Night sync",
+    "status": "nominal"
+  },
+  "grok": {
+    "canaryTag": "v1.4.2-rc1",
+    "canaryPercent": 10,
+    "healthScore": 99.8,
+    "status": "staging"
+  },
+  "localWatch": {
+    "zeroEgress": true,
+    "alerts": [
+      {
+        "id": "SIG-901",
+        "storyId": "CORE-104",
+        "type": "RepeatedSignature",
+        "severity": "urgent",
+        "message": "pytest repeated 3 consecutive times without code edits"
+      }
+    ]
+  }
+}
+EOF
+fi
