@@ -1,6 +1,6 @@
 # YARD Omarchy Plugin — Build Plan & Architecture
 
-This document outlines the blueprint and implementation plan for packaging the YARD control plane as a native Omarchy desktop plugin (`omarchy.yard-console`), adhering to the Omarchy Quattro shell specification.
+This document outlines the blueprint and implementation plan for packaging the YARD control plane as a native Omarchy desktop plugin (`org.yard.console`), adhering to the Omarchy Quattro shell specification.
 
 ---
 
@@ -34,12 +34,14 @@ This document outlines the blueprint and implementation plan for packaging the Y
 
 ```
 plugin/omarchy/
-├── manifest.json              # Omarchy shell plugin manifest
+├── manifest.json              # Omarchy shell plugin manifest (schemaVersion 1, id: org.yard.console)
 ├── BarWidget.qml              # Status bar slot button & badge icon
 ├── Panel.qml                  # Quickshell popout keyboard HUD
 ├── YardModel.js               # Parser & formatting helper for YARD status JSON
 ├── bin/
 │   └── yard-status            # CLI status query & JSON emitter helper
+├── tests/
+│   └── test_plugin.py         # Automated verification test suite
 └── assets/
     ├── yard.svg               # YARD brand icon
     └── yard-alert.svg         # YARD alert icon

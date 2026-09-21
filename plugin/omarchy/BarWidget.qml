@@ -4,10 +4,13 @@ import qs.Ui
 
 BarWidget {
   id: root
-  moduleName: "omarchy.yard-console"
+  moduleName: "org.yard.console"
 
   readonly property bool opened: panelLoader.item ? panelLoader.item.opened === true : false
   readonly property bool alarming: panelLoader.item ? panelLoader.item.alarming === true : false
+  readonly property bool popoutSwitchClosing: panelLoader.item ? panelLoader.item.popoutSwitchClosing === true : false
+  readonly property real openPanelIndicatorWidth: button.width
+  readonly property real openPanelIndicatorHeight: Math.max(Style.space(10), Math.round(Style.bar.iconSlot * 0.55))
 
   function injectPanel() {
     var target = panelLoader.item
@@ -18,9 +21,10 @@ BarWidget {
     if ("hostWidget" in target) target.hostWidget = root
   }
 
-  function togglePanel() {
-    if (panelLoader.item) panelLoader.item.toggle()
-  }
+  function open() { if (panelLoader.item) panelLoader.item.open() }
+  function close() { if (panelLoader.item) panelLoader.item.close() }
+  function togglePanel() { if (panelLoader.item) panelLoader.item.toggle() }
+  function closeForPopoutSwitch() { if (panelLoader.item) panelLoader.item.closeForPopoutSwitch() }
 
   implicitWidth: button.implicitWidth
   implicitHeight: button.implicitHeight

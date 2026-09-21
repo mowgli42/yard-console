@@ -8,12 +8,13 @@ import "YardModel.js" as YardModel
 
 Panel {
   id: root
-  moduleName: "omarchy.yard-console"
-  ipcTarget: "omarchy.yard-console"
+  moduleName: "org.yard.console"
+  ipcTarget: "org.yard.console"
   manageIpc: false
 
   property var anchorItem: null
   property var hostWidget: null
+  readonly property var barIdentity: hostWidget || root
 
   readonly property color foreground: bar ? bar.foreground : Color.foreground
   readonly property color urgent: bar ? bar.urgent : Color.urgent
@@ -36,6 +37,12 @@ Panel {
 
   function toggle() {
     root.opened ? root.close() : root.open()
+  }
+
+  function switchPanel(direction) {
+    if (root.bar && typeof root.bar.switchPanelFrom === "function")
+      return root.bar.switchPanelFrom(root.barIdentity, direction)
+    return false
   }
 
   function refreshStatus() {
@@ -81,17 +88,24 @@ Panel {
   KeyboardPanel {
     id: panel
     anchorItem: root.anchorItem
-    owner: root
+    owner: root.barIdentity
     bar: root.bar
     open: root.opened
+    focusTarget: keyCatcher
     contentWidth: panel.fittedContentWidth(Style.space(420))
     contentHeight: panel.fittedContentHeight(mainCol.implicitHeight, Style.space(720))
 
-    Column {
-      id: mainCol
+    PanelKeyCatcher {
+      id: keyCatcher
       anchors.fill: parent
-      spacing: Style.space(12)
-      padding: Style.space(14)
+      onCloseRequested: root.close()
+      onTabRequested: function(direction) { root.switchPanel(direction) }
+
+      Column {
+        id: mainCol
+        anchors.fill: parent
+        spacing: Style.space(12)
+        padding: Style.space(14)
 
       // Header
       PanelHero {
@@ -470,4 +484,5 @@ Panel {
       }
     }
   }
+}
 }

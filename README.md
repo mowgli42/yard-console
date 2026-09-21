@@ -130,14 +130,18 @@ The script will:
 The plugin directory (`plugin/omarchy/`) can be linked directly into Omarchy's user plugin directory:
 ```bash
 # Link plugin to user directory
-ln -sfn /home/tprettol/repo/yard-console/plugin/omarchy ~/.config/omarchy/plugins/omarchy.yard-console
+ln -sfn /home/tprettol/repo/yard-console/plugin/omarchy ~/.config/omarchy/plugins/org.yard.console
 
-# Add widget to status bar in ~/.config/omarchy/shell.json under "bar.layout.right"
-# { "id": "omarchy.yard-console" }
+# Validate against Omarchy plugin specification
+omarchy plugin validate /home/tprettol/repo/yard-console/plugin/omarchy
+
+# Enable widget on the Omarchy status bar
+omarchy plugin enable org.yard.console right
 ```
 When active on the status bar:
 - Displays `󱚣` with dynamic tooltip reflecting Beads adoption (`YARD [6/7 Beads] In-Work: appliance-keeper-o4o`).
 - Clicking opens the Quickshell HUD with real-time Beads Adoption Scorecard, Active Trio, Agent Status, Git Working Branch, and latest GitHub PR.
+- Supports keyboard navigation with `Esc` to close and `Tab`/`Shift+Tab` to switch panels.
 - One-click button launches the full Tokyo Night web console.
 
 ### Active Test Repositories
