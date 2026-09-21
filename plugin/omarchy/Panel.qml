@@ -84,8 +84,8 @@ Panel {
     owner: root
     bar: root.bar
     open: root.opened
-    contentWidth: panel.fittedContentWidth(Style.space(380))
-    contentHeight: panel.fittedContentHeight(mainCol.implicitHeight, Style.space(560))
+    contentWidth: panel.fittedContentWidth(Style.space(420))
+    contentHeight: panel.fittedContentHeight(mainCol.implicitHeight, Style.space(720))
 
     Column {
       id: mainCol
@@ -222,6 +222,83 @@ Panel {
 
       PanelSeparator { foreground: root.foreground }
 
+      // Beads Adoption & System Status
+      Column {
+        width: parent.width
+        spacing: Style.space(6)
+
+        PanelSectionHeader {
+          text: "BEADS ADOPTION & ECOSYSTEM"
+          foreground: root.foreground
+          fontFamily: root.fontFamily
+        }
+
+        Item {
+          width: parent.width
+          implicitHeight: Style.space(20)
+          Text {
+            text: "Adoption Score"
+            color: root.foreground
+            font.family: root.fontFamily
+            font.pixelSize: Style.font.body
+            anchors.left: parent.left
+          }
+          Text {
+            text: (root.fleetData && root.fleetData.beadsSystem)
+              ? (root.fleetData.beadsSystem.adoptedRepos + " / " + root.fleetData.beadsSystem.totalRepos + " Repos (" + root.fleetData.beadsSystem.adoptionPercent + "%)")
+              : "Scanning..."
+            color: Color.accent || root.foreground
+            font.family: root.fontFamily
+            font.pixelSize: Style.font.caption
+            anchors.right: parent.right
+          }
+        }
+
+        Item {
+          width: parent.width
+          implicitHeight: Style.space(20)
+          Text {
+            text: "Total Beads Tracked"
+            color: root.foreground
+            font.family: root.fontFamily
+            font.pixelSize: Style.font.body
+            anchors.left: parent.left
+          }
+          Text {
+            text: (root.fleetData && root.fleetData.beadsSystem)
+              ? (root.fleetData.beadsSystem.totalBeads + " (" + root.fleetData.beadsSystem.closedBeads + " closed · " + root.fleetData.beadsSystem.pendingBeads + " open)")
+              : "—"
+            color: root.dim
+            font.family: root.fontFamily
+            font.pixelSize: Style.font.caption
+            anchors.right: parent.right
+          }
+        }
+
+        Item {
+          width: parent.width
+          implicitHeight: Style.space(20)
+          Text {
+            text: "CLI Tooling (bd)"
+            color: root.foreground
+            font.family: root.fontFamily
+            font.pixelSize: Style.font.body
+            anchors.left: parent.left
+          }
+          Text {
+            text: (root.fleetData && root.fleetData.beadsSystem && root.fleetData.beadsSystem.installed)
+              ? "Installed · Dolt Ready"
+              : "JSONL Native (Portable)"
+            color: (root.fleetData && root.fleetData.beadsSystem && root.fleetData.beadsSystem.installed) ? Color.accent : root.dim
+            font.family: root.fontFamily
+            font.pixelSize: Style.font.caption
+            anchors.right: parent.right
+          }
+        }
+      }
+
+      PanelSeparator { foreground: root.foreground }
+
       // Beads Active Pipeline & OpenSpec Link
       Column {
         width: parent.width
@@ -272,24 +349,114 @@ Panel {
           }
         }
 
-            Item {
-              width: parent.width
-              implicitHeight: Style.space(18)
-              Text {
-                text: "OpenSpec"
-                color: root.dim
-                font.family: root.fontFamily
-                font.pixelSize: Style.font.caption
-                anchors.left: parent.left
+        Item {
+          width: parent.width
+          implicitHeight: Style.space(18)
+          Text {
+            text: "Agent Status"
+            color: root.foreground
+            font.family: root.fontFamily
+            font.pixelSize: Style.font.caption
+            anchors.left: parent.left
+          }
+          Text {
+            text: (root.fleetData && root.fleetData.beads && root.fleetData.beads.inWork)
+              ? (root.fleetData.beads.inWork.agent + " [" + (root.fleetData.beads.inWork.agentStatus || "active").toUpperCase() + "]")
+              : "Cursor Cloud Agent [IDLE]"
+            color: Color.accent || root.foreground
+            font.family: root.fontFamily
+            font.pixelSize: Style.font.caption
+            anchors.right: parent.right
+          }
+        }
+
+        Item {
+          width: parent.width
+          implicitHeight: Style.space(18)
+          Text {
+            text: "OpenSpec"
+            color: root.dim
+            font.family: root.fontFamily
+            font.pixelSize: Style.font.caption
+            anchors.left: parent.left
+          }
+          Text {
+            text: (root.fleetData && root.fleetData.beads && root.fleetData.beads.inWork) ? (root.fleetData.beads.inWork.specPath || root.fleetData.beads.inWork.specId || "orientation-layer/spec.md") : "orientation-layer/spec.md"
+            color: root.dim
+            font.family: root.fontFamily
+            font.pixelSize: Style.font.caption
+            anchors.right: parent.right
+          }
+        }
+      }
+
+      PanelSeparator { foreground: root.foreground }
+
+      // GitHub & Git Activity
+      Column {
+        width: parent.width
+        spacing: Style.space(6)
+
+        PanelSectionHeader {
+          text: "GITHUB & GIT ACTIVITY"
+          foreground: root.foreground
+          fontFamily: root.fontFamily
+        }
+
+        Item {
+          width: parent.width
+          implicitHeight: Style.space(18)
+          Text {
+            text: "Working Branch"
+            color: root.foreground
+            font.family: root.fontFamily
+            font.pixelSize: Style.font.caption
+            anchors.left: parent.left
+          }
+          Text {
+            text: {
+              if (root.fleetData && root.fleetData.allProjects && root.fleetData.beads) {
+                var p = root.fleetData.allProjects[root.fleetData.beads.activeProject];
+                if (p && p.gitActivity) return p.gitActivity.branch + (p.gitActivity.isClean ? " (clean)" : " (modified)");
               }
-              Text {
-                text: (root.fleetData && root.fleetData.beads && root.fleetData.beads.inWork) ? (root.fleetData.beads.inWork.specPath || root.fleetData.beads.inWork.specId || "orientation-layer/spec.md") : "orientation-layer/spec.md"
-                color: root.dim
-                font.family: root.fontFamily
-                font.pixelSize: Style.font.caption
-                anchors.right: parent.right
-              }
+              return "main (clean)";
             }
+            color: root.dim
+            font.family: root.fontFamily
+            font.pixelSize: Style.font.caption
+            anchors.right: parent.right
+          }
+        }
+
+        Item {
+          width: parent.width
+          implicitHeight: Style.space(18)
+          Text {
+            text: "Latest PR"
+            color: root.foreground
+            font.family: root.fontFamily
+            font.pixelSize: Style.font.caption
+            anchors.left: parent.left
+          }
+          Text {
+            text: {
+              if (root.fleetData && root.fleetData.allProjects && root.fleetData.beads) {
+                var proj = root.fleetData.allProjects[root.fleetData.beads.activeProject];
+                if (proj && proj.githubPrs && proj.githubPrs.openPrs && proj.githubPrs.openPrs.length > 0) {
+                  return "#" + proj.githubPrs.openPrs[0].number + " " + proj.githubPrs.openPrs[0].title;
+                }
+              }
+              return "No active PR on active project";
+            }
+            color: Color.accent || root.foreground
+            font.family: root.fontFamily
+            font.pixelSize: Style.font.caption
+            anchors.right: parent.right
+            elide: Text.ElideRight
+            width: parent.width * 0.65
+            horizontalAlignment: Text.AlignRight
+          }
+        }
       }
 
       // Quick Launch Button

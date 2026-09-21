@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "id": "omarchy.yard-console",
   "name": "YARD Control Plane",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "author": "YARD Team",
-  "description": "Mixed-fleet agentic control plane for Cursor, Grok, and Local LLM runtimes.",
+  "description": "Control plane and HUD for Beads task pipelines, GitHub activity, agent status, and OpenSpec contracts.",
   "kinds": [
     "bar-widget"
   ],
@@ -12,8 +12,8 @@
     "barWidget": "BarWidget.qml"
   },
   "barWidget": {
-    "displayName": "YARD Control Plane",
-    "description": "At-a-glance fleet status, crew WIP, Grok canary tracking, and local anomaly alerts.",
+    "displayName": "YARD & Beads Control Plane",
+    "description": "At-a-glance Beads adoption, current active in-work bead, GitHub PRs, agent status, and OpenSpec definitions.",
     "category": "AI",
     "allowMultiple": false,
     "defaults": {

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-21T15:24:48Z",
+  "updatedAt": "2026-09-21T15:33:55Z",
   "fleet": {
     "activeCrews": 7,
     "maxCrews": 12,
@@ -34,6 +34,7 @@
       "owner": "tprettol@yahoo.com",
       "agent": "Cursor Cloud Agent (bc-709a)",
       "model": "gemini-3.8-flash",
+      "agentStatus": "completed",
       "tokens": "18,200 / 45,000 (40%)",
       "health": "Verified Green",
       "specPath": "openspec/specs/human-in-the-loop/spec.md",
@@ -51,6 +52,7 @@
       "owner": "tprettol@yahoo.com",
       "agent": "Cursor Cloud Agent (bc-709a)",
       "model": "gemini-3.8-flash",
+      "agentStatus": "active",
       "tokens": "26,400 / 45,000 (58%)",
       "health": "Nominal \u00b7 Active Loop",
       "specPath": "openspec/specs/demo-scenarios/spec.md",
@@ -68,6 +70,7 @@
       "owner": "tprettol@yahoo.com",
       "agent": "Cursor Cloud Agent (bc-709a)",
       "model": "gemini-3.8-flash",
+      "agentStatus": "idle",
       "tokens": "0 / 0 (0%)",
       "health": "Queued",
       "specPath": "openspec/specs/demo-scenarios/spec.md",
@@ -76,6 +79,18 @@
       "gherkin": "Scenario: Operator demo contradiction flow\n\n  GIVEN fixture `fixtures/scenarios/contradiction_case.json`\n  AND `SCHWERKPUNKT_MODE=manual`\n  WHEN the operator loads the fixture and advances the loop\n  THEN the runtime SHALL pause with `pending_operator.kind=orient`\n  WHEN the operator resolves `case_status` to `open`\n  THEN contradictions SHALL be cleared\n  AND the loop SHALL proceed toward Decide without LLM or MCP",
       "cliCmd": "bd show schwerpunkt-i0i.2.10"
     }
+  },
+  "beadsSystem": {
+    "installed": false,
+    "binaryPath": "",
+    "version": "not installed",
+    "doltInstalled": false,
+    "adoptedRepos": 6,
+    "totalRepos": 7,
+    "adoptionPercent": 85,
+    "totalBeads": 119,
+    "closedBeads": 64,
+    "pendingBeads": 54
   },
   "allProjects": {
     "mowgli42/schwerpunkt": {
@@ -91,6 +106,7 @@
         "owner": "tprettol@yahoo.com",
         "agent": "Cursor Cloud Agent (bc-709a)",
         "model": "gemini-3.8-flash",
+        "agentStatus": "completed",
         "tokens": "18,200 / 45,000 (40%)",
         "health": "Verified Green",
         "specPath": "openspec/specs/human-in-the-loop/spec.md",
@@ -108,6 +124,7 @@
         "owner": "tprettol@yahoo.com",
         "agent": "Cursor Cloud Agent (bc-709a)",
         "model": "gemini-3.8-flash",
+        "agentStatus": "active",
         "tokens": "26,400 / 45,000 (58%)",
         "health": "Nominal \u00b7 Active Loop",
         "specPath": "openspec/specs/demo-scenarios/spec.md",
@@ -125,6 +142,7 @@
         "owner": "tprettol@yahoo.com",
         "agent": "Cursor Cloud Agent (bc-709a)",
         "model": "gemini-3.8-flash",
+        "agentStatus": "idle",
         "tokens": "0 / 0 (0%)",
         "health": "Queued",
         "specPath": "openspec/specs/demo-scenarios/spec.md",
@@ -137,6 +155,30 @@
         "totalBeads": 31,
         "closedBeads": 24,
         "pendingBeads": 6
+      },
+      "beadsAdoption": {
+        "adopted": true,
+        "adoptionScore": 100,
+        "backend": "dolt",
+        "hasIssuesJsonl": true,
+        "hasConfigYaml": true,
+        "hasAgentsMd": true,
+        "issuesPath": "/home/tprettol/repo/schwerpunkt/.beads/issues.jsonl"
+      },
+      "gitActivity": {
+        "branch": "main",
+        "isClean": true,
+        "lastCommit": {
+          "hash": "88c77e1",
+          "message": "Sync Repo Health Loop Cursor skills and rule",
+          "author": "mowgli42",
+          "relativeTime": "6 weeks ago"
+        },
+        "recentCommitsCount": 0
+      },
+      "githubPrs": {
+        "available": true,
+        "openPrs": []
       }
     },
     "mowgli42/yard-console": {
@@ -198,6 +240,30 @@
         "totalBeads": 0,
         "closedBeads": 0,
         "pendingBeads": 0
+      },
+      "beadsAdoption": {
+        "adopted": false,
+        "adoptionScore": 0,
+        "backend": "jsonl",
+        "hasIssuesJsonl": false,
+        "hasConfigYaml": false,
+        "hasAgentsMd": false,
+        "issuesPath": ""
+      },
+      "gitActivity": {
+        "branch": "main",
+        "isClean": false,
+        "lastCommit": {
+          "hash": "1b23924",
+          "message": "docs: update screenshots and README for appliance-keeper, fluffy-spoon, and OnePage-PM",
+          "author": "mowgli42",
+          "relativeTime": "8 minutes ago"
+        },
+        "recentCommitsCount": 0
+      },
+      "githubPrs": {
+        "available": true,
+        "openPrs": []
       }
     },
     "mowgli42/appliance-keeper": {
@@ -230,6 +296,7 @@
         "owner": "tprettol@yahoo.com",
         "agent": "Claude Sonnet (Claude-3.7)",
         "model": "claude-sonnet-5-thinking-high",
+        "agentStatus": "active",
         "tokens": "26,400 / 45,000 (58%)",
         "health": "Nominal \u00b7 Active Loop",
         "specPath": "openspec/specs/attention/spec.md",
@@ -247,6 +314,7 @@
         "owner": "tprettol@yahoo.com",
         "agent": "Claude Sonnet (Claude-3.7)",
         "model": "claude-sonnet-5-thinking-high",
+        "agentStatus": "idle",
         "tokens": "0 / 0 (0%)",
         "health": "Queued",
         "specPath": "openspec/specs/appliance/spec.md",
@@ -259,6 +327,45 @@
         "totalBeads": 4,
         "closedBeads": 0,
         "pendingBeads": 4
+      },
+      "beadsAdoption": {
+        "adopted": true,
+        "adoptionScore": 100,
+        "backend": "dolt",
+        "hasIssuesJsonl": true,
+        "hasConfigYaml": true,
+        "hasAgentsMd": true,
+        "issuesPath": "/home/tprettol/repo/appliance-keeper/.beads/issues.jsonl"
+      },
+      "gitActivity": {
+        "branch": "main",
+        "isClean": true,
+        "lastCommit": {
+          "hash": "0b37080",
+          "message": "Sync Repo Health Loop Cursor skills and rule",
+          "author": "mowgli42",
+          "relativeTime": "2 weeks ago"
+        },
+        "recentCommitsCount": 0
+      },
+      "githubPrs": {
+        "available": true,
+        "openPrs": [
+          {
+            "number": 6,
+            "title": "Add appliance: filter info + change frequency",
+            "branch": "cursor/add-appliance-filters-5018",
+            "author": "mowgli42",
+            "state": "OPEN"
+          },
+          {
+            "number": 3,
+            "title": "Centriq-style media & insights + README docs UX",
+            "branch": "cursor/centriq-media-insights-5018",
+            "author": "mowgli42",
+            "state": "OPEN"
+          }
+        ]
       }
     },
     "mowgli42/fluffy-spoon": {
@@ -274,6 +381,7 @@
         "owner": "tprettol@yahoo.com",
         "agent": "Cursor Cloud Agent (bc-709a)",
         "model": "gemini-3.8-flash",
+        "agentStatus": "completed",
         "tokens": "18,200 / 45,000 (40%)",
         "health": "Verified Green",
         "specPath": "docs/OPENSPEC.md",
@@ -291,6 +399,7 @@
         "owner": "tprettol@yahoo.com",
         "agent": "Cursor Cloud Agent (bc-709a)",
         "model": "gemini-3.8-flash",
+        "agentStatus": "completed",
         "tokens": "18,200 / 45,000 (40%)",
         "health": "Verified Green",
         "specPath": "docs/OPENSPEC.md",
@@ -320,6 +429,30 @@
         "totalBeads": 1,
         "closedBeads": 1,
         "pendingBeads": 0
+      },
+      "beadsAdoption": {
+        "adopted": true,
+        "adoptionScore": 100,
+        "backend": "dolt",
+        "hasIssuesJsonl": true,
+        "hasConfigYaml": true,
+        "hasAgentsMd": true,
+        "issuesPath": "/home/tprettol/repo/fluffy-spoon/.beads/issues.jsonl"
+      },
+      "gitActivity": {
+        "branch": "main",
+        "isClean": true,
+        "lastCommit": {
+          "hash": "8c2208e",
+          "message": "Add eight recent-hit recipes to the cookbook",
+          "author": "mowgli42",
+          "relativeTime": "6 days ago"
+        },
+        "recentCommitsCount": 0
+      },
+      "githubPrs": {
+        "available": true,
+        "openPrs": []
       }
     },
     "mowgli42/OnePage-PM": {
@@ -335,6 +468,7 @@
         "owner": "tprettol@yahoo.com",
         "agent": "Cursor Cloud Agent (bc-709a)",
         "model": "gpt-5.6-sol-high",
+        "agentStatus": "completed",
         "tokens": "18,200 / 45,000 (40%)",
         "health": "Verified Green",
         "specPath": "openspec.md",
@@ -352,6 +486,7 @@
         "owner": "tprettol@yahoo.com",
         "agent": "Cursor Cloud Agent (bc-709a)",
         "model": "gpt-5.6-sol-high",
+        "agentStatus": "completed",
         "tokens": "18,200 / 45,000 (40%)",
         "health": "Verified Green",
         "specPath": "openspec.md",
@@ -381,6 +516,52 @@
         "totalBeads": 1,
         "closedBeads": 1,
         "pendingBeads": 0
+      },
+      "beadsAdoption": {
+        "adopted": true,
+        "adoptionScore": 100,
+        "backend": "dolt",
+        "hasIssuesJsonl": true,
+        "hasConfigYaml": true,
+        "hasAgentsMd": true,
+        "issuesPath": "/home/tprettol/repo/OnePage-PM/.beads/issues.jsonl"
+      },
+      "gitActivity": {
+        "branch": "main",
+        "isClean": true,
+        "lastCommit": {
+          "hash": "b690e30",
+          "message": "Add Gherkin scenarios for core happy paths (#17)",
+          "author": "cursor[bot]",
+          "relativeTime": "5 weeks ago"
+        },
+        "recentCommitsCount": 0
+      },
+      "githubPrs": {
+        "available": true,
+        "openPrs": [
+          {
+            "number": 7,
+            "title": "Follow-up PRs: SQLite, notifications, attachments, exports, templates",
+            "branch": "cursor/follow-up-prs-c0f4",
+            "author": "mowgli42",
+            "state": "OPEN"
+          },
+          {
+            "number": 6,
+            "title": "Roadmap PRs #1\u2013#9: persistence, auth, hardening, plan CRUD, Gantt, Docker",
+            "branch": "cursor/roadmap-all-prs-c0f4",
+            "author": "mowgli42",
+            "state": "OPEN"
+          },
+          {
+            "number": 5,
+            "title": "Persist todos to JSON storage (PR #1 \u2013 reliability)",
+            "branch": "cursor/persistent-todos-json-c0f4",
+            "author": "mowgli42",
+            "state": "OPEN"
+          }
+        ]
       }
     },
     "mowgli42/o-my-sim": {
@@ -396,6 +577,7 @@
         "owner": "tprettol@yahoo.com",
         "agent": "Cursor Cloud Agent (bc-709a)",
         "model": "gpt-5.6-sol-high",
+        "agentStatus": "completed",
         "tokens": "18,200 / 45,000 (40%)",
         "health": "Verified Green",
         "specPath": "openspec/specs/o-my-sim/architecture.md",
@@ -413,6 +595,7 @@
         "owner": "operator",
         "agent": "Cursor Cloud Agent (bc-709a)",
         "model": "gpt-5.6-sol-high",
+        "agentStatus": "active",
         "tokens": "26,400 / 45,000 (58%)",
         "health": "Nominal \u00b7 Active Loop",
         "specPath": "openspec/specs/o-my-sim/architecture.md",
@@ -430,6 +613,7 @@
         "owner": "operator",
         "agent": "Cursor Cloud Agent (bc-709a)",
         "model": "gpt-5.6-sol-high",
+        "agentStatus": "idle",
         "tokens": "0 / 0 (0%)",
         "health": "Queued",
         "specPath": "openspec/specs/o-my-sim/architecture.md",
@@ -442,6 +626,30 @@
         "totalBeads": 69,
         "closedBeads": 25,
         "pendingBeads": 44
+      },
+      "beadsAdoption": {
+        "adopted": true,
+        "adoptionScore": 100,
+        "backend": "dolt",
+        "hasIssuesJsonl": true,
+        "hasConfigYaml": true,
+        "hasAgentsMd": true,
+        "issuesPath": "/home/tprettol/repo/o-my-sim/.beads/issues.jsonl"
+      },
+      "gitActivity": {
+        "branch": "main",
+        "isClean": true,
+        "lastCommit": {
+          "hash": "03b0442",
+          "message": "Move sim host ports into the 70s band (807x/8270/8970)",
+          "author": "mowgli42",
+          "relativeTime": "4 weeks ago"
+        },
+        "recentCommitsCount": 0
+      },
+      "githubPrs": {
+        "available": true,
+        "openPrs": []
       }
     },
     "mowgli42/verified-xfer": {
@@ -457,6 +665,7 @@
         "owner": "tprettol@yahoo.com",
         "agent": "Cursor Agent",
         "model": "claude-fable-5-1",
+        "agentStatus": "completed",
         "tokens": "18,200 / 45,000 (40%)",
         "health": "Verified Green",
         "specPath": "openspec/specs/file-staging/spec.md",
@@ -474,6 +683,7 @@
         "owner": "tprettol@yahoo.com",
         "agent": "Cursor Agent",
         "model": "claude-fable-5-1",
+        "agentStatus": "completed",
         "tokens": "18,200 / 45,000 (40%)",
         "health": "Verified Green",
         "specPath": "openspec/specs/file-staging/spec.md",
@@ -503,6 +713,30 @@
         "totalBeads": 13,
         "closedBeads": 13,
         "pendingBeads": 0
+      },
+      "beadsAdoption": {
+        "adopted": true,
+        "adoptionScore": 100,
+        "backend": "dolt",
+        "hasIssuesJsonl": true,
+        "hasConfigYaml": true,
+        "hasAgentsMd": true,
+        "issuesPath": "/home/tprettol/repo/verified-xfer/.beads/issues.jsonl"
+      },
+      "gitActivity": {
+        "branch": "main",
+        "isClean": true,
+        "lastCommit": {
+          "hash": "88c3e0c",
+          "message": "Complete OpenSpec archive: Gherkin spec, test coverage, Beads readiness (#7)",
+          "author": "mowgli42",
+          "relativeTime": "5 weeks ago"
+        },
+        "recentCommitsCount": 0
+      },
+      "githubPrs": {
+        "available": true,
+        "openPrs": []
       }
     }
   }

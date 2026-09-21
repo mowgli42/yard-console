@@ -90,7 +90,9 @@ The **Crews View (`3`)** manages autonomous agile crews working concurrently acr
 | **Cursor Build Table (View 4)** | `Claude Sonnet (Claude-3.7)`, `Cursor Cloud (gpt-5.6-sol / gemini-3.8-flash)`, `Cursor Local (Sonnet 5)`, `composer-2.5` | Granular builder model attribution per branch, repo & PR. |
 | **Local Watch Table (View 6)** | `Ollama / Qwen 2.5 Coder 14B`, `llama.cpp / DeepSeek R1 14B`, `Mistral NeMo` | Zero-egress local observer models watching heartbeats across repos (`appliance-keeper`, `fluffy-spoon`, `OnePage-PM`, `schwerpunkt`). |
 | **Beads Active Ribbon (Header)** | Current in-work bead ID (`appliance-keeper-o4o`, `fluffy-spoon-box`, `OnePage-PM-oppm`, `schwerpunkt-i0i.3.1`), assigned agent, live pulse | Continuous task attribution across multiple project repositories. |
-| **OpenSpec Baseball Card (`b`)** | Assigned agent (`Claude Sonnet 3.7`, `gemini-3.8-flash`, `gpt-5.6-sol`), engine model, token burn | Glanceable athlete-card stats, formal `SHALL` spec requirement, and Gherkin BDD scenario. |
+| **Beads & GitHub Matrix (View 1)** | Fleet adoption rate, issue backend (Dolt/JSONL), git dirty state, and open GitHub PRs per repo | Deep ecosystem adoption scorecard and pull request linkage. |
+| **OpenSpec Baseball Card (`b`)** | Assigned agent (`Claude Sonnet 3.7`, `gemini-3.8-flash`, `gpt-5.6-sol`), engine model, token burn, git branch, commit hash, and PR # | Glanceable athlete-card stats, formal `SHALL` spec requirement, Git metadata, and Gherkin BDD scenario. |
+| **Omarchy Quickshell HUD (`BarWidget.qml` / `Panel.qml`)** | Dynamic Bar button tooltip (`YARD [6/7 Beads] In-Work: ...`), Beads adoption score, agent state, and GitHub telemetry | Linux desktop integration via Omarchy shell status bar. |
 | **Persistent Footer Status Bar** | `Cursor Cloud Agent: Active`, `Grok Release Agent: Canary 10%`, `Local Watcher: 1 Alert` | Always-visible agent health LEDs across all views. |
 
 ## Live Operation & Repository Management
@@ -122,6 +124,21 @@ The script will:
 - Verify or initialize `.beads/` and `openspec/`.
 - Register the repo in `config/repos.json`.
 - Trigger an immediate sync so it appears in the console project selector.
+
+### Installing and Activating the Omarchy Plugin
+
+The plugin directory (`plugin/omarchy/`) can be linked directly into Omarchy's user plugin directory:
+```bash
+# Link plugin to user directory
+ln -sfn /home/tprettol/repo/yard-console/plugin/omarchy ~/.config/omarchy/plugins/omarchy.yard-console
+
+# Add widget to status bar in ~/.config/omarchy/shell.json under "bar.layout.right"
+# { "id": "omarchy.yard-console" }
+```
+When active on the status bar:
+- Displays `󱚣` with dynamic tooltip reflecting Beads adoption (`YARD [6/7 Beads] In-Work: appliance-keeper-o4o`).
+- Clicking opens the Quickshell HUD with real-time Beads Adoption Scorecard, Active Trio, Agent Status, Git Working Branch, and latest GitHub PR.
+- One-click button launches the full Tokyo Night web console.
 
 ### Active Test Repositories
 

@@ -13,6 +13,8 @@ import sys
 import json
 import time
 import re
+import shutil
+import subprocess
 import argparse
 from pathlib import Path
 from typing import Dict, Any, List, Optional
@@ -22,6 +24,153 @@ REPO_ROOT = SCRIPT_DIR.parent
 DEFAULT_CONFIG = REPO_ROOT / "config" / "repos.json"
 DEFAULT_STATE_OUT = Path(os.path.expanduser("~/.local/state/yard/status.json"))
 WEB_DATA_OUT = REPO_ROOT / "data" / "status.json"
+
+def check_beads_installation() -> Dict[str, Any]:
+    """Inspects system-wide and local Beads (bd) CLI and environment installation."""
+    bd_bin = shutil.which("bd")
+    dolt_bin = shutil.which("dolt")
+    version_str = "not installed"
+    is_installed = False
+
+    if bd_bin:
+        is_installed = True
+        try:
+            res = subprocess.run([bd_bin, "--version"], capture_output=True, text=True, timeout=2)
+            if res.returncode == 0:
+                version_str = res.stdout.strip()
+            else:
+                version_str = "bd installed (custom build)"
+        except Exception:
+            version_str = "bd installed"
+    else:
+        # Check standard user paths
+        for cand in [Path.home() / ".local/bin/bd", Path.home() / ".bun/bin/bd"]:
+            if cand.is_file() and os.access(cand, os.X_OK):
+                bd_bin = str(cand)
+                is_installed = True
+                version_str = "bd (user path)"
+                break
+
+    return {
+        "installed": is_installed,
+        "binaryPath": bd_bin or "",
+        "version": version_str,
+        "doltInstalled": dolt_bin is not None,
+        "doltPath": dolt_bin or ""
+    }
+
+def inspect_git_activity(repo_path: Path) -> Dict[str, Any]:
+    """Extracts branch, last commit, dirty state, and recent commit messages."""
+    result = {
+        "branch": "unknown",
+        "isClean": True,
+        "lastCommit": {
+            "hash": "",
+            "message": "",
+            "author": "",
+            "relativeTime": ""
+        },
+        "recentCommitsCount": 0
+    }
+    if not (repo_path / ".git").exists():
+        return result
+
+    try:
+        # Branch
+        br_res = subprocess.run(["git", "branch", "--show-current"], cwd=repo_path, capture_output=True, text=True, timeout=2)
+        if br_res.returncode == 0 and br_res.stdout.strip():
+            result["branch"] = br_res.stdout.strip()
+
+        # Status clean?
+        st_res = subprocess.run(["git", "status", "--porcelain"], cwd=repo_path, capture_output=True, text=True, timeout=2)
+        if st_res.returncode == 0:
+            result["isClean"] = len(st_res.stdout.strip()) == 0
+
+        # Last commit
+        log_res = subprocess.run(
+            ["git", "log", "-n", "1", "--pretty=format:%h|%s|%an|%cr"],
+            cwd=repo_path, capture_output=True, text=True, timeout=2
+        )
+        if log_res.returncode == 0 and log_res.stdout.strip():
+            parts = log_res.stdout.strip().split("|")
+            if len(parts) >= 4:
+                result["lastCommit"] = {
+                    "hash": parts[0],
+                    "message": parts[1],
+                    "author": parts[2],
+                    "relativeTime": parts[3]
+                }
+    except Exception:
+        pass
+
+    return result
+
+def inspect_github_prs(repo_path: Path) -> Dict[str, Any]:
+    """Inspects GitHub PRs via gh CLI if available and accessible."""
+    gh_bin = shutil.which("gh")
+    result = {
+        "available": gh_bin is not None,
+        "openPrs": []
+    }
+    if not gh_bin:
+        return result
+
+    try:
+        pr_res = subprocess.run(
+            [gh_bin, "pr", "list", "--limit", "3", "--json", "number,title,headRefName,state,updatedAt,author"],
+            cwd=repo_path, capture_output=True, text=True, timeout=3
+        )
+        if pr_res.returncode == 0 and pr_res.stdout.strip():
+            prs = json.loads(pr_res.stdout)
+            result["openPrs"] = [
+                {
+                    "number": p.get("number"),
+                    "title": p.get("title"),
+                    "branch": p.get("headRefName"),
+                    "author": p.get("author", {}).get("login", "unknown"),
+                    "state": p.get("state")
+                }
+                for p in prs
+            ]
+    except Exception:
+        pass
+
+    return result
+
+def inspect_beads_adoption(repo_path: Path) -> Dict[str, Any]:
+    """Inspects whether .beads, issues.jsonl, and AGENTS.md are configured."""
+    beads_dir = repo_path / ".beads"
+    has_beads_dir = beads_dir.is_dir()
+    has_issues = (beads_dir / "issues.jsonl").is_file()
+    has_config = (beads_dir / "config.yaml").is_file()
+    has_agents_md = (repo_path / "AGENTS.md").is_file()
+
+    # Read config backend if present
+    backend = "jsonl"
+    meta_file = beads_dir / "metadata.json"
+    if meta_file.is_file():
+        try:
+            with open(meta_file, "r") as mf:
+                mdata = json.load(mf)
+                backend = mdata.get("backend", "jsonl")
+        except Exception:
+            pass
+
+    score = 0
+    if has_beads_dir: score += 25
+    if has_issues: score += 35
+    if has_config: score += 20
+    if has_agents_md: score += 20
+
+    return {
+        "adopted": has_beads_dir and has_issues,
+        "adoptionScore": score,
+        "backend": backend,
+        "hasIssuesJsonl": has_issues,
+        "hasConfigYaml": has_config,
+        "hasAgentsMd": has_agents_md,
+        "issuesPath": str(beads_dir / "issues.jsonl") if has_issues else ""
+    }
 
 def parse_beads(repo_path: Path) -> Dict[str, Any]:
     """Reads .beads/issues.jsonl and extracts completed, in-progress, and next beads."""
@@ -274,12 +423,15 @@ def format_bead_object(bead: Optional[Dict[str, Any]], role: str, repo_info: Dic
     # If inWork has token count in repo_info or defaults, provide realistic metrics
     tokens = "0 / 0 (0%)"
     health = "Queued"
+    agent_status = "idle"
     if role == "in-work":
         tokens = repo_info.get("tokens", "26,400 / 45,000 (58%)")
         health = "Nominal · Active Loop"
+        agent_status = "active"
     elif role == "completed":
         tokens = repo_info.get("completed_tokens", "18,200 / 45,000 (40%)")
         health = "Verified Green"
+        agent_status = "completed"
 
     return {
         "id": bead_id,
@@ -290,6 +442,7 @@ def format_bead_object(bead: Optional[Dict[str, Any]], role: str, repo_info: Dic
         "owner": bead.get("owner", bead.get("assignee", "operator")),
         "agent": repo_info.get("agent", "Cursor Cloud Agent (bc-709a)"),
         "model": repo_info.get("model", "gemini-3.8-flash"),
+        "agentStatus": agent_status,
         "tokens": tokens,
         "health": health,
         "specPath": spec_info["specPath"],
@@ -336,6 +489,10 @@ def sync_all_repos(config_path: Path) -> Dict[str, Any]:
         spec_completed = extract_openspec_for_bead(repo_path, completed_raw)
         spec_next = extract_openspec_for_bead(repo_path, next_raw)
 
+        beads_adoption = inspect_beads_adoption(repo_path)
+        git_activity = inspect_git_activity(repo_path)
+        github_prs = inspect_github_prs(repo_path)
+
         beads_data[slug] = {
             "project": slug,
             "path": str(repo_path),
@@ -347,11 +504,22 @@ def sync_all_repos(config_path: Path) -> Dict[str, Any]:
                 "totalBeads": beads_res.get("totalCount", 0),
                 "closedBeads": beads_res.get("closedCount", 0),
                 "pendingBeads": beads_res.get("pendingCount", 0)
-            }
+            },
+            "beadsAdoption": beads_adoption,
+            "gitActivity": git_activity,
+            "githubPrs": github_prs
         }
         # If inWork has a specific title in BEADS_DATA and in_work_raw is just setup, check if BEADS_DATA has more descriptive title
         # Keep clean values
 
+
+    # Aggregate beads metrics & system installation
+    beads_install = check_beads_installation()
+    total_repos_count = len(beads_data)
+    adopted_repos_count = sum(1 for p in beads_data.values() if p.get("beadsAdoption", {}).get("adopted"))
+    total_beads_count = sum(p.get("stats", {}).get("totalBeads", 0) for p in beads_data.values())
+    closed_beads_count = sum(p.get("stats", {}).get("closedBeads", 0) for p in beads_data.values())
+    pending_beads_count = sum(p.get("stats", {}).get("pendingBeads", 0) for p in beads_data.values())
 
     # Build top-level YARD status contract
     first_proj = beads_data.get(active_project_key, {})
@@ -385,6 +553,18 @@ def sync_all_repos(config_path: Path) -> Dict[str, Any]:
             "completed": first_proj.get("completed", {}),
             "inWork": first_proj.get("inWork", {}),
             "next": first_proj.get("next", {})
+        },
+        "beadsSystem": {
+            "installed": beads_install["installed"],
+            "binaryPath": beads_install["binaryPath"],
+            "version": beads_install["version"],
+            "doltInstalled": beads_install["doltInstalled"],
+            "adoptedRepos": adopted_repos_count,
+            "totalRepos": total_repos_count,
+            "adoptionPercent": int((adopted_repos_count / total_repos_count * 100) if total_repos_count else 0),
+            "totalBeads": total_beads_count,
+            "closedBeads": closed_beads_count,
+            "pendingBeads": pending_beads_count
         },
         "allProjects": beads_data
     }

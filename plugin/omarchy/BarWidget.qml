@@ -45,7 +45,14 @@ BarWidget {
     text: "󱚣"
     slotSize: Style.bar.statusSlot
     active: root.alarming
-    tooltipText: root.alarming ? "YARD: Anomaly Detected" : "YARD: Mixed-Fleet Control Plane"
+    tooltipText: {
+      var item = panelLoader.item
+      if (!item || !item.fleetData) return root.alarming ? "YARD: Anomaly Detected" : "YARD: Beads Control Plane"
+      var fd = item.fleetData
+      var beadId = (fd.beads && fd.beads.inWork) ? fd.beads.inWork.id : "idle"
+      var beadAdopt = (fd.beadsSystem) ? (fd.beadsSystem.adoptedRepos + "/" + fd.beadsSystem.totalRepos + " Beads") : ""
+      return "YARD [" + beadAdopt + "] In-Work: " + beadId
+    }
     onPressed: function(mouseButton) {
       if (mouseButton === Qt.LeftButton) root.togglePanel()
     }

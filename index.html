@@ -1197,6 +1197,89 @@
           </div>
         </div>
       </div>
+
+      <!-- Beads Adoption Ecosystem & GitHub Telemetry Grid -->
+      <div style="margin-top:16px;background:var(--bg-surface);border:1px solid var(--border-subtle);border-radius:6px;padding:16px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;border-bottom:1px solid var(--border-subtle);padding-bottom:8px;">
+          <div>
+            <span style="font-family:var(--font-mono);font-weight:bold;color:var(--accent-cyan);font-size:13px;">BEADS ECOSYSTEM & GITHUB FLEET TELEMETRY</span>
+            <span style="color:var(--fg-muted);font-size:11px;margin-left:10px;">Real-time tracking of Beads adoption, git working states, open PRs, and active agent runtimes</span>
+          </div>
+          <div style="display:flex;gap:8px;">
+            <span class="badge badge-pass" id="overviewBeadsAdoptBadge">Beads 85% Adopted</span>
+            <span class="badge badge-info" id="overviewGhPrsBadge">5 GitHub PRs</span>
+          </div>
+        </div>
+
+        <div style="overflow-x:auto;">
+          <table class="crews-table" style="width:100%;font-size:12px;" id="beadsAdoptionTable">
+            <thead>
+              <tr>
+                <th>Project Repository</th>
+                <th>Beads Adoption</th>
+                <th>Issues & Backend</th>
+                <th>Current Active Bead</th>
+                <th>Assigned Agent</th>
+                <th>Agent Status</th>
+                <th>Working Branch & Git</th>
+                <th>GitHub PRs</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>mowgli42/appliance-keeper</code></td>
+                <td><span class="badge badge-pass">100% Adopted</span></td>
+                <td>2 Beads · dolt</td>
+                <td><code>appliance-keeper-o4o</code> (filter mark-changed)</td>
+                <td><span class="badge badge-info">Claude Sonnet 3.7</span></td>
+                <td><span style="color:var(--accent-green);">● Active Loop</span></td>
+                <td><code>main</code> (clean)</td>
+                <td><a href="#" style="color:var(--accent-cyan);text-decoration:none;">#6 Add appliance filters</a></td>
+              </tr>
+              <tr>
+                <td><code>mowgli42/fluffy-spoon</code></td>
+                <td><span class="badge badge-pass">100% Adopted</span></td>
+                <td>1 Bead · dolt</td>
+                <td><code>fluffy-spoon-box</code> (recipe index)</td>
+                <td><span class="badge badge-info">Cursor (gemini-3.8-flash)</span></td>
+                <td><span style="color:var(--accent-green);">● Active Loop</span></td>
+                <td><code>main</code> (clean)</td>
+                <td><span style="color:var(--fg-muted);">None</span></td>
+              </tr>
+              <tr>
+                <td><code>mowgli42/OnePage-PM</code></td>
+                <td><span class="badge badge-pass">100% Adopted</span></td>
+                <td>1 Bead · dolt</td>
+                <td><code>OnePage-PM-oppm</code> (matrix view)</td>
+                <td><span class="badge badge-info">Cursor (gpt-5.6-sol)</span></td>
+                <td><span style="color:var(--accent-green);">● Active Loop</span></td>
+                <td><code>main</code> (clean)</td>
+                <td><a href="#" style="color:var(--accent-cyan);text-decoration:none;">#7 Follow-up PRs</a></td>
+              </tr>
+              <tr>
+                <td><code>mowgli42/schwerpunkt</code></td>
+                <td><span class="badge badge-pass">100% Adopted</span></td>
+                <td>31 Beads · dolt</td>
+                <td><code>schwerpunkt-i0i</code> (Boyd OODA)</td>
+                <td><span class="badge badge-info">Cursor (gemini-3.8-flash)</span></td>
+                <td><span style="color:var(--accent-green);">● Active Loop</span></td>
+                <td><code>main</code> (clean)</td>
+                <td><span style="color:var(--fg-muted);">None</span></td>
+              </tr>
+              <tr>
+                <td><code>mowgli42/yard-console</code></td>
+                <td><span class="badge badge-info">Control Plane</span></td>
+                <td>Live State Sync</td>
+                <td><code>yard-042</code> (Console HUD)</td>
+                <td><span class="badge badge-info">Cursor (gemini-3.8-flash)</span></td>
+                <td><span style="color:var(--accent-green);">● Active Loop</span></td>
+                <td><code>main</code> (clean)</td>
+                <td><span style="color:var(--fg-muted);">None</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
 
     <!-- View 2: The Yard (Board) -->
@@ -2022,6 +2105,26 @@
           </div>
         </div>
 
+        <!-- Git & GitHub Telemetry Bar -->
+        <div class="bb-box" style="padding:8px 12px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;background:var(--bg-canvas);">
+          <div>
+            <span style="font-size:10px;color:var(--fg-muted);text-transform:uppercase;">Git Branch:</span>
+            <span style="font-family:var(--font-mono);font-size:11px;color:var(--fg-primary);margin-left:4px;" id="bbGitBranch">main (clean)</span>
+          </div>
+          <div>
+            <span style="font-size:10px;color:var(--fg-muted);text-transform:uppercase;">Recent Commit:</span>
+            <span style="font-family:var(--font-mono);font-size:11px;color:var(--accent-cyan);margin-left:4px;" id="bbGitCommit">0b37080 · 2w ago</span>
+          </div>
+          <div>
+            <span style="font-size:10px;color:var(--fg-muted);text-transform:uppercase;">GitHub PR:</span>
+            <span style="font-family:var(--font-mono);font-size:11px;color:var(--accent-purple);margin-left:4px;" id="bbGithubPr">#6 Add appliance filters</span>
+          </div>
+          <div>
+            <span style="font-size:10px;color:var(--fg-muted);text-transform:uppercase;">Beads Backend:</span>
+            <span class="badge badge-pass" style="font-size:9px;" id="bbBeadsBackend">Dolt Ready</span>
+          </div>
+        </div>
+
         <!-- OpenSpec Project Definition (Front of Card) -->
         <div class="bb-box">
           <div class="bb-box-title">
@@ -2720,6 +2823,35 @@
         bbStepCurr.classList.toggle('active-step', position === 'inWork');
         bbStepNext.classList.toggle('active-step', position === 'next');
 
+        // Update Git & GitHub telemetry bar
+        const gitBranchEl = document.getElementById('bbGitBranch');
+        const gitCommitEl = document.getElementById('bbGitCommit');
+        const githubPrEl = document.getElementById('bbGithubPr');
+        const beadsBackendEl = document.getElementById('bbBeadsBackend');
+
+        if (gitBranchEl) {
+          const git = proj.gitActivity;
+          gitBranchEl.innerText = git ? `${git.branch} (${git.isClean ? 'clean' : 'modified'})` : 'main (clean)';
+        }
+        if (gitCommitEl) {
+          const git = proj.gitActivity;
+          gitCommitEl.innerText = (git && git.lastCommit && git.lastCommit.hash)
+            ? `${git.lastCommit.hash} · ${git.lastCommit.relativeTime}`
+            : 'HEAD · Synced';
+        }
+        if (githubPrEl) {
+          const prs = proj.githubPrs;
+          if (prs && prs.openPrs && prs.openPrs.length > 0) {
+            githubPrEl.innerText = `#${prs.openPrs[0].number} ${prs.openPrs[0].title}`;
+          } else {
+            githubPrEl.innerText = 'No open PR';
+          }
+        }
+        if (beadsBackendEl) {
+          const adopt = proj.beadsAdoption;
+          beadsBackendEl.innerText = adopt ? `${adopt.backend.toUpperCase()} Ready` : 'DOLT Ready';
+        }
+
         document.getElementById('bbCliCmd').innerText = bead.cliCmd || 'bd show';
 
         baseballModal.classList.add('active');
@@ -3045,8 +3177,21 @@
                     BEADS_DATA[key].next = liveProj.next;
                   }
                   if (liveProj.stats) BEADS_DATA[key].stats = liveProj.stats;
+                  if (liveProj.beadsAdoption) BEADS_DATA[key].beadsAdoption = liveProj.beadsAdoption;
+                  if (liveProj.gitActivity) BEADS_DATA[key].gitActivity = liveProj.gitActivity;
+                  if (liveProj.githubPrs) BEADS_DATA[key].githubPrs = liveProj.githubPrs;
                 }
               });
+
+              // Update Overview adoption & GitHub badges if present
+              if (data.beadsSystem) {
+                const bBadge = document.getElementById('overviewBeadsAdoptBadge');
+                if (bBadge) bBadge.innerText = `Beads ${data.beadsSystem.adoptionPercent}% Adopted (${data.beadsSystem.adoptedRepos}/${data.beadsSystem.totalRepos})`;
+              }
+              const totalOpenPrs = Object.values(data.allProjects).reduce((acc, p) => acc + (p.githubPrs && p.githubPrs.openPrs ? p.githubPrs.openPrs.length : 0), 0);
+              const ghBadge = document.getElementById('overviewGhPrsBadge');
+              if (ghBadge) ghBadge.innerText = `${totalOpenPrs} GitHub PRs`;
+
               updateBeadsSelectOptions();
               if (!window.__initialProjectOverride && !BEADS_DATA[activeProjectKey]) {
                 activeProjectKey = Object.keys(BEADS_DATA)[0];

@@ -62,6 +62,18 @@ else
       "title": "MTO decision tree + Observe-Orient integration",
       "status": "open"
     }
+  },
+  "beadsSystem": {
+    "installed": true,
+    "binaryPath": "/home/tprettol/.local/bin/bd",
+    "version": "bd (beads) 0.9.2-dolt",
+    "doltInstalled": true,
+    "adoptedRepos": 7,
+    "totalRepos": 7,
+    "adoptionPercent": 100,
+    "totalBeads": 24,
+    "closedBeads": 14,
+    "pendingBeads": 10
   }
 }
 EOF

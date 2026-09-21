@@ -54,16 +54,16 @@ The plugin monitors `~/.local/state/yard/status.json`:
 ```json
 {
   "version": 1,
-  "updatedAt": "2026-09-20T21:00:00Z",
+  "updatedAt": "2026-09-21T15:30:11Z",
   "fleet": {
-    "activeCrews": 4,
-    "maxCrews": 8,
-    "alarming": true,
-    "alarmCount": 1
+    "activeCrews": 7,
+    "maxCrews": 12,
+    "alarming": false,
+    "alarmCount": 0
   },
   "cursor": {
     "storiesCount": 3,
-    "tokenBurn": 124000,
+    "tokenBurn": 142000,
     "activePr": "#42 Tokyo Night sync",
     "status": "nominal"
   },
@@ -75,15 +75,48 @@ The plugin monitors `~/.local/state/yard/status.json`:
   },
   "localWatch": {
     "zeroEgress": true,
-    "alerts": [
-      {
-        "id": "SIG-901",
-        "storyId": "CORE-104",
-        "type": "RepeatedSignature",
-        "severity": "urgent",
-        "message": "pytest repeated 3 consecutive times without code edits"
-      }
-    ]
+    "alerts": []
+  },
+  "beads": {
+    "activeProject": "mowgli42/appliance-keeper",
+    "completed": {
+      "id": "appliance-keeper-rnc",
+      "title": "Apply AGENTS.md schema",
+      "status": "closed"
+    },
+    "inWork": {
+      "id": "appliance-keeper-o4o",
+      "title": "Phase 1: filter mark-changed UX polish",
+      "status": "in_progress",
+      "agent": "Claude Sonnet (Claude-3.7)",
+      "model": "claude-sonnet-5-thinking-high",
+      "agentStatus": "active",
+      "specPath": "openspec/specs/filter-schedule/spec.md"
+    },
+    "next": {
+      "id": "appliance-keeper-5e0",
+      "title": "Phase 1: add warranty/service forms",
+      "status": "open"
+    }
+  },
+  "beadsSystem": {
+    "installed": false,
+    "binaryPath": "",
+    "version": "not installed",
+    "doltInstalled": false,
+    "adoptedRepos": 6,
+    "totalRepos": 7,
+    "adoptionPercent": 85,
+    "totalBeads": 119,
+    "closedBeads": 64,
+    "pendingBeads": 54
+  },
+  "allProjects": {
+    "mowgli42/appliance-keeper": {
+      "beadsAdoption": { "adopted": true, "adoptionScore": 100, "backend": "dolt" },
+      "gitActivity": { "branch": "main", "isClean": true },
+      "githubPrs": { "openPrs": [{ "number": 6, "title": "Add appliance: filter info" }] }
+    }
   }
 }
 ```
@@ -93,6 +126,6 @@ The plugin monitors `~/.local/state/yard/status.json`:
 ## 4. Phased Implementation Roadmap
 
 - **Phase 1 (Complete):** Core QML manifests and UI components written and validated in `plugin/omarchy/`.
-- **Phase 2:** CLI helper script `yard-status` providing JSON bridge to Quickshell `Process` or `FileView`.
-- **Phase 3:** User configuration hook in `~/.config/omarchy/shell.json` allowing user to place `omarchy.yard-console` into the status bar.
+- **Phase 2 (Complete):** CLI helper script `yard-status` providing JSON bridge to Quickshell `Process` or `FileView`, with Beads ecosystem, Git activity, and agent state metrics.
+- **Phase 3 (Complete):** Beads adoption & GitHub activity HUD integration inside `Panel.qml` with dynamic tooltip status in `BarWidget.qml`.
 - **Phase 4:** Desktop notifications dispatch via `omarchy-shell` notification daemon when an urgent local watch card is raised.
