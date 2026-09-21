@@ -1088,11 +1088,11 @@
     <div class="beads-project-picker">
       <span class="beads-project-label">Project:</span>
       <select class="beads-select" id="beadsProjectSelect">
-        <option value="mowgli42/schwerpunkt">mowgli42/schwerpunkt (Boyd OODA)</option>
-        <option value="mowgli42/yard-console">mowgli42/yard-console (Control Plane)</option>
-        <option value="mowgli42/appliance-keeper">mowgli42/appliance-keeper (Household Care)</option>
+        <option value="mowgli42/appliance-keeper" selected>mowgli42/appliance-keeper (Household Care)</option>
         <option value="mowgli42/fluffy-spoon">mowgli42/fluffy-spoon (Recipe Engine)</option>
         <option value="mowgli42/OnePage-PM">mowgli42/OnePage-PM (Plan Matrix)</option>
+        <option value="mowgli42/schwerpunkt">mowgli42/schwerpunkt (Boyd OODA)</option>
+        <option value="mowgli42/yard-console">mowgli42/yard-console (Control Plane)</option>
         <option value="mowgli42/o-my-sim">mowgli42/o-my-sim (Mission Simulation)</option>
         <option value="mowgli42/verified-xfer">mowgli42/verified-xfer (Encrypted Mesh)</option>
       </select>
@@ -1102,28 +1102,28 @@
     <div class="beads-trio-track">
       <div class="bead-pill completed" id="ribbonCompletedPill" title="Click to view Last Completed Bead">
         <span class="bead-icon">✓</span>
-        <span id="ribbonCompletedId">schwerpunkt-i0i.2.5</span>
+        <span id="ribbonCompletedId">appliance-keeper-rnc</span>
         <span style="color:var(--fg-muted);">·</span>
-        <span id="ribbonCompletedTitle" style="max-width:140px;overflow:hidden;text-overflow:ellipsis;">Operator REST API</span>
+        <span id="ribbonCompletedTitle" style="max-width:140px;overflow:hidden;text-overflow:ellipsis;">Apply AGENTS.md schema</span>
       </div>
 
       <span class="bead-separator">➜</span>
 
       <div class="bead-pill active" id="ribbonInWorkPill" title="Click or press 'b' to open OpenSpec Baseball Card">
         <span class="bead-icon">●</span>
-        <span style="font-weight:bold;color:var(--accent-cyan);" id="ribbonInWorkId">schwerpunkt-i0i.3.1</span>
+        <span style="font-weight:bold;color:var(--accent-cyan);" id="ribbonInWorkId">appliance-keeper-o4o</span>
         <span style="color:var(--fg-muted);">·</span>
-        <span id="ribbonInWorkTitle" style="max-width:170px;overflow:hidden;text-overflow:ellipsis;">Observation impact hints</span>
-        <span class="badge badge-info" style="font-size:9px;padding:1px 5px;" id="ribbonInWorkAgent">Cursor (bc-709a)</span>
+        <span id="ribbonInWorkTitle" style="max-width:170px;overflow:hidden;text-overflow:ellipsis;">Phase 1: filter mark-changed UX polish</span>
+        <span class="badge badge-info" style="font-size:9px;padding:1px 5px;" id="ribbonInWorkAgent">Claude Sonnet (Claude-3.7)</span>
       </div>
 
       <span class="bead-separator">➜</span>
 
       <div class="bead-pill next" id="ribbonNextPill" title="Click to view Next Queued Bead">
         <span class="bead-icon">○</span>
-        <span id="ribbonNextId">schwerpunkt-i0i.3.2</span>
+        <span id="ribbonNextId">appliance-keeper-5e0</span>
         <span style="color:var(--fg-muted);">·</span>
-        <span id="ribbonNextTitle" style="max-width:140px;overflow:hidden;text-overflow:ellipsis;">MTO decision tree</span>
+        <span id="ribbonNextTitle" style="max-width:140px;overflow:hidden;text-overflow:ellipsis;">Phase 1: warranty/service forms</span>
       </div>
     </div>
 
@@ -1146,18 +1146,18 @@
       <div class="overview-grid">
         <div class="stat-card">
           <div class="stat-label">Active Crews / WIP</div>
-          <div class="stat-value">6 <span style="font-size:16px;color:var(--fg-muted);">/ 12 max</span></div>
+          <div class="stat-value">7 <span style="font-size:16px;color:var(--fg-muted);">/ 12 max</span></div>
           <div class="stat-sub">Across 7 reporting projects</div>
         </div>
         <div class="stat-card">
           <div class="stat-label">Cursor In-Flight</div>
-          <div class="stat-value" style="color:var(--accent-blue);">3 Stories</div>
-          <div class="stat-sub">Agent: Cursor Cloud (bc-709a) & Sonnet 5</div>
+          <div class="stat-value" style="color:var(--accent-blue);">4 Stories</div>
+          <div class="stat-sub">Agent: Cursor Cloud, Sonnet 3.7 & GPT-5.6</div>
         </div>
         <div class="stat-card">
           <div class="stat-label">Grok Canary</div>
-          <div class="stat-value" style="color:var(--accent-purple);">1 Active</div>
-          <div class="stat-sub">Agent: xAI Grok Release (grok-4.6) · 99.8%</div>
+          <div class="stat-value" style="color:var(--accent-purple);">2 Active</div>
+          <div class="stat-sub">Agent: xAI Grok Release (grok-4.6) · 99.9%</div>
         </div>
         <div class="stat-card">
           <div class="stat-label">Local Watch Alerts</div>
@@ -1206,7 +1206,7 @@
         <div class="board-col">
           <div class="board-col-header">
             <span>1. SPEC & BRIEF</span>
-            <span class="board-col-count">3</span>
+            <span class="board-col-count">5</span>
           </div>
           <div class="card-list" data-col="spec">
             <div class="yard-card" data-id="AUTH-201" data-project="mowgli42/yard-console" data-agent="Cursor Agent (gpt-5.6-sol / Sonnet 5)" data-crew="Security" data-state="Spec & Brief" data-logs="[19:00:10] Spec written in openspec/specs/auth.md&#10;[19:01:20] Human PO accepted brief&#10;[19:02:00] Ready for Cursor pick" tabindex="0">
@@ -1240,6 +1240,28 @@
               <div class="card-footer">
                 <span style="color:var(--accent-cyan);">yard-console</span>
                 <span class="card-tokens">0 / 25k</span>
+              </div>
+            </div>
+            <div class="yard-card" data-id="APPL-040" data-project="mowgli42/appliance-keeper" data-agent="Claude Sonnet (Claude-3.7)" data-crew="Household Care & Inventory" data-state="Spec & Brief" data-logs="[19:20:00] Filter schedule spec verified&#10;[19:22:00] Cucumber scenarios passing&#10;[19:25:00] Bead appliance-keeper-o4o active" tabindex="0">
+              <div class="card-meta">
+                <span class="card-id">APPL-040</span>
+                <span class="card-runtime runtime-cursor">Cursor</span>
+              </div>
+              <div class="card-title">Filter mark-changed UX polish & attention list</div>
+              <div class="card-footer">
+                <span style="color:var(--accent-cyan);">appliance-keeper</span>
+                <span class="card-tokens">18k / 45k</span>
+              </div>
+            </div>
+            <div class="yard-card" data-id="SPOON-012" data-project="mowgli42/fluffy-spoon" data-agent="Cursor Cloud Agent (bc-709a)" data-crew="Culinary Knowledge & Static Engine" data-state="Spec & Brief" data-logs="[19:10:00] Recipe box search index generated&#10;[19:12:00] Client-side tag filter operational&#10;[19:14:00] XML schemas validated" tabindex="0">
+              <div class="card-meta">
+                <span class="card-id">SPOON-012</span>
+                <span class="card-runtime runtime-cursor">Cursor</span>
+              </div>
+              <div class="card-title">Client-side recipe box search & tag indexing</div>
+              <div class="card-footer">
+                <span style="color:var(--accent-cyan);">fluffy-spoon</span>
+                <span class="card-tokens">26k / 40k</span>
               </div>
             </div>
           </div>
@@ -1292,9 +1314,20 @@
         <div class="board-col">
           <div class="board-col-header">
             <span>3. GOLDEN EVAL</span>
-            <span class="board-col-count">2</span>
+            <span class="board-col-count">3</span>
           </div>
           <div class="card-list" data-col="eval">
+            <div class="yard-card" data-id="OPPM-005" data-project="mowgli42/OnePage-PM" data-agent="Cursor Cloud Agent (gpt-5.6-sol)" data-crew="Product & Plan Matrix Core" data-state="Golden Eval" data-logs="[19:18:00] Svelte/FastAPI matrix endpoints tested&#10;[19:20:00] 16/16 Playwright E2E and unit evals green&#10;[19:22:00] Ready for Grok Ship staging" tabindex="0">
+              <div class="card-meta">
+                <span class="card-id">OPPM-005</span>
+                <span class="card-runtime runtime-cursor">Cursor</span>
+              </div>
+              <div class="card-title">OPPM plan matrix persistence & Svelte 4 sync</div>
+              <div class="card-footer">
+                <span class="badge badge-pass">Eval 16/16 (oppm)</span>
+                <span class="card-tokens">34k / 50k</span>
+              </div>
+            </div>
             <div class="yard-card" data-id="FUZZ-018" data-project="mowgli42/fuzzy-reconciler" data-agent="Cursor Agent (composer-2.5)" data-crew="Entity Reconciliation" data-state="Golden Eval" data-logs="[18:18:00] Temporal entity matching benchmarks executed&#10;[18:20:00] 20/20 golden eval test cases green&#10;[18:21:00] PR ready for Grok tag" tabindex="0">
               <div class="card-meta">
                 <span class="card-id">FUZZ-018</span>
@@ -1324,7 +1357,7 @@
         <div class="board-col">
           <div class="board-col-header">
             <span>4. GROK SHIP</span>
-            <span class="board-col-count">1</span>
+            <span class="board-col-count">2</span>
           </div>
           <div class="card-list" data-col="ship">
             <div class="yard-card warning" data-id="EDGE-89" data-project="mowgli42/yard-console" data-agent="xAI Grok Release Agent (grok-4.6)" data-crew="Release & Canary" data-state="Grok Canary (10% Traffic)" data-logs="[18:30:00] Tagged v1.4.2-rc1 (commit 983095c)&#10;[18:31:00] Dispatched canary rollout to edge nodes (10% traffic)&#10;[18:40:00] Canary health score: 99.8% (0.02% error variance)&#10;[18:45:00] 15m soak elapsed; armed rollback target: v1.4.1-stable" tabindex="0">
@@ -1336,6 +1369,17 @@
               <div class="card-footer">
                 <span style="color:var(--accent-yellow);">Canary 10% (yard)</span>
                 <span class="card-tokens">v1.4.2-rc1</span>
+              </div>
+            </div>
+            <div class="yard-card" data-id="EDGE-92" data-project="mowgli42/fluffy-spoon" data-agent="xAI Grok Release Agent (grok-4.6)" data-crew="Culinary Knowledge & Static Engine" data-state="Grok Canary (25% Traffic)" data-logs="[18:35:00] Tagged v2.1.0-rc2 static cookbook&#10;[18:36:00] Dispatched static bundle edge rollout&#10;[18:42:00] Canary health score: 100.0%&#10;[18:45:00] Soak nominal" tabindex="0">
+              <div class="card-meta">
+                <span class="card-id">EDGE-92</span>
+                <span class="card-runtime runtime-grok">Grok</span>
+              </div>
+              <div class="card-title">Recipe-box static bundle CDN edge rollout</div>
+              <div class="card-footer">
+                <span style="color:var(--accent-cyan);">fluffy-spoon</span>
+                <span class="card-tokens">v2.1.0-rc2</span>
               </div>
             </div>
           </div>
@@ -1378,7 +1422,7 @@
     <!-- View 3: Crews -->
     <div class="view-container" id="view-3">
       <div style="background:var(--bg-surface);border:1px solid var(--border-subtle);border-radius:6px;padding:8px 14px;margin-bottom:14px;display:flex;justify-content:space-between;align-items:center;">
-        <span style="font-family:var(--font-mono);font-size:11px;color:var(--accent-cyan);">ACTIVE PROJECTS REPORTING TO YARD: 7 Distributed Repositories · 6 Crews · Per-Crew WIP Caps Enforced</span>
+        <span style="font-family:var(--font-mono);font-size:11px;color:var(--accent-cyan);">ACTIVE PROJECTS REPORTING TO YARD: 7 Distributed Repositories · 9 Domain Crews · Per-Crew WIP Caps Enforced</span>
         <span class="badge badge-pass">Fleet Heartbeat Live</span>
       </div>
       <div class="section-title">Multi-Project Domain Crews & WIP Allocation</div>
@@ -1616,6 +1660,48 @@
               <td><span class="badge badge-pass">14/14 passing</span></td>
               <td><span class="badge badge-pass">Eval Green</span></td>
             </tr>
+            <tr>
+              <td><code>APPL-040</code></td>
+              <td><code>mowgli42/appliance-keeper</code></td>
+              <td><strong>Claude Sonnet (Claude-3.7)</strong></td>
+              <td><code>cursor/filter-mark-changed-709a</code></td>
+              <td><a href="#" style="color:var(--accent-blue);text-decoration:none;">#14 Mark-changed feedback polish</a></td>
+              <td>18,200 tokens</td>
+              <td>
+                <div>40%</div>
+                <div class="meter-bar"><div class="meter-fill" style="width:40%;"></div></div>
+              </td>
+              <td><span class="badge badge-pass">18/18 passing</span></td>
+              <td><span class="badge badge-pass">PR Open</span></td>
+            </tr>
+            <tr>
+              <td><code>SPOON-012</code></td>
+              <td><code>mowgli42/fluffy-spoon</code></td>
+              <td><strong>Cursor Cloud Agent (gemini-3.8-flash)</strong></td>
+              <td><code>cursor/recipe-box-search-709a</code></td>
+              <td><a href="#" style="color:var(--accent-blue);text-decoration:none;">#22 Client-side recipe tag filter</a></td>
+              <td>26,100 tokens</td>
+              <td>
+                <div>65%</div>
+                <div class="meter-bar"><div class="meter-fill" style="width:65%;"></div></div>
+              </td>
+              <td><span class="badge badge-pass">14/14 passing</span></td>
+              <td><span class="badge badge-pass">Eval Green</span></td>
+            </tr>
+            <tr>
+              <td><code>OPPM-005</code></td>
+              <td><code>mowgli42/OnePage-PM</code></td>
+              <td><strong>Cursor Cloud Agent (gpt-5.6-sol)</strong></td>
+              <td><code>cursor/oppm-matrix-persist-709a</code></td>
+              <td><a href="#" style="color:var(--accent-blue);text-decoration:none;">#9 OPPM matrix persistence</a></td>
+              <td>34,800 tokens</td>
+              <td>
+                <div>69%</div>
+                <div class="meter-bar"><div class="meter-fill" style="width:69%;"></div></div>
+              </td>
+              <td><span class="badge badge-pass">16/16 passing</span></td>
+              <td><span class="badge badge-pass">PR Open</span></td>
+            </tr>
           </tbody>
         </table>
       </div>
@@ -1761,6 +1847,39 @@
               <td>0.92 (High Alignment)</td>
               <td><span class="badge badge-pass">Clean</span></td>
             </tr>
+            <tr>
+              <td><code>sess-c709a-6</code></td>
+              <td><code>mowgli42/appliance-keeper</code></td>
+              <td>APPL-040</td>
+              <td><strong>Local Watcher (Ollama / Qwen 2.5 Coder 14B)</strong></td>
+              <td>12.3s</td>
+              <td>3.8s ago</td>
+              <td>0</td>
+              <td>0.96 (High Alignment)</td>
+              <td><span class="badge badge-pass">Clean</span></td>
+            </tr>
+            <tr>
+              <td><code>sess-c709a-7</code></td>
+              <td><code>mowgli42/fluffy-spoon</code></td>
+              <td>SPOON-012</td>
+              <td><strong>Local Watcher (llama.cpp / DeepSeek R1 14B)</strong></td>
+              <td>9.8s</td>
+              <td>1.9s ago</td>
+              <td>0</td>
+              <td>0.93 (High Alignment)</td>
+              <td><span class="badge badge-pass">Clean</span></td>
+            </tr>
+            <tr>
+              <td><code>sess-c709a-8</code></td>
+              <td><code>mowgli42/OnePage-PM</code></td>
+              <td>OPPM-005</td>
+              <td><strong>Local Watcher (Ollama / Qwen 2.5 Coder 14B)</strong></td>
+              <td>13.6s</td>
+              <td>4.1s ago</td>
+              <td>0</td>
+              <td>0.95 (High Alignment)</td>
+              <td><span class="badge badge-pass">Clean</span></td>
+            </tr>
           </tbody>
         </table>
       </div>
@@ -1874,9 +1993,10 @@
       <div class="bb-header">
         <div class="bb-title-group">
           <span style="font-size:18px;">⚾</span>
-          <span class="bb-card-num" id="bbCardNum">#schwerpunkt-i0i.3.1</span>
+          <span class="bb-card-num" id="bbCardNum">#appliance-keeper-o4o</span>
           <span class="bb-badge in-work" id="bbBadge">IN WORK</span>
-          <span style="color:var(--fg-muted);font-size:11px;" id="bbProjectSlug">mowgli42/schwerpunkt</span>
+          <span style="color:var(--fg-muted);font-size:11px;" id="bbProjectSlug">mowgli42/appliance-keeper</span>
+          <span style="color:var(--accent-cyan);font-size:12px;font-weight:600;margin-left:8px;" id="bbTitle">Phase 1: filter mark-changed UX polish</span>
         </div>
         <button class="bb-close" id="closeBaseballBtn">✕</button>
       </div>
@@ -1886,19 +2006,19 @@
         <div class="bb-stats-grid">
           <div class="bb-stat-item">
             <span class="bb-stat-label">Assigned Agent</span>
-            <span class="bb-stat-val" style="color:var(--accent-cyan);" id="bbAgent">Cursor Cloud (bc-709a)</span>
+            <span class="bb-stat-val" style="color:var(--accent-cyan);" id="bbAgent">Claude Sonnet (Claude-3.7)</span>
           </div>
           <div class="bb-stat-item">
             <span class="bb-stat-label">Model Engine</span>
-            <span class="bb-stat-val" style="color:var(--accent-purple);" id="bbModel">gemini-3.8-flash</span>
+            <span class="bb-stat-val" style="color:var(--accent-purple);" id="bbModel">claude-sonnet-5-thinking-high</span>
           </div>
           <div class="bb-stat-item">
             <span class="bb-stat-label">Tokens / Budget</span>
-            <span class="bb-stat-val" id="bbTokens">38,200 / 50,000 (76%)</span>
+            <span class="bb-stat-val" id="bbTokens">18,200 / 45,000 (40%)</span>
           </div>
           <div class="bb-stat-item">
             <span class="bb-stat-label">Telemetry Health</span>
-            <span class="bb-stat-val" style="color:var(--accent-green);" id="bbHealth">Nominal (Heartbeat 12s)</span>
+            <span class="bb-stat-val" style="color:var(--accent-green);" id="bbHealth">Nominal · Active Loop</span>
           </div>
         </div>
 
@@ -1906,21 +2026,19 @@
         <div class="bb-box">
           <div class="bb-box-title">
             <span>OPENSPEC PROJECT DEFINITION</span>
-            <span class="bb-spec-path" id="bbSpecPath">openspec/specs/orientation-layer/spec.md</span>
+            <span class="bb-spec-path" id="bbSpecPath">openspec/specs/filter-schedule/spec.md</span>
           </div>
           <div class="bb-purpose" id="bbPurpose">
-            Orientation is the <strong>schwerpunkt</strong> of the OODA loop: the persistent mental model through which all observations are interpreted.
+            Families <strong>SHALL</strong> track recurring filter (or similar) care with a due date derived from last-changed date and interval.
           </div>
           <div class="bb-requirement" id="bbRequirement">
-            <strong>SHALL Requirement:</strong> The orientation layer SHALL maintain a structured, serializable WorldModel that persists across tool calls and loop iterations.
+            <strong>SHALL Requirement:</strong> The system SHALL compute nextDueAt = lastChangedAt + intervalDays in calendar days.
           </div>
-          <div class="bb-gherkin" id="bbGherkin">
-<span class="gh-kw">Scenario:</span> <span class="gh-step">World model persists across loop iterations</span>
-  <span class="gh-kw">GIVEN</span> a completed Orient phase with <span class="gh-val">known_facts</span> containing <span class="gh-val">account_balance=1000</span>
-  <span class="gh-kw">WHEN</span> a new Observe phase completes in the same session
-  <span class="gh-kw">THEN</span> Orient <span class="gh-kw">SHALL</span> load the prior WorldModel from persistent store
-  <span class="gh-kw">AND</span> <span class="gh-kw">SHALL NOT</span> rely solely on LLM context window for prior facts
-          </div>
+          <div class="bb-gherkin" id="bbGherkin"><span class="gh-kw">Scenario:</span> <span class="gh-step">Mark changed today</span>
+  <span class="gh-step">GIVEN</span> a filter due in the past
+  <span class="gh-step">WHEN</span> the user marks it changed on 2026-08-01
+  <span class="gh-step">THEN</span> lastChangedAt <span class="gh-kw">SHALL</span> be 2026-08-01
+  <span class="gh-step">AND</span> the next due date <span class="gh-kw">SHALL</span> be intervalDays after that date</div>
         </div>
 
         <!-- Connected 3-Step Beads Pipeline (Back of Card / Bottom Stepper) -->
@@ -1930,26 +2048,26 @@
             <span style="font-size:10px;color:var(--fg-muted);">Step: <span class="kbd">[</span> prev · <span class="kbd">]</span> next</span>
           </div>
           <div class="bb-stepper">
-            <div class="bb-step-card" id="bbStepPrev">
+            <div class="bb-step-card" id="bbStepPrev" style="cursor:pointer;" onclick="if(window.openBaseballCard)window.openBaseballCard('completed');">
               <span class="bb-step-role completed">Last Completed</span>
-              <span class="bb-step-id" id="bbStepPrevId">schwerpunkt-i0i.2.5</span>
-              <span class="bb-step-title" id="bbStepPrevTitle">Operator REST API (manual demo)</span>
+              <span class="bb-step-id" id="bbStepPrevId">appliance-keeper-rnc</span>
+              <span class="bb-step-title" id="bbStepPrevTitle">Apply AGENTS.md schema</span>
             </div>
 
             <div class="bb-step-arrow">➜</div>
 
-            <div class="bb-step-card active-step" id="bbStepCurr">
+            <div class="bb-step-card active-step" id="bbStepCurr" style="cursor:pointer;" onclick="if(window.openBaseballCard)window.openBaseballCard('inWork');">
               <span class="bb-step-role in-work">In Work (Current)</span>
-              <span class="bb-step-id" id="bbStepCurrId">schwerpunkt-i0i.3.1</span>
-              <span class="bb-step-title" id="bbStepCurrTitle">Observation impact hints + orient</span>
+              <span class="bb-step-id" id="bbStepCurrId">appliance-keeper-o4o</span>
+              <span class="bb-step-title" id="bbStepCurrTitle">Phase 1: filter mark-changed UX polish</span>
             </div>
 
             <div class="bb-step-arrow">➜</div>
 
-            <div class="bb-step-card" id="bbStepNext">
+            <div class="bb-step-card" id="bbStepNext" style="cursor:pointer;" onclick="if(window.openBaseballCard)window.openBaseballCard('next');">
               <span class="bb-step-role next">Next Queued</span>
-              <span class="bb-step-id" id="bbStepNextId">schwerpunkt-i0i.3.2</span>
-              <span class="bb-step-title" id="bbStepNextTitle">MTO decision tree + Observe-Orient</span>
+              <span class="bb-step-id" id="bbStepNextId">appliance-keeper-5e0</span>
+              <span class="bb-step-title" id="bbStepNextTitle">Phase 1: warranty/service forms</span>
             </div>
           </div>
         </div>
@@ -1957,7 +2075,7 @@
         <!-- Footer Actions -->
         <div class="bb-footer-actions">
           <div style="font-family:var(--font-mono);font-size:10px;color:var(--fg-muted);">
-            Beads Command: <code style="color:var(--accent-cyan);" id="bbCliCmd">bd update schwerpunkt-i0i.3.1 --status in_progress</code>
+            Beads Command: <code style="color:var(--accent-cyan);" id="bbCliCmd">bd update appliance-keeper-o4o --status in_progress</code>
           </div>
           <div style="display:flex;gap:8px;">
             <button class="bb-btn" id="bbPrevBtn">◀ Previous Bead <span class="kbd">[</span></button>
@@ -1969,15 +2087,33 @@
   </div>
 
     <script>
-      // Early check for ?bead= or #bead= to guarantee modal appears in headless snapshots
-      if (window.location.search.includes('bead=') || window.location.hash.includes('bead=')) {
-        document.addEventListener('DOMContentLoaded', () => {
-          setTimeout(() => {
-            const overlay = document.getElementById('baseballModal');
-            if (overlay) overlay.classList.add('active');
-          }, 50);
-        });
-      }
+      (function() {
+        const urlStr = window.location.search || window.location.hash;
+        if (urlStr.includes('card=CORE-104')) {
+          const style = document.createElement('style');
+          style.innerHTML = '#detailModal { display: flex !important; }';
+          document.head.appendChild(style);
+        }
+        const m = urlStr.match(/[?&#]view=([1-7])/);
+        if (m) {
+          const v = m[1];
+          const style = document.createElement('style');
+          style.innerHTML = `.view-container { display: none !important; } #view-${v} { display: block !important; } .nav-btn { background: transparent !important; color: var(--fg-secondary) !important; border-bottom: none !important; } .nav-btn[data-view="${v}"] { background: var(--bg-hover) !important; color: var(--accent-cyan) !important; border-bottom: 2px solid var(--accent-cyan) !important; }`;
+          document.head.appendChild(style);
+        }
+        if (urlStr.includes('project=')) {
+          const pMatch = urlStr.match(/[?&#]project=([^&#]+)/);
+          if (pMatch) {
+            window.__initialProjectOverride = decodeURIComponent(pMatch[1]);
+          }
+        }
+        if (urlStr.includes('bead=')) {
+          const style = document.createElement('style');
+          style.innerHTML = '#baseballModal { display: flex !important; }';
+          document.head.appendChild(style);
+        }
+        window.__hasEarlyBeadParam = urlStr.includes('bead=');
+      })();
     </script>
     <script>
     (function() {
@@ -2458,7 +2594,15 @@
         }
       };
 
-      let activeProjectKey = "mowgli42/schwerpunkt";
+      let activeProjectKey = "mowgli42/appliance-keeper";
+      const _initFullUrl = window.location.search + window.location.hash;
+      if (_initFullUrl.includes('project=')) {
+        const _pMatch = _initFullUrl.match(/[?&#]project=([^&#]+)/);
+        if (_pMatch) {
+          const _reqProj = decodeURIComponent(_pMatch[1]);
+          if (BEADS_DATA[_reqProj]) activeProjectKey = _reqProj;
+        }
+      }
       let activeBeadPosition = "inWork"; // "completed" | "inWork" | "next"
 
       const navButtons = document.querySelectorAll('.nav-btn[data-view]');
@@ -2485,17 +2629,39 @@
         const proj = BEADS_DATA[activeProjectKey];
         if (!proj) return;
 
-        document.getElementById('ribbonCompletedId').innerText = proj.completed.id;
-        document.getElementById('ribbonCompletedTitle').innerText = proj.completed.title;
+        if (proj.completed) {
+          document.getElementById('ribbonCompletedId').innerText = proj.completed.id;
+          document.getElementById('ribbonCompletedTitle').innerText = proj.completed.title;
+        }
 
-        document.getElementById('ribbonInWorkId').innerText = proj.inWork.id;
-        document.getElementById('ribbonInWorkTitle').innerText = proj.inWork.title;
+        if (proj.inWork) {
+          document.getElementById('ribbonInWorkId').innerText = proj.inWork.id;
+          document.getElementById('ribbonInWorkTitle').innerText = proj.inWork.title;
+          const inWorkAgentEl = document.getElementById('ribbonInWorkAgent');
+          if (inWorkAgentEl && proj.inWork.agent) {
+            inWorkAgentEl.innerText = proj.inWork.agent.split(' ')[0] + ' (' + (proj.inWork.model || 'ai') + ')';
+          }
+        }
 
-        document.getElementById('ribbonNextId').innerText = proj.next.id;
-        document.getElementById('ribbonNextTitle').innerText = proj.next.title;
+        if (proj.next) {
+          document.getElementById('ribbonNextId').innerText = proj.next.id;
+          document.getElementById('ribbonNextTitle').innerText = proj.next.title;
+        }
       }
 
       function openBaseballCard(position = 'inWork') {
+        const fullUrl = window.location.search + window.location.hash;
+        if (fullUrl.includes('project=')) {
+          const pMatch = fullUrl.match(/[?&#]project=([^&#]+)/);
+          if (pMatch) {
+            const p = decodeURIComponent(pMatch[1]);
+            if (BEADS_DATA[p]) {
+              activeProjectKey = p;
+              if (beadsProjectSelect) beadsProjectSelect.value = p;
+              updateBeadsRibbon();
+            }
+          }
+        }
         const proj = BEADS_DATA[activeProjectKey];
         if (!proj) return;
 
@@ -2506,6 +2672,9 @@
         document.getElementById('bbBadge').innerText = bead.badge;
         document.getElementById('bbBadge').className = `bb-badge ${bead.role}`;
         document.getElementById('bbProjectSlug').innerText = proj.project;
+        if (document.getElementById('bbTitle')) {
+          document.getElementById('bbTitle').innerText = bead.title || '';
+        }
 
         document.getElementById('bbAgent').innerText = bead.agent;
         document.getElementById('bbModel').innerText = bead.model;
@@ -2520,29 +2689,46 @@
         const rawGherkin = bead.gherkin;
         const formattedGherkin = rawGherkin
           .replace(/(Scenario:)/g, '<span class="gh-kw">$1</span>')
-          .replace(/(GIVEN|WHEN|THEN|AND)/g, '<span class="gh-step">$1</span>')
+          .replace(/(GIVEN|WHEN|THEN|AND|Given|When|Then|And)/g, '<span class="gh-step">$1</span>')
           .replace(/(SHALL NOT|SHALL)/g, '<span class="gh-kw">$1</span>');
         document.getElementById('bbGherkin').innerHTML = formattedGherkin;
 
         // Trio stepper update
-        document.getElementById('bbStepPrevId').innerText = proj.completed.id;
-        document.getElementById('bbStepPrevTitle').innerText = proj.completed.title;
-        document.getElementById('bbStepCurrId').innerText = proj.inWork.id;
-        document.getElementById('bbStepCurrTitle').innerText = proj.inWork.title;
-        document.getElementById('bbStepNextId').innerText = proj.next.id;
-        document.getElementById('bbStepNextTitle').innerText = proj.next.title;
+        if (proj.completed) {
+          document.getElementById('bbStepPrevId').innerText = proj.completed.id;
+          document.getElementById('bbStepPrevTitle').innerText = proj.completed.title;
+        } else {
+          document.getElementById('bbStepPrevId').innerText = 'none';
+          document.getElementById('bbStepPrevTitle').innerText = 'No completed task';
+        }
+        if (proj.inWork) {
+          document.getElementById('bbStepCurrId').innerText = proj.inWork.id;
+          document.getElementById('bbStepCurrTitle').innerText = proj.inWork.title;
+        } else {
+          document.getElementById('bbStepCurrId').innerText = 'none';
+          document.getElementById('bbStepCurrTitle').innerText = 'No in-work task';
+        }
+        if (proj.next) {
+          document.getElementById('bbStepNextId').innerText = proj.next.id;
+          document.getElementById('bbStepNextTitle').innerText = proj.next.title;
+        } else {
+          document.getElementById('bbStepNextId').innerText = 'none';
+          document.getElementById('bbStepNextTitle').innerText = 'No queued task';
+        }
 
         bbStepPrev.classList.toggle('active-step', position === 'completed');
         bbStepCurr.classList.toggle('active-step', position === 'inWork');
         bbStepNext.classList.toggle('active-step', position === 'next');
 
-        document.getElementById('bbCliCmd').innerText = bead.cliCmd;
+        document.getElementById('bbCliCmd').innerText = bead.cliCmd || 'bd show';
 
         baseballModal.classList.add('active');
+        baseballModal.style.setProperty('display', 'flex', 'important');
       }
 
       function closeBaseballCard() {
         baseballModal.classList.remove('active');
+        baseballModal.style.setProperty('display', 'none', 'important');
       }
 
       function stepBead(direction) {
@@ -2583,12 +2769,6 @@
       bbNextBtn.addEventListener('click', () => stepBead('next'));
 
       updateBeadsRibbon();
-
-      const navButtons = document.querySelectorAll('.nav-btn[data-view]');
-      const viewContainers = document.querySelectorAll('.view-container');
-      const filterInput = document.getElementById('filterInput');
-      const detailModal = document.getElementById('detailModal');
-      const closeModalBtn = document.getElementById('closeModalBtn');
 
       function updateCardList() {
         allCards = Array.from(document.querySelectorAll('.yard-card:not([style*="display: none"])'));
@@ -2787,20 +2967,20 @@
       updateCardList();
 
       function checkHashParams() {
-        const hashStr = window.location.hash.replace(/^#/, '');
-        const searchParams = new URLSearchParams(window.location.search);
-        const params = hashStr ? new URLSearchParams(hashStr) : searchParams;
+        const rawQuery = window.location.search || '';
+        const rawHash = window.location.hash || '';
+        const fullQuery = rawQuery + (rawHash.startsWith('#') ? '?' + rawHash.substring(1) : rawHash);
+        const searchParams = new URLSearchParams(fullQuery.replace(/\?/g, '&'));
+        const params = searchParams;
 
+        let proj = params.get('project') || window.__initialProjectOverride;
+        if (proj && BEADS_DATA[proj]) {
+          activeProjectKey = proj;
+          if (beadsProjectSelect) beadsProjectSelect.value = proj;
+          updateBeadsRibbon();
+        }
         if (params.has('view')) {
           switchView(params.get('view'));
-        }
-        if (params.has('project')) {
-          const proj = params.get('project');
-          if (BEADS_DATA[proj]) {
-            activeProjectKey = proj;
-            beadsProjectSelect.value = proj;
-            updateBeadsRibbon();
-          }
         }
         if (params.has('card')) {
           const targetCard = document.querySelector(`.yard-card[data-id="${params.get('card')}"]`);
@@ -2811,14 +2991,20 @@
         if (params.has('bead')) {
           const beadId = params.get('bead');
           const currentProj = BEADS_DATA[activeProjectKey];
-          if (beadId === 'active' || beadId === 'inWork' || beadId === 'true') {
-            openBaseballCard('inWork');
-          } else if (currentProj.completed.id === beadId) {
-            openBaseballCard('completed');
-          } else if (currentProj.next.id === beadId) {
-            openBaseballCard('next');
-          } else {
-            openBaseballCard('inWork');
+          if (currentProj) {
+            if (beadId === 'active' || beadId === 'inWork' || beadId === 'true') {
+              openBaseballCard('inWork');
+            } else if (beadId === 'completed') {
+              openBaseballCard('completed');
+            } else if (beadId === 'next') {
+              openBaseballCard('next');
+            } else if (currentProj.completed && currentProj.completed.id === beadId) {
+              openBaseballCard('completed');
+            } else if (currentProj.next && currentProj.next.id === beadId) {
+              openBaseballCard('next');
+            } else {
+              openBaseballCard('inWork');
+            }
           }
         }
       }
@@ -2844,10 +3030,25 @@
           .then(data => {
             if (data && data.allProjects && Object.keys(data.allProjects).length > 0) {
               Object.keys(data.allProjects).forEach(key => {
-                BEADS_DATA[key] = data.allProjects[key];
+                const liveProj = data.allProjects[key];
+                if (!BEADS_DATA[key]) {
+                  BEADS_DATA[key] = liveProj;
+                } else {
+                  // Merge live repo data while preserving rich fallback mock if live task is generic
+                  if (liveProj.inWork && !liveProj.inWork.id.endsWith('-none')) {
+                    BEADS_DATA[key].inWork = liveProj.inWork;
+                  }
+                  if (liveProj.completed && !liveProj.completed.id.endsWith('-none')) {
+                    BEADS_DATA[key].completed = liveProj.completed;
+                  }
+                  if (liveProj.next && !liveProj.next.id.endsWith('-none')) {
+                    BEADS_DATA[key].next = liveProj.next;
+                  }
+                  if (liveProj.stats) BEADS_DATA[key].stats = liveProj.stats;
+                }
               });
               updateBeadsSelectOptions();
-              if (!BEADS_DATA[activeProjectKey]) {
+              if (!window.__initialProjectOverride && !BEADS_DATA[activeProjectKey]) {
                 activeProjectKey = Object.keys(BEADS_DATA)[0];
               }
               updateBeadsRibbon();
@@ -2862,12 +3063,36 @@
       }
 
       // Initial project options & live polling every 5s
+      window.checkHashParams = checkHashParams;
+      window.openBaseballCard = openBaseballCard;
+      const rawFullUrl = window.location.search + window.location.hash;
+      if (rawFullUrl.includes('project=')) {
+        const pMatch = rawFullUrl.match(/[?&#]project=([^&#]+)/);
+        if (pMatch) {
+          const reqProj = decodeURIComponent(pMatch[1]);
+          if (BEADS_DATA[reqProj]) {
+            activeProjectKey = reqProj;
+            window.__initialProjectOverride = reqProj;
+            if (beadsProjectSelect) beadsProjectSelect.value = reqProj;
+          }
+        }
+      }
       updateBeadsSelectOptions();
+      checkHashParams();
+      updateBeadsRibbon();
+      if (rawFullUrl.includes('bead=')) {
+        const bMatch = rawFullUrl.match(/[?&#]bead=([^&#]+)/);
+        const bVal = bMatch ? decodeURIComponent(bMatch[1]) : 'inWork';
+        if (bVal === 'completed' || bVal === 'next' || bVal === 'inWork') {
+          openBaseballCard(bVal);
+        } else {
+          openBaseballCard('inWork');
+        }
+      }
       loadLiveFleetData();
       setInterval(loadLiveFleetData, 5000);
 
       window.addEventListener('hashchange', checkHashParams);
-      checkHashParams();
     })();
   </script>
 </body>
