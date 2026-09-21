@@ -98,5 +98,13 @@ class OmarchyPluginVerificationTests(unittest.TestCase):
         self.assertIn("barIdentity", panel_content)
 
 
+    def test_web_console_coexistence(self):
+        """Ensures index.html exists alongside plugin files for HUD launcher."""
+        index_html = PLUGIN_DIR / "index.html"
+        self.assertTrue(index_html.is_file(), "index.html missing from plugin repo root")
+        content = index_html.read_text(encoding="utf-8")
+        self.assertIn("YARD", content)
+
+
 if __name__ == "__main__":
     unittest.main()

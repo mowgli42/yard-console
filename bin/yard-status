@@ -1,7 +1,15 @@
 #!/usr/bin/env bash
 # YARD status provider CLI for Omarchy Quickshell plugin
 
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
+
 STATUS_FILE="${XDG_STATE_HOME:-$HOME/.local/state}/yard/status.json"
+
+# If status file doesn't exist or is stale (>60s), attempt a quick sync pass
+if [[ ! -f "$STATUS_FILE" && -f "$REPO_DIR/scripts/yard-sync.py" ]]; then
+  python3 "$REPO_DIR/scripts/yard-sync.py" >/dev/null 2>&1 || true
+fi
 
 if [[ -f "$STATUS_FILE" ]]; then
   cat "$STATUS_FILE"

@@ -100,7 +100,7 @@ The **Crews View (`3`)** manages autonomous agile crews working concurrently acr
 The console is fully functional and monitors real repository state:
 1. **Local State Daemon (`yard-sync`):** Continuously scans `.beads/issues.jsonl` and `openspec/specs/` across all configured repositories, formatting unified status JSON into `~/.local/state/yard/status.json` and `data/status.json`.
 2. **Web Live Polling:** The console polls `data/status.json` and updates the active bead ribbon, project selector, and baseball cards in real time without refreshing.
-3. **Omarchy Quickshell Plugin:** The status script (`plugin/omarchy/bin/yard-status`) reads this same state, updating the Linux desktop bar and HUD.
+3. **Omarchy Quickshell Plugin:** The status script (`bin/yard-status`) reads this same state, updating the Linux desktop bar and HUD.
 
 ### Starting the Live Console
 
@@ -125,24 +125,32 @@ The script will:
 - Register the repo in `config/repos.json`.
 - Trigger an immediate sync so it appears in the console project selector.
 
-### Installing and Activating the Omarchy Plugin
+### Installing and Activating as an Omarchy Plugin
 
-The plugin directory (`plugin/omarchy/`) can be linked directly into Omarchy's user plugin directory:
+The entire repository is directly compatible with Omarchy Quattro's plugin architecture (`schemaVersion: 1`, `id: org.yard.console`).
+
+#### Option 1: Direct Install via `omarchy plugin add`
 ```bash
-# Link plugin to user directory
-ln -sfn /home/tprettol/repo/yard-console/plugin/omarchy ~/.config/omarchy/plugins/org.yard.console
+# Add directly from GitHub repository
+omarchy plugin add https://github.com/mowgli42/yard-console.git --enable
+```
+
+#### Option 2: Local Development Link
+```bash
+# Link local checkout to user plugin directory
+ln -sfn /home/tprettol/repo/yard-console ~/.config/omarchy/plugins/org.yard.console
 
 # Validate against Omarchy plugin specification
-omarchy plugin validate /home/tprettol/repo/yard-console/plugin/omarchy
+omarchy plugin validate /home/tprettol/repo/yard-console
 
-# Enable widget on the Omarchy status bar
+# Enable widget on the Omarchy status bar (right section)
 omarchy plugin enable org.yard.console right
 ```
 When active on the status bar:
 - Displays `󱚣` with dynamic tooltip reflecting Beads adoption (`YARD [6/7 Beads] In-Work: appliance-keeper-o4o`).
 - Clicking opens the Quickshell HUD with real-time Beads Adoption Scorecard, Active Trio, Agent Status, Git Working Branch, and latest GitHub PR.
 - Supports keyboard navigation with `Esc` to close and `Tab`/`Shift+Tab` to switch panels.
-- One-click button launches the full Tokyo Night web console.
+- "Open YARD Baseball Card Console" button launches the Tokyo Night web interface in your default browser (`omarchy launch browser`).
 
 ### Active Test Repositories
 
@@ -185,4 +193,4 @@ Stealth preview. Contracts and detector rules are documented in `docs/ARCHITECTU
 - **AI Tools Integration Matrix:** [`docs/AI-INTEGRATIONS.md`](docs/AI-INTEGRATIONS.md) (Cursor, Grok, Local LLMs, Claude Code, MCP servers)
 - **Omarchy Shell Plugin Plan:** [`docs/OMARCHY-PLUGIN-PLAN.md`](docs/OMARCHY-PLUGIN-PLAN.md) (Quattro bar widget & Quickshell HUD)
 - **OpenSpec & Gherkin Specs:** [`openspec/project.md`](openspec/project.md) and [`openspec/features/`](openspec/features/)
-- **Native Omarchy Plugin:** [`plugin/omarchy/`](plugin/omarchy/) (`manifest.json`, `BarWidget.qml`, `Panel.qml`, `bin/yard-status`)
+- **Native Omarchy Plugin:** Root-level manifests and QML components (`manifest.json`, `BarWidget.qml`, `Panel.qml`, `YardModel.js`, `bin/yard-status`) directly installable via `omarchy plugin add`.

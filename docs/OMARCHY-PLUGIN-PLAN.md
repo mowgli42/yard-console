@@ -30,10 +30,10 @@ This document outlines the blueprint and implementation plan for packaging the Y
 
 ---
 
-## 2. Directory Structure
+## 2. Directory Structure (Self-Contained Hybrid Architecture)
 
 ```
-plugin/omarchy/
+yard-console/
 ├── manifest.json              # Omarchy shell plugin manifest (schemaVersion 1, id: org.yard.console)
 ├── BarWidget.qml              # Status bar slot button & badge icon
 ├── Panel.qml                  # Quickshell popout keyboard HUD
@@ -42,9 +42,14 @@ plugin/omarchy/
 │   └── yard-status            # CLI status query & JSON emitter helper
 ├── tests/
 │   └── test_plugin.py         # Automated verification test suite
-└── assets/
-    ├── yard.svg               # YARD brand icon
-    └── yard-alert.svg         # YARD alert icon
+├── index.html                 # Full Tokyo Night web console & Baseball Card interface
+├── scripts/
+│   ├── yard-sync.py           # Background Beads/OpenSpec/Git telemetry collector
+│   ├── yard-add-repo.py       # New/existing repository onboarding tool
+│   ├── yard-start.sh          # Live environment launcher
+│   └── generate-screenshots.py # Headless browser screenshot generator
+├── openspec/                  # Living capability specifications & Gherkin scenarios
+└── docs/                      # Architectural blueprints, C4 models & diagrams
 ```
 
 ---
@@ -127,7 +132,7 @@ The plugin monitors `~/.local/state/yard/status.json`:
 
 ## 4. Phased Implementation Roadmap
 
-- **Phase 1 (Complete):** Core QML manifests and UI components written and validated in `plugin/omarchy/`.
+- **Phase 1 (Complete):** Core QML manifests and UI components validated at the repository root for direct `omarchy plugin add` compatibility.
 - **Phase 2 (Complete):** CLI helper script `yard-status` providing JSON bridge to Quickshell `Process` or `FileView`, with Beads ecosystem, Git activity, and agent state metrics.
 - **Phase 3 (Complete):** Beads adoption & GitHub activity HUD integration inside `Panel.qml` with dynamic tooltip status in `BarWidget.qml`.
 - **Phase 4:** Desktop notifications dispatch via `omarchy-shell` notification daemon when an urgent local watch card is raised.

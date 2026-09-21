@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-21T15:33:55Z",
+  "updatedAt": "2026-09-21T22:04:00Z",
   "fleet": {
     "activeCrews": 7,
     "maxCrews": 12,
@@ -251,13 +251,13 @@
         "issuesPath": ""
       },
       "gitActivity": {
-        "branch": "main",
+        "branch": "cursor/omarchy-plugin-hybrid-repo-709a",
         "isClean": false,
         "lastCommit": {
-          "hash": "1b23924",
-          "message": "docs: update screenshots and README for appliance-keeper, fluffy-spoon, and OnePage-PM",
+          "hash": "fbd0d4e",
+          "message": "Align Omarchy plugin with official spec, naming convention, and add test verification suite",
           "author": "mowgli42",
-          "relativeTime": "8 minutes ago"
+          "relativeTime": "5 hours ago"
         },
         "recentCommitsCount": 0
       },

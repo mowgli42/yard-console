@@ -53,7 +53,13 @@ Panel {
   }
 
   function launchWebConsole() {
-    if (root.bar) root.bar.run("omarchy launch browser " + (root.settings && root.settings.webConsoleUrl ? root.settings.webConsoleUrl : "http://localhost:8000"))
+    var url = (root.settings && root.settings.webConsoleUrl) ? root.settings.webConsoleUrl : ""
+    if (!url || url === "http://localhost:8000") {
+      // Prefer local file if server is not running or default requested
+      var localIndex = decodeURIComponent(String(Qt.resolvedUrl("index.html")).replace(/^file:\/\//, ""))
+      url = "file://" + localIndex
+    }
+    if (root.bar) root.bar.run("omarchy launch browser " + url)
     root.close()
   }
 
