@@ -283,7 +283,7 @@
       display: grid;
       grid-template-columns: repeat(5, 1fr);
       gap: 12px;
-      height: calc(100vh - 120px);
+      height: calc(100vh - 165px);
       overflow-x: auto;
     }
 
@@ -613,6 +613,444 @@
     .dot.green { background-color: var(--accent-green); box-shadow: 0 0 6px var(--accent-green); }
     .dot.yellow { background-color: var(--accent-yellow); box-shadow: 0 0 6px var(--accent-yellow); }
     .dot.red { background-color: var(--accent-red); box-shadow: 0 0 6px var(--accent-red); }
+
+    /* ==========================================================================
+       Beads Pipeline Ribbon & Current Bead Ticker
+       ========================================================================== */
+    .beads-ribbon {
+      background-color: var(--bg-surface-elevated);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 6px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      gap: 16px;
+      user-select: none;
+    }
+
+    .beads-project-picker {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .beads-project-label {
+      color: var(--fg-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-size: 10px;
+    }
+
+    .beads-select {
+      background-color: var(--bg-canvas);
+      border: 1px solid var(--border-subtle);
+      color: var(--accent-cyan);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 4px;
+      outline: none;
+      cursor: pointer;
+    }
+
+    .beads-trio-track {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      overflow-x: auto;
+    }
+
+    .bead-pill {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      padding: 3px 10px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+    }
+
+    .bead-pill:hover {
+      border-color: var(--accent-blue);
+      background-color: var(--bg-highlight);
+    }
+
+    .bead-pill.completed {
+      border-color: rgba(158, 206, 106, 0.3);
+      color: var(--fg-secondary);
+    }
+
+    .bead-pill.completed .bead-icon {
+      color: var(--accent-green);
+    }
+
+    .bead-pill.active {
+      background-color: rgba(122, 162, 247, 0.15);
+      border-color: var(--accent-blue);
+      color: var(--fg-primary);
+      box-shadow: 0 0 10px rgba(122, 162, 247, 0.25);
+    }
+
+    .bead-pill.active .bead-icon {
+      color: var(--accent-cyan);
+      animation: beadPulse 1.5s infinite ease-in-out;
+    }
+
+    .bead-pill.next {
+      border-color: rgba(187, 154, 247, 0.3);
+      color: var(--fg-secondary);
+    }
+
+    .bead-pill.next .bead-icon {
+      color: var(--accent-purple);
+    }
+
+    .bead-separator {
+      color: var(--fg-dim);
+      font-size: 10px;
+    }
+
+    .current-bead-quick {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(90deg, rgba(122,162,247,0.12), rgba(187,154,247,0.12));
+      border: 1px solid var(--accent-blue);
+      border-radius: 6px;
+      padding: 4px 10px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .current-bead-quick:hover {
+      box-shadow: 0 0 12px rgba(122, 162, 247, 0.35);
+      transform: translateY(-1px);
+    }
+
+    @keyframes beadPulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(1.15); }
+    }
+
+    /* ==========================================================================
+       OpenSpec Baseball Card Modal
+       ========================================================================== */
+    .baseball-modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(10, 10, 15, 0.82);
+      backdrop-filter: blur(6px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1100;
+    }
+
+    .baseball-modal-overlay.active {
+      display: flex;
+    }
+
+    .baseball-card {
+      background: radial-gradient(circle at 10% 10%, #24283b 0%, #1a1b26 90%);
+      border: 2px solid var(--accent-blue);
+      box-shadow: 0 0 35px rgba(122, 162, 247, 0.28), 0 20px 40px rgba(0, 0, 0, 0.7);
+      border-radius: 12px;
+      width: 780px;
+      max-width: 95vw;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .baseball-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--accent-blue), var(--accent-cyan), var(--accent-purple), var(--accent-green));
+    }
+
+    .bb-header {
+      padding: 14px 20px 12px;
+      background-color: rgba(36, 40, 59, 0.85);
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .bb-title-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .bb-card-num {
+      font-family: var(--font-mono);
+      font-weight: 800;
+      font-size: 14px;
+      color: var(--accent-cyan);
+      background: var(--bg-canvas);
+      padding: 3px 8px;
+      border-radius: 4px;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .bb-badge {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .bb-badge.in-work {
+      background-color: rgba(122, 162, 247, 0.2);
+      border: 1px solid var(--accent-blue);
+      color: var(--accent-cyan);
+    }
+
+    .bb-badge.completed {
+      background-color: rgba(158, 206, 106, 0.2);
+      border: 1px solid var(--accent-green);
+      color: var(--accent-green);
+    }
+
+    .bb-badge.next {
+      background-color: rgba(187, 154, 247, 0.2);
+      border: 1px solid var(--accent-purple);
+      color: var(--accent-purple);
+    }
+
+    .bb-close {
+      background: transparent;
+      border: none;
+      color: var(--fg-muted);
+      font-size: 16px;
+      cursor: pointer;
+      padding: 4px 8px;
+      border-radius: 4px;
+    }
+
+    .bb-close:hover {
+      color: var(--fg-primary);
+      background: var(--bg-surface-elevated);
+    }
+
+    .bb-body {
+      padding: 16px 20px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    /* Player & Engine Stats Grid */
+    .bb-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      background-color: var(--bg-canvas);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 10px 14px;
+    }
+
+    .bb-stat-item {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .bb-stat-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--fg-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .bb-stat-val {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--fg-primary);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* OpenSpec Section */
+    .bb-box {
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 12px 14px;
+    }
+
+    .bb-box-title {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--accent-cyan);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .bb-spec-path {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--accent-blue);
+      background: var(--bg-canvas);
+      padding: 2px 6px;
+      border-radius: 3px;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .bb-purpose {
+      color: var(--fg-secondary);
+      font-size: 12px;
+      margin-bottom: 8px;
+      line-height: 1.4;
+    }
+
+    .bb-requirement {
+      background: rgba(122, 162, 247, 0.08);
+      border-left: 3px solid var(--accent-blue);
+      padding: 8px 12px;
+      font-size: 12px;
+      color: var(--fg-primary);
+      border-radius: 0 4px 4px 0;
+      margin-bottom: 8px;
+    }
+
+    .bb-gherkin {
+      background: var(--bg-canvas);
+      border: 1px solid var(--border-subtle);
+      border-radius: 6px;
+      padding: 10px 12px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      line-height: 1.6;
+      overflow-x: auto;
+    }
+
+    .gh-kw { color: var(--accent-purple); font-weight: bold; }
+    .gh-step { color: var(--accent-cyan); font-weight: bold; }
+    .gh-val { color: var(--accent-green); }
+    .gh-comm { color: var(--fg-muted); font-style: italic; }
+
+    /* Beads Connected Trio Stepper */
+    .bb-stepper {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr auto 1fr;
+      align-items: center;
+      gap: 10px;
+      background: var(--bg-canvas);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 10px 14px;
+    }
+
+    .bb-step-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 6px;
+      padding: 8px 10px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .bb-step-card:hover {
+      border-color: var(--accent-blue);
+      transform: translateY(-2px);
+    }
+
+    .bb-step-card.active-step {
+      border-color: var(--accent-blue);
+      box-shadow: 0 0 12px rgba(122, 162, 247, 0.3);
+      background: rgba(122, 162, 247, 0.08);
+    }
+
+    .bb-step-role {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .bb-step-role.completed { color: var(--accent-green); }
+    .bb-step-role.in-work { color: var(--accent-cyan); }
+    .bb-step-role.next { color: var(--accent-purple); }
+
+    .bb-step-id {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: bold;
+      color: var(--fg-primary);
+    }
+
+    .bb-step-title {
+      font-size: 11px;
+      color: var(--fg-secondary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .bb-step-arrow {
+      color: var(--fg-muted);
+      font-size: 14px;
+    }
+
+    .bb-footer-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 4px;
+    }
+
+    .bb-btn {
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border-subtle);
+      color: var(--fg-primary);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      padding: 5px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s;
+    }
+
+    .bb-btn:hover {
+      background: var(--accent-blue);
+      color: var(--bg-canvas);
+      border-color: var(--accent-blue);
+    }
   </style>
 </head>
 <body>
@@ -644,6 +1082,55 @@
       </div>
     </div>
   </header>
+
+  <!-- Beads Pipeline Ribbon & Active Bead Ticker -->
+  <div class="beads-ribbon" id="beadsRibbon">
+    <div class="beads-project-picker">
+      <span class="beads-project-label">Project:</span>
+      <select class="beads-select" id="beadsProjectSelect">
+        <option value="mowgli42/schwerpunkt">mowgli42/schwerpunkt (Boyd OODA)</option>
+        <option value="mowgli42/yard-console">mowgli42/yard-console (Control Plane)</option>
+        <option value="mowgli42/o-my-sim">mowgli42/o-my-sim (Mission Simulation)</option>
+        <option value="mowgli42/verified-xfer">mowgli42/verified-xfer (Encrypted Mesh)</option>
+      </select>
+    </div>
+
+    <!-- Connected 3-Step Pipeline: Completed -> In Work -> Next Up -->
+    <div class="beads-trio-track">
+      <div class="bead-pill completed" id="ribbonCompletedPill" title="Click to view Last Completed Bead">
+        <span class="bead-icon">✓</span>
+        <span id="ribbonCompletedId">schwerpunkt-i0i.2.5</span>
+        <span style="color:var(--fg-muted);">·</span>
+        <span id="ribbonCompletedTitle" style="max-width:140px;overflow:hidden;text-overflow:ellipsis;">Operator REST API</span>
+      </div>
+
+      <span class="bead-separator">➜</span>
+
+      <div class="bead-pill active" id="ribbonInWorkPill" title="Click or press 'b' to open OpenSpec Baseball Card">
+        <span class="bead-icon">●</span>
+        <span style="font-weight:bold;color:var(--accent-cyan);" id="ribbonInWorkId">schwerpunkt-i0i.3.1</span>
+        <span style="color:var(--fg-muted);">·</span>
+        <span id="ribbonInWorkTitle" style="max-width:170px;overflow:hidden;text-overflow:ellipsis;">Observation impact hints</span>
+        <span class="badge badge-info" style="font-size:9px;padding:1px 5px;" id="ribbonInWorkAgent">Cursor (bc-709a)</span>
+      </div>
+
+      <span class="bead-separator">➜</span>
+
+      <div class="bead-pill next" id="ribbonNextPill" title="Click to view Next Queued Bead">
+        <span class="bead-icon">○</span>
+        <span id="ribbonNextId">schwerpunkt-i0i.3.2</span>
+        <span style="color:var(--fg-muted);">·</span>
+        <span id="ribbonNextTitle" style="max-width:140px;overflow:hidden;text-overflow:ellipsis;">MTO decision tree</span>
+      </div>
+    </div>
+
+    <!-- Quick Baseball Card trigger -->
+    <div class="current-bead-quick" id="openBaseballCardBtn" title="Inspect OpenSpec Baseball Card (Shortcut: 'b')">
+      <span style="color:var(--accent-purple);font-size:12px;">⚾</span>
+      <span style="font-weight:bold;color:var(--accent-cyan);">OpenSpec Baseball Card</span>
+      <span class="kbd" style="font-size:9px;">b</span>
+    </div>
+  </div>
 
   <!-- Main View Area -->
   <main>
@@ -1330,6 +1817,8 @@
   <footer>
     <div class="key-hints">
       <div class="key-hint"><span class="kbd">1–7</span> views</div>
+      <div class="key-hint"><span class="kbd">b</span> baseball card</div>
+      <div class="key-hint"><span class="kbd">[</span><span class="kbd">]</span> prev/next bead</div>
       <div class="key-hint"><span class="kbd">/</span> filter</div>
       <div class="key-hint"><span class="kbd">j</span><span class="kbd">k</span> move card</div>
       <div class="key-hint"><span class="kbd">return</span> open</div>
@@ -1343,8 +1832,118 @@
     </div>
   </footer>
 
-  <!-- Application Logic & Keyboard Router -->
-  <script>
+  <!-- OpenSpec Baseball Card Modal -->
+  <div class="baseball-modal-overlay" id="baseballModal">
+    <div class="baseball-card">
+      <div class="bb-header">
+        <div class="bb-title-group">
+          <span style="font-size:18px;">⚾</span>
+          <span class="bb-card-num" id="bbCardNum">#schwerpunkt-i0i.3.1</span>
+          <span class="bb-badge in-work" id="bbBadge">IN WORK</span>
+          <span style="color:var(--fg-muted);font-size:11px;" id="bbProjectSlug">mowgli42/schwerpunkt</span>
+        </div>
+        <button class="bb-close" id="closeBaseballBtn">✕</button>
+      </div>
+
+      <div class="bb-body">
+        <!-- Player & Engine Stats -->
+        <div class="bb-stats-grid">
+          <div class="bb-stat-item">
+            <span class="bb-stat-label">Assigned Agent</span>
+            <span class="bb-stat-val" style="color:var(--accent-cyan);" id="bbAgent">Cursor Cloud (bc-709a)</span>
+          </div>
+          <div class="bb-stat-item">
+            <span class="bb-stat-label">Model Engine</span>
+            <span class="bb-stat-val" style="color:var(--accent-purple);" id="bbModel">gemini-3.8-flash</span>
+          </div>
+          <div class="bb-stat-item">
+            <span class="bb-stat-label">Tokens / Budget</span>
+            <span class="bb-stat-val" id="bbTokens">38,200 / 50,000 (76%)</span>
+          </div>
+          <div class="bb-stat-item">
+            <span class="bb-stat-label">Telemetry Health</span>
+            <span class="bb-stat-val" style="color:var(--accent-green);" id="bbHealth">Nominal (Heartbeat 12s)</span>
+          </div>
+        </div>
+
+        <!-- OpenSpec Project Definition (Front of Card) -->
+        <div class="bb-box">
+          <div class="bb-box-title">
+            <span>OPENSPEC PROJECT DEFINITION</span>
+            <span class="bb-spec-path" id="bbSpecPath">openspec/specs/orientation-layer/spec.md</span>
+          </div>
+          <div class="bb-purpose" id="bbPurpose">
+            Orientation is the <strong>schwerpunkt</strong> of the OODA loop: the persistent mental model through which all observations are interpreted.
+          </div>
+          <div class="bb-requirement" id="bbRequirement">
+            <strong>SHALL Requirement:</strong> The orientation layer SHALL maintain a structured, serializable WorldModel that persists across tool calls and loop iterations.
+          </div>
+          <div class="bb-gherkin" id="bbGherkin">
+<span class="gh-kw">Scenario:</span> <span class="gh-step">World model persists across loop iterations</span>
+  <span class="gh-kw">GIVEN</span> a completed Orient phase with <span class="gh-val">known_facts</span> containing <span class="gh-val">account_balance=1000</span>
+  <span class="gh-kw">WHEN</span> a new Observe phase completes in the same session
+  <span class="gh-kw">THEN</span> Orient <span class="gh-kw">SHALL</span> load the prior WorldModel from persistent store
+  <span class="gh-kw">AND</span> <span class="gh-kw">SHALL NOT</span> rely solely on LLM context window for prior facts
+          </div>
+        </div>
+
+        <!-- Connected 3-Step Beads Pipeline (Back of Card / Bottom Stepper) -->
+        <div class="bb-box" style="padding:10px 14px;">
+          <div class="bb-box-title" style="margin-bottom:6px;">
+            <span>BEADS PROGRESSION PIPELINE</span>
+            <span style="font-size:10px;color:var(--fg-muted);">Step: <span class="kbd">[</span> prev · <span class="kbd">]</span> next</span>
+          </div>
+          <div class="bb-stepper">
+            <div class="bb-step-card" id="bbStepPrev">
+              <span class="bb-step-role completed">Last Completed</span>
+              <span class="bb-step-id" id="bbStepPrevId">schwerpunkt-i0i.2.5</span>
+              <span class="bb-step-title" id="bbStepPrevTitle">Operator REST API (manual demo)</span>
+            </div>
+
+            <div class="bb-step-arrow">➜</div>
+
+            <div class="bb-step-card active-step" id="bbStepCurr">
+              <span class="bb-step-role in-work">In Work (Current)</span>
+              <span class="bb-step-id" id="bbStepCurrId">schwerpunkt-i0i.3.1</span>
+              <span class="bb-step-title" id="bbStepCurrTitle">Observation impact hints + orient</span>
+            </div>
+
+            <div class="bb-step-arrow">➜</div>
+
+            <div class="bb-step-card" id="bbStepNext">
+              <span class="bb-step-role next">Next Queued</span>
+              <span class="bb-step-id" id="bbStepNextId">schwerpunkt-i0i.3.2</span>
+              <span class="bb-step-title" id="bbStepNextTitle">MTO decision tree + Observe-Orient</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Footer Actions -->
+        <div class="bb-footer-actions">
+          <div style="font-family:var(--font-mono);font-size:10px;color:var(--fg-muted);">
+            Beads Command: <code style="color:var(--accent-cyan);" id="bbCliCmd">bd update schwerpunkt-i0i.3.1 --status in_progress</code>
+          </div>
+          <div style="display:flex;gap:8px;">
+            <button class="bb-btn" id="bbPrevBtn">◀ Previous Bead <span class="kbd">[</span></button>
+            <button class="bb-btn" id="bbNextBtn">Next Bead ▶ <span class="kbd">]</span></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <script>
+      // Early check for ?bead= or #bead= to guarantee modal appears in headless snapshots
+      if (window.location.search.includes('bead=') || window.location.hash.includes('bead=')) {
+        document.addEventListener('DOMContentLoaded', () => {
+          setTimeout(() => {
+            const overlay = document.getElementById('baseballModal');
+            if (overlay) overlay.classList.add('active');
+          }, 50);
+        });
+      }
+    </script>
+    <script>
     (function() {
       // ----------------------------------------------------------------------
       // State
@@ -1352,6 +1951,402 @@
       let currentView = 1;
       let focusedCardIndex = 0;
       let allCards = [];
+
+      // ----------------------------------------------------------------------
+      // Beads Multi-Project Dataset & OpenSpec Registry
+      // ----------------------------------------------------------------------
+      const BEADS_DATA = {
+        "mowgli42/schwerpunkt": {
+          project: "mowgli42/schwerpunkt",
+          completed: {
+            id: "schwerpunkt-i0i.2.5",
+            title: "Operator REST API (manual demo, no AI)",
+            status: "closed",
+            role: "completed",
+            badge: "COMPLETED",
+            owner: "tprettol@yahoo.com",
+            agent: "Cursor Cloud Agent (bc-709a)",
+            model: "gemini-3.8-flash",
+            tokens: "44,120 / 50,000 (88%)",
+            health: "Nominal · 23 Unit Tests Green",
+            specPath: "openspec/specs/operator-console/spec.md",
+            purpose: "Provides a headless REST API for human operators to inspect the world model, approve irreversible decisions, and step through OODA cycles.",
+            requirement: "The Operator API SHALL expose /sessions/{id}/observe, /orient, /decide, and /act endpoints with zero external LLM dependencies.",
+            gherkin: `Scenario: Manual contradiction case resolves via REST
+  GIVEN an active session with an unresolved contradiction
+  WHEN the operator submits POST /sessions/{id}/resolve
+  THEN the contradiction state SHALL clear
+  AND the loop SHALL advance to the Decide phase without error`,
+            cliCmd: "bd update schwerpunkt-i0i.2.5 --status closed"
+          },
+          inWork: {
+            id: "schwerpunkt-i0i.3.1",
+            title: "Observation impact hints + orient plan-impact",
+            status: "in_progress",
+            role: "in-work",
+            badge: "IN WORK",
+            owner: "tprettol@yahoo.com",
+            agent: "Cursor Cloud Agent (bc-709a)",
+            model: "gemini-3.8-flash",
+            tokens: "38,200 / 50,000 (76%)",
+            health: "Nominal · Heartbeat 12s · Zero Egress",
+            specPath: "openspec/specs/orientation-layer/spec.md",
+            purpose: "Orientation is the schwerpunkt of the OODA loop: the persistent mental model through which all observations are interpreted.",
+            requirement: "The orientation layer SHALL maintain a structured, serializable WorldModel that persists across tool calls and loop iterations.",
+            gherkin: `Scenario: World model persists across loop iterations
+  GIVEN a completed Orient phase with known_facts containing account_balance=1000
+  WHEN a new Observe phase completes in the same session
+  THEN Orient SHALL load the prior WorldModel from persistent store
+  AND SHALL NOT rely solely on LLM context window for prior facts`,
+            cliCmd: "bd update schwerpunkt-i0i.3.1 --status in_progress"
+          },
+          next: {
+            id: "schwerpunkt-i0i.3.2",
+            title: "MTO decision tree + Observe-Orient integration",
+            status: "open",
+            role: "next",
+            badge: "NEXT QUEUED",
+            owner: "tprettol@yahoo.com",
+            agent: "Grok Release Agent (grok-4.6)",
+            model: "grok-4.6",
+            tokens: "0 / 60,000 (0%)",
+            health: "Ready · Blocked on schwerpunkt-i0i.3.1",
+            specPath: "openspec/specs/demo-scenarios/spec.md",
+            purpose: "Translates observed battlespace contradictions into recommended Mission Tasking Order (MTO) route deviations and dynamic target reallocations.",
+            requirement: "The decision tree SHALL evaluate plan_impacts against asset confidence gates before submitting updated MTO manifests.",
+            gherkin: `Scenario: Dynamic target reallocation on plan impact
+  GIVEN an observed route blockage with confidence >= 0.85
+  WHEN the MTO decision tree evaluates asset alternatives
+  THEN it SHALL generate an amended flight routing waypoint set
+  AND SHALL request operator approval prior to execution`,
+            cliCmd: "bd show schwerpunkt-i0i.3.2"
+          }
+        },
+        "mowgli42/yard-console": {
+          project: "mowgli42/yard-console",
+          completed: {
+            id: "yard-041",
+            title: "Tokyo Night keyboard router (1-7, j/k, /, Enter)",
+            status: "closed",
+            role: "completed",
+            badge: "COMPLETED",
+            owner: "mowgli42",
+            agent: "Cursor Local Agent",
+            model: "claude-sonnet-5-thinking-high",
+            tokens: "28,400 / 40,000 (71%)",
+            health: "Verified · Visual Regression Tests Passed",
+            specPath: "openspec/specs/web-console/spec.md",
+            purpose: "Defines the user experience, interaction architecture, and visual aesthetics of the standalone YARD Web Console.",
+            requirement: "The Web Console UI SHALL strictly conform to the Tokyo Night color palette and provide full keyboard navigation.",
+            gherkin: `Scenario: Navigating cards via vim-style j/k keys
+  GIVEN The Yard view or Signals view with multiple cards
+  WHEN the operator presses j
+  THEN the selection cursor SHALL move to the next card in the list
+  AND the selected card SHALL exhibit a Tokyo Blue focus outline`,
+            cliCmd: "bd update yard-041 --status closed"
+          },
+          inWork: {
+            id: "yard-042",
+            title: "OpenSpec & Beads Baseball Card progress interface",
+            status: "in_progress",
+            role: "in-work",
+            badge: "IN WORK",
+            owner: "tprettol@yahoo.com",
+            agent: "Cursor Cloud Agent (bc-709a)",
+            model: "gemini-3.8-flash",
+            tokens: "31,800 / 45,000 (70%)",
+            health: "Nominal · OpenSpec Sync Active",
+            specPath: "openspec/specs/beads-openspec-interface/spec.md",
+            purpose: "Connects YARD mixed-fleet tracking to formal OpenSpec project definitions and linear Beads issue pipelines with a baseball card HUD.",
+            requirement: "The YARD Console SHALL continuously display the 3-step bead pipeline (completed, in-work, next) and open an interactive Baseball Card on 'b'.",
+            gherkin: `Scenario: Displaying current active bead in persistent console header
+  GIVEN an active agent crew working on a project repository
+  WHEN the YARD Web Console loads or updates
+  THEN the console SHALL display a persistent Current Bead indicator pill
+  AND clicking the Current Bead or pressing 'b' SHALL open the Baseball Card`,
+            cliCmd: "bd update yard-042 --status in_progress"
+          },
+          next: {
+            id: "yard-043",
+            title: "Omarchy Quattro Shell HUD status panel integration",
+            status: "open",
+            role: "next",
+            badge: "NEXT QUEUED",
+            owner: "tprettol@yahoo.com",
+            agent: "Cursor Local Agent",
+            model: "gemini-3.8-flash",
+            tokens: "0 / 30,000 (0%)",
+            health: "Queued · Ready to implement",
+            specPath: "openspec/specs/omarchy-plugin/spec.md",
+            purpose: "Integrates YARD fleet state, alert badges, and the 3-bead pipeline into the native Omarchy Linux desktop shell bar and Quickshell popups.",
+            requirement: "The Omarchy plugin SHALL read ~/.local/state/yard/status.json and display real-time crew WIP and detector warnings.",
+            gherkin: `Scenario: Omarchy status bar alert badge
+  GIVEN an anomaly alert flagged by Local Watch
+  WHEN the yard-status script emits alarming=true
+  THEN the Omarchy bar widget SHALL display a blinking urgent badge
+  AND clicking the badge SHALL open the Quickshell HUD panel`,
+            cliCmd: "bd show yard-043"
+          }
+        },
+        "mowgli42/o-my-sim": {
+          project: "mowgli42/o-my-sim",
+          completed: {
+            id: "o-my-sim-u1n.1",
+            title: "Ingest MissionPlan/RoutePlan and fly published waypoints",
+            status: "closed",
+            role: "completed",
+            badge: "COMPLETED",
+            owner: "mowgli42",
+            agent: "Cursor Agent",
+            model: "claude-sonnet-5-thinking-high",
+            tokens: "49,000 / 60,000 (81%)",
+            health: "Closed with tests green · gh-22",
+            specPath: "docs/MISSION-PLAN-INGEST.md",
+            purpose: "Translates UCI XML and JSON route plans into active simulation trajectories for aircraft and ISR sensor platforms.",
+            requirement: "The simulator SHALL ingest routes/v1 and assign waypoints to PlatformStatus.MissionPlanID with zero dropped coordinates.",
+            gherkin: `Scenario: Waypoint execution following RoutePlan ingest
+  GIVEN an ingested JSON flight route with 12 waypoints
+  WHEN the simulation engine ticks to T+300
+  THEN PlatformStatus SHALL reflect current altitude and heading
+  AND no PROX-* invalid waypoint warnings SHALL be emitted`,
+            cliCmd: "bd update o-my-sim-u1n.1 --status closed"
+          },
+          inWork: {
+            id: "o-my-sim-u1n.2",
+            title: "Publish ActivationStatus and coarse ExecutionStatus",
+            status: "in_progress",
+            role: "in-work",
+            badge: "IN WORK",
+            owner: "tprettol@yahoo.com",
+            agent: "Cursor Cloud Agent (bc-709a)",
+            model: "gpt-5.6-sol-high",
+            tokens: "34,600 / 50,000 (69%)",
+            health: "Nominal · Redis Bus Active",
+            specPath: "docs/MISSION-PLAN-INGEST.md",
+            purpose: "Broadcasts coarse activation states over the Redis pub/sub bus to synchronize mission planning with operator battle management.",
+            requirement: "Every ACTIVATE command SHALL trigger an immediate ActivationStatus ACK and transition to EXECUTING or REJECTED.",
+            gherkin: `Scenario: Reject activation without loaded plan
+  GIVEN an aircraft without an active MissionPlan loaded
+  WHEN an ACTIVATE command is published on the Redis bus
+  THEN the sim SHALL immediately reply with REJECTED and reason 'NO_PLAN'
+  AND SHALL NOT enter an unguided flight pattern`,
+            cliCmd: "bd update o-my-sim-u1n.2 --status in_progress"
+          },
+          next: {
+            id: "o-my-sim-u1n.3",
+            title: "Honor TaskCommand/Cancel/RouteModificationRequest on bus",
+            status: "open",
+            role: "next",
+            badge: "NEXT QUEUED",
+            owner: "tprettol@yahoo.com",
+            agent: "Grok Release Agent",
+            model: "grok-4.6",
+            tokens: "0 / 50,000 (0%)",
+            health: "Waiting for ActivationStatus",
+            specPath: "docs/MISSION-PLAN-INGEST.md",
+            purpose: "Processes dynamic retask commands and route modification requests mid-flight across the battlespace telemetry pipeline.",
+            requirement: "TaskCommand on Redis SHALL yield TaskStatus and RouteModificationRequest SHALL increment RoutePlan version.",
+            gherkin: `Scenario: Mid-flight route modification bumps plan version
+  GIVEN an aircraft in EXECUTING state along RoutePlan v1
+  WHEN a RouteModificationRequest arrives with new ingress waypoints
+  THEN the simulator SHALL bump RoutePlan to v2
+  AND publish TaskStatus COMPLETE for the retasking`,
+            cliCmd: "bd show o-my-sim-u1n.3"
+          }
+        },
+        "mowgli42/verified-xfer": {
+          project: "mowgli42/verified-xfer",
+          completed: {
+            id: "vx-101",
+            title: "Zero-knowledge payload integrity checksums",
+            status: "closed",
+            role: "completed",
+            badge: "COMPLETED",
+            owner: "tprettol@yahoo.com",
+            agent: "Cursor Agent",
+            model: "claude-fable-5-1",
+            tokens: "21,100 / 30,000 (70%)",
+            health: "Verified · 14 Rust Tests Green",
+            specPath: "openspec/specs/runtime-boundaries/spec.md",
+            purpose: "Ensures cryptographic proof of file integrity across air-gapped data transfers between secure enclave systems.",
+            requirement: "Every outgoing file chunk SHALL be signed with BLAKE3 and verified against public key attestations before ingestion.",
+            gherkin: `Scenario: Chunk integrity validation on arrival
+  GIVEN an incoming binary blob chunk from an external enclave
+  WHEN the hash is calculated and compared to the BLAKE3 signature
+  THEN verified-xfer SHALL accept and write to the spool directory
+  AND SHALL emit zero warnings to the system log`,
+            cliCmd: "bd update vx-101 --status closed"
+          },
+          inWork: {
+            id: "vx-102",
+            title: "QUIC streaming backpressure & window throttling",
+            status: "in_progress",
+            role: "in-work",
+            badge: "IN WORK",
+            owner: "tprettol@yahoo.com",
+            agent: "Cursor Cloud Agent (bc-709a)",
+            model: "gemini-3.8-flash",
+            tokens: "19,800 / 40,000 (49%)",
+            health: "Nominal · Zero Packet Drop",
+            specPath: "openspec/specs/runtime-boundaries/spec.md",
+            purpose: "Prevents buffer overflow and out-of-order packet exhaustion over degraded or high-latency satellite tactical links.",
+            requirement: "The streaming transport layer SHALL dynamically throttle window size when peer ACK latency exceeds 250ms.",
+            gherkin: `Scenario: Satellite link backpressure throttling
+  GIVEN an active QUIC transfer over a degraded satcom connection
+  WHEN round-trip latency increases past 250ms
+  THEN the sender window SHALL reduce by 50%
+  AND SHALL NOT drop buffered transport frames`,
+            cliCmd: "bd update vx-102 --status in_progress"
+          },
+          next: {
+            id: "vx-103",
+            title: "Hardware TPM 2.0 key attestation & seal verification",
+            status: "open",
+            role: "next",
+            badge: "NEXT QUEUED",
+            owner: "tprettol@yahoo.com",
+            agent: "Local Watch Agent",
+            model: "Qwen 2.5 Coder 14B",
+            tokens: "0 / 35,000 (0%)",
+            health: "Queued · Ready for TPM binding",
+            specPath: "openspec/specs/runtime-boundaries/spec.md",
+            purpose: "Binds cryptographic storage secrets directly to motherboard TPM PCR registers to prevent side-channel disk extraction.",
+            requirement: "Decryption keys SHALL remain sealed in TPM NVRAM until platform integrity registers PCR 0-7 match golden signatures.",
+            gherkin: `Scenario: Tampered firmware refuses key unsealing
+  GIVEN a modified UEFI firmware payload
+  WHEN the system boots and requests TPM key unseal
+  THEN the TPM SHALL refuse to release decryption keys
+  AND SHALL trigger a secure lockdown alert`,
+            cliCmd: "bd show vx-103"
+          }
+        }
+      };
+
+      let activeProjectKey = "mowgli42/schwerpunkt";
+      let activeBeadPosition = "inWork"; // "completed" | "inWork" | "next"
+
+      const navButtons = document.querySelectorAll('.nav-btn[data-view]');
+      const viewContainers = document.querySelectorAll('.view-container');
+      const filterInput = document.getElementById('filterInput');
+      const detailModal = document.getElementById('detailModal');
+      const closeModalBtn = document.getElementById('closeModalBtn');
+
+      // Baseball Card elements
+      const baseballModal = document.getElementById('baseballModal');
+      const closeBaseballBtn = document.getElementById('closeBaseballBtn');
+      const openBaseballCardBtn = document.getElementById('openBaseballCardBtn');
+      const beadsProjectSelect = document.getElementById('beadsProjectSelect');
+      const ribbonCompletedPill = document.getElementById('ribbonCompletedPill');
+      const ribbonInWorkPill = document.getElementById('ribbonInWorkPill');
+      const ribbonNextPill = document.getElementById('ribbonNextPill');
+      const bbStepPrev = document.getElementById('bbStepPrev');
+      const bbStepCurr = document.getElementById('bbStepCurr');
+      const bbStepNext = document.getElementById('bbStepNext');
+      const bbPrevBtn = document.getElementById('bbPrevBtn');
+      const bbNextBtn = document.getElementById('bbNextBtn');
+
+      function updateBeadsRibbon() {
+        const proj = BEADS_DATA[activeProjectKey];
+        if (!proj) return;
+
+        document.getElementById('ribbonCompletedId').innerText = proj.completed.id;
+        document.getElementById('ribbonCompletedTitle').innerText = proj.completed.title;
+
+        document.getElementById('ribbonInWorkId').innerText = proj.inWork.id;
+        document.getElementById('ribbonInWorkTitle').innerText = proj.inWork.title;
+
+        document.getElementById('ribbonNextId').innerText = proj.next.id;
+        document.getElementById('ribbonNextTitle').innerText = proj.next.title;
+      }
+
+      function openBaseballCard(position = 'inWork') {
+        const proj = BEADS_DATA[activeProjectKey];
+        if (!proj) return;
+
+        activeBeadPosition = position;
+        const bead = proj[position] || proj.inWork;
+
+        document.getElementById('bbCardNum').innerText = `#${bead.id}`;
+        document.getElementById('bbBadge').innerText = bead.badge;
+        document.getElementById('bbBadge').className = `bb-badge ${bead.role}`;
+        document.getElementById('bbProjectSlug').innerText = proj.project;
+
+        document.getElementById('bbAgent').innerText = bead.agent;
+        document.getElementById('bbModel').innerText = bead.model;
+        document.getElementById('bbTokens').innerText = bead.tokens;
+        document.getElementById('bbHealth').innerText = bead.health;
+
+        document.getElementById('bbSpecPath').innerText = bead.specPath;
+        document.getElementById('bbPurpose').innerHTML = bead.purpose;
+        document.getElementById('bbRequirement').innerHTML = `<strong>SHALL Requirement:</strong> ${bead.requirement}`;
+
+        // Format gherkin syntax
+        const rawGherkin = bead.gherkin;
+        const formattedGherkin = rawGherkin
+          .replace(/(Scenario:)/g, '<span class="gh-kw">$1</span>')
+          .replace(/(GIVEN|WHEN|THEN|AND)/g, '<span class="gh-step">$1</span>')
+          .replace(/(SHALL NOT|SHALL)/g, '<span class="gh-kw">$1</span>');
+        document.getElementById('bbGherkin').innerHTML = formattedGherkin;
+
+        // Trio stepper update
+        document.getElementById('bbStepPrevId').innerText = proj.completed.id;
+        document.getElementById('bbStepPrevTitle').innerText = proj.completed.title;
+        document.getElementById('bbStepCurrId').innerText = proj.inWork.id;
+        document.getElementById('bbStepCurrTitle').innerText = proj.inWork.title;
+        document.getElementById('bbStepNextId').innerText = proj.next.id;
+        document.getElementById('bbStepNextTitle').innerText = proj.next.title;
+
+        bbStepPrev.classList.toggle('active-step', position === 'completed');
+        bbStepCurr.classList.toggle('active-step', position === 'inWork');
+        bbStepNext.classList.toggle('active-step', position === 'next');
+
+        document.getElementById('bbCliCmd').innerText = bead.cliCmd;
+
+        baseballModal.classList.add('active');
+      }
+
+      function closeBaseballCard() {
+        baseballModal.classList.remove('active');
+      }
+
+      function stepBead(direction) {
+        if (!baseballModal.classList.contains('active')) return;
+        const order = ['completed', 'inWork', 'next'];
+        let idx = order.indexOf(activeBeadPosition);
+        if (direction === 'next' && idx < order.length - 1) {
+          openBaseballCard(order[idx + 1]);
+        } else if (direction === 'prev' && idx > 0) {
+          openBaseballCard(order[idx - 1]);
+        }
+      }
+
+      // Event listeners for Beads & Baseball Card
+      beadsProjectSelect.addEventListener('change', (e) => {
+        activeProjectKey = e.target.value;
+        updateBeadsRibbon();
+        if (baseballModal.classList.contains('active')) {
+          openBaseballCard('inWork');
+        }
+      });
+
+      openBaseballCardBtn.addEventListener('click', () => openBaseballCard('inWork'));
+      ribbonInWorkPill.addEventListener('click', () => openBaseballCard('inWork'));
+      ribbonCompletedPill.addEventListener('click', () => openBaseballCard('completed'));
+      ribbonNextPill.addEventListener('click', () => openBaseballCard('next'));
+
+      closeBaseballBtn.addEventListener('click', closeBaseballCard);
+      baseballModal.addEventListener('click', (e) => {
+        if (e.target === baseballModal) closeBaseballCard();
+      });
+
+      bbStepPrev.addEventListener('click', () => openBaseballCard('completed'));
+      bbStepCurr.addEventListener('click', () => openBaseballCard('inWork'));
+      bbStepNext.addEventListener('click', () => openBaseballCard('next'));
+
+      bbPrevBtn.addEventListener('click', () => stepBead('prev'));
+      bbNextBtn.addEventListener('click', () => stepBead('next'));
+
+      updateBeadsRibbon();
 
       const navButtons = document.querySelectorAll('.nav-btn[data-view]');
       const viewContainers = document.querySelectorAll('.view-container');
@@ -1451,7 +2446,27 @@
       // Keyboard-First Router
       // ----------------------------------------------------------------------
       window.addEventListener('keydown', (e) => {
-        // If modal is active
+        // If Baseball Modal is active
+        if (baseballModal.classList.contains('active')) {
+          if (e.key === 'Escape') {
+            closeBaseballCard();
+            e.preventDefault();
+            return;
+          }
+          if (e.key === '[') {
+            stepBead('prev');
+            e.preventDefault();
+            return;
+          }
+          if (e.key === ']') {
+            stepBead('next');
+            e.preventDefault();
+            return;
+          }
+          return;
+        }
+
+        // If story detail modal is active
         if (detailModal.classList.contains('active')) {
           if (e.key === 'Escape') {
             closeModal();
@@ -1466,6 +2481,25 @@
             filterInput.blur();
             e.preventDefault();
           }
+          return;
+        }
+
+        // Toggle Baseball Card with 'b'
+        if (e.key === 'b' || e.key === 'B') {
+          openBaseballCard('inWork');
+          e.preventDefault();
+          return;
+        }
+
+        // Step beads via [ and ] even from main views
+        if (e.key === '[') {
+          openBaseballCard('completed');
+          e.preventDefault();
+          return;
+        }
+        if (e.key === ']') {
+          openBaseballCard('next');
+          e.preventDefault();
           return;
         }
 
@@ -1516,17 +2550,45 @@
       // Initial card index
       updateCardList();
 
-      // Check URL hash for initial view or card selection (e.g. #view=2 or #card=CORE-104)
-      const params = new URLSearchParams(window.location.hash.replace(/^#/, ''));
-      if (params.has('view')) {
-        switchView(params.get('view'));
-      }
-      if (params.has('card')) {
-        const targetCard = document.querySelector(`.yard-card[data-id="${params.get('card')}"]`);
-        if (targetCard) {
-          openCardDetail(targetCard);
+      function checkHashParams() {
+        const hashStr = window.location.hash.replace(/^#/, '');
+        const searchParams = new URLSearchParams(window.location.search);
+        const params = hashStr ? new URLSearchParams(hashStr) : searchParams;
+
+        if (params.has('view')) {
+          switchView(params.get('view'));
+        }
+        if (params.has('project')) {
+          const proj = params.get('project');
+          if (BEADS_DATA[proj]) {
+            activeProjectKey = proj;
+            beadsProjectSelect.value = proj;
+            updateBeadsRibbon();
+          }
+        }
+        if (params.has('card')) {
+          const targetCard = document.querySelector(`.yard-card[data-id="${params.get('card')}"]`);
+          if (targetCard) {
+            openCardDetail(targetCard);
+          }
+        }
+        if (params.has('bead')) {
+          const beadId = params.get('bead');
+          const currentProj = BEADS_DATA[activeProjectKey];
+          if (beadId === 'active' || beadId === 'inWork' || beadId === 'true') {
+            openBaseballCard('inWork');
+          } else if (currentProj.completed.id === beadId) {
+            openBaseballCard('completed');
+          } else if (currentProj.next.id === beadId) {
+            openBaseballCard('next');
+          } else {
+            openBaseballCard('inWork');
+          }
         }
       }
+
+      window.addEventListener('hashchange', checkHashParams);
+      checkHashParams();
     })();
   </script>
 </body>

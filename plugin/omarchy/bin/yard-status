@@ -40,6 +40,27 @@ else
         "message": "pytest repeated 3 consecutive times without code edits"
       }
     ]
+  },
+  "beads": {
+    "activeProject": "mowgli42/schwerpunkt",
+    "completed": {
+      "id": "schwerpunkt-i0i.2.5",
+      "title": "Operator REST API (manual demo, no AI)",
+      "status": "closed"
+    },
+    "inWork": {
+      "id": "schwerpunkt-i0i.3.1",
+      "title": "Observation impact hints + orient plan-impact",
+      "status": "in_progress",
+      "agent": "Cursor Cloud Agent (bc-709a)",
+      "model": "gemini-3.8-flash",
+      "specId": "openspec/specs/orientation-layer/spec.md"
+    },
+    "next": {
+      "id": "schwerpunkt-i0i.3.2",
+      "title": "MTO decision tree + Observe-Orient integration",
+      "status": "open"
+    }
   }
 }
 EOF

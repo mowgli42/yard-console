@@ -33,6 +33,7 @@ YARD is a mixed-fleet control plane designed to orchestrate agentic software eng
 | Web Console UI & Navigation | `openspec/specs/web-console/spec.md` | Keyboard-first Tokyo Night interface requirements and hotkeys. |
 | Omarchy Shell Plugin | `openspec/specs/omarchy-plugin/spec.md` | Native Quickshell bar widget, popup HUD, IPC targets. |
 | AI Tools Integration Matrix | `openspec/specs/ai-integrations/spec.md` | Protocols, MCP bridges, and telemetry pipelines for external agent tools. |
+| Beads & OpenSpec Interface | `openspec/specs/beads-openspec-interface/spec.md` | Beads issue tracking, active bead ticker, and OpenSpec Baseball Card modal. |
 
 ## Verification Framework
 

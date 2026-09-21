@@ -21,10 +21,25 @@ Open `index.html`. Tokyo Night. Keyboard first.
 | key | action |
 |---|---|
 | `1–7` | views |
+| `b` | openspec baseball card |
+| `[` `]` | prev / next bead |
 | `/` | filter |
 | `j` `k` | move card |
 | `return` | open detail |
 | `esc` | close / dismiss |
+
+## OpenSpec & Beads Baseball Card Interface
+
+The console integrates directly with **OpenSpec** capability definitions and **Beads** (`.beads/issues.jsonl`) linear progress pipelines:
+
+![OpenSpec & Beads Baseball Card](docs/images/07_baseball_card_openspec.png)
+
+- **Persistent Current Bead Ribbon:** Shows the project selector and the active 3-step bead pipeline: `[Last Completed]` ➜ `[In Work (Pulse)]` ➜ `[Next Queued]`.
+- **Baseball Card Modal (`b`):**
+  - **Player & Engine Stats:** Assigned agent, model (`gemini-3.8-flash`, `gpt-5.6-sol`, `sonnet-5`), token burn percentage, and heartbeat telemetry.
+  - **OpenSpec Definition:** Linked spec document, capability purpose statement, and formal `SHALL` requirement clause.
+  - **Executable Gherkin:** Syntax-highlighted `GIVEN` / `WHEN` / `THEN` scenario verifying the bead's acceptance criteria.
+  - **Connected Trio Stepper:** Click any pill or press `[` / `]` to step between the last completed, current in-work, and next bead.
 
 ## Agent Crews Across Projects
 
@@ -53,6 +68,8 @@ The **Crews View (`3`)** manages autonomous agile crews working concurrently acr
 | **Crews Matrix (View 3)** | `agent-scrum-core`, `agent-scrum-backup`, `agent-scrum-ooda`, `agent-scrum-reconcile`, `agent-scrum-release`, `agent-scrum-watch`, `agent-scrum-omarchy` | Scrum-master agents capping WIP across 7 distributed repositories. |
 | **Cursor Build Table (View 4)** | `Cursor Cloud (bc-709a / gpt-5.6-sol)`, `Cursor Local (Sonnet 5)`, `gemini-3.8-flash`, `composer-2.5` | Granular builder model attribution per branch, repo & PR. |
 | **Local Watch Table (View 6)** | `Ollama / Qwen 2.5 Coder 14B`, `llama.cpp / DeepSeek R1 14B`, `Mistral NeMo` | Zero-egress local observer models watching heartbeats across repos. |
+| **Beads Active Ribbon (Header)** | Current in-work bead ID (`schwerpunkt-i0i.3.1`, `yard-042`), assigned agent, live pulse | Continuous task attribution across multiple project repositories. |
+| **OpenSpec Baseball Card (`b`)** | Assigned agent (`Cursor Cloud bc-709a`), engine model (`gemini-3.8-flash`), token burn | Glanceable athlete-card stats, formal `SHALL` spec requirement, and Gherkin BDD scenario. |
 | **Persistent Footer Status Bar** | `Cursor Cloud Agent: Active`, `Grok Release Agent: Canary 10%`, `Local Watcher: 1 Alert` | Always-visible agent health LEDs across all views. |
 
 ## What this is not

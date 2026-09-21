@@ -220,10 +220,82 @@ Panel {
         }
       }
 
+      PanelSeparator { foreground: root.foreground }
+
+      // Beads Active Pipeline & OpenSpec Link
+      Column {
+        width: parent.width
+        spacing: Style.space(6)
+
+        PanelSectionHeader {
+          text: "BEADS PIPELINE (ACTIVE TRIO)"
+          foreground: root.foreground
+          fontFamily: root.fontFamily
+        }
+
+        Item {
+          width: parent.width
+          implicitHeight: Style.space(18)
+          Text {
+            text: "Project"
+            color: root.foreground
+            font.family: root.fontFamily
+            font.pixelSize: Style.font.caption
+            anchors.left: parent.left
+          }
+          Text {
+            text: (root.fleetData && root.fleetData.beads) ? root.fleetData.beads.activeProject : "mowgli42/schwerpunkt"
+            color: Color.accent || root.foreground
+            font.family: root.fontFamily
+            font.pixelSize: Style.font.caption
+            anchors.right: parent.right
+          }
+        }
+
+        Item {
+          width: parent.width
+          implicitHeight: Style.space(18)
+          Text {
+            text: "In Work"
+            color: root.foreground
+            font.family: root.fontFamily
+            font.pixelSize: Style.font.caption
+            anchors.left: parent.left
+          }
+          Text {
+            text: (root.fleetData && root.fleetData.beads && root.fleetData.beads.inWork) ? root.fleetData.beads.inWork.id : "schwerpunkt-i0i.3.1"
+            color: Color.accent || root.foreground
+            font.family: root.fontFamily
+            font.bold: true
+            font.pixelSize: Style.font.caption
+            anchors.right: parent.right
+          }
+        }
+
+        Item {
+          width: parent.width
+          implicitHeight: Style.space(18)
+          Text {
+            text: "OpenSpec"
+            color: root.dim
+            font.family: root.fontFamily
+            font.pixelSize: Style.font.caption
+            anchors.left: parent.left
+          }
+          Text {
+            text: (root.fleetData && root.fleetData.beads && root.fleetData.beads.inWork) ? root.fleetData.beads.inWork.specId : "orientation-layer/spec.md"
+            color: root.dim
+            font.family: root.fontFamily
+            font.pixelSize: Style.font.caption
+            anchors.right: parent.right
+          }
+        }
+      }
+
       // Quick Launch Button
       Button {
         width: parent.width
-        text: "Open YARD Tokyo Night Console"
+        text: "Open YARD Baseball Card Console"
         bordered: true
         foreground: root.foreground
         fontFamily: root.fontFamily
