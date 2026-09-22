@@ -105,6 +105,17 @@ class OmarchyPluginVerificationTests(unittest.TestCase):
         content = index_html.read_text(encoding="utf-8")
         self.assertIn("YARD", content)
 
+    def test_welfare_check_and_btw_peek(self):
+        """Verifies coordinator welfare audit and out-of-band /btw peek CLI."""
+        res = subprocess.run([str(STATUS_BIN), "--peek", "appliance-keeper"], capture_output=True, text=True)
+        self.assertEqual(res.returncode, 0, f"yard-status --peek failed: {res.stderr}")
+        peek_data = json.loads(res.stdout)
+        self.assertEqual(peek_data.get("project"), "mowgli42/appliance-keeper")
+        self.assertIn("welfareStatus", peek_data)
+        self.assertIn("peek", peek_data)
+        self.assertIn("channel", peek_data["peek"])
+        self.assertEqual(peek_data["peek"]["channel"], "out-of-band /btw probe")
+
 
 if __name__ == "__main__":
     unittest.main()

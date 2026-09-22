@@ -7,7 +7,10 @@
       "crew": "OODA Orientation Core",
       "runtime": "Cursor",
       "agent": "Cursor Cloud Agent (bc-709a)",
-      "model": "gemini-3.8-flash"
+      "model": "gemini-3.8-flash",
+      "role": "worker",
+      "host": "workstation-alpha (local)",
+      "coordinator": "Coordinator-1 (Claude Opus 4.5)"
     },
     {
       "id": "yard-console",
@@ -16,7 +19,10 @@
       "crew": "Core Control Plane",
       "runtime": "Cursor",
       "agent": "Cursor Cloud Agent (bc-709a)",
-      "model": "gemini-3.8-flash"
+      "model": "gemini-3.8-flash",
+      "role": "coordinator",
+      "host": "workstation-alpha (local)",
+      "coordinator": "Self"
     },
     {
       "id": "appliance-keeper",
@@ -25,7 +31,10 @@
       "crew": "Household Care & Inventory",
       "runtime": "Cursor",
       "agent": "Claude Sonnet (Claude-3.7)",
-      "model": "claude-sonnet-5-thinking-high"
+      "model": "claude-sonnet-5-thinking-high",
+      "role": "worker",
+      "host": "ssh://node-01.local (Worker 1)",
+      "coordinator": "Coordinator-1 (Claude Opus 4.5)"
     },
     {
       "id": "fluffy-spoon",
@@ -34,7 +43,10 @@
       "crew": "Culinary Knowledge & Static Engine",
       "runtime": "Cursor",
       "agent": "Cursor Cloud Agent (bc-709a)",
-      "model": "gemini-3.8-flash"
+      "model": "gemini-3.8-flash",
+      "role": "worker",
+      "host": "ssh://node-02.local (Worker 2)",
+      "coordinator": "Coordinator-1 (Claude Opus 4.5)"
     },
     {
       "id": "OnePage-PM",
@@ -43,7 +55,10 @@
       "crew": "Product & Plan Matrix Core",
       "runtime": "Cursor",
       "agent": "Cursor Cloud Agent (bc-709a)",
-      "model": "gpt-5.6-sol-high"
+      "model": "gpt-5.6-sol-high",
+      "role": "worker",
+      "host": "ssh://node-03.local (Worker 3)",
+      "coordinator": "Coordinator-1 (Claude Opus 4.5)"
     },
     {
       "id": "o-my-sim",
@@ -52,7 +67,10 @@
       "crew": "Sim Engine & Telemetry",
       "runtime": "Cursor",
       "agent": "Cursor Cloud Agent (bc-709a)",
-      "model": "gpt-5.6-sol-high"
+      "model": "gpt-5.6-sol-high",
+      "role": "worker",
+      "host": "ssh://node-04.local (Worker 4)",
+      "coordinator": "Coordinator-1 (Claude Opus 4.5)"
     },
     {
       "id": "verified-xfer",
@@ -61,7 +79,10 @@
       "crew": "Secure Mesh & QUIC",
       "runtime": "Cursor",
       "agent": "Cursor Agent",
-      "model": "claude-fable-5-1"
+      "model": "claude-fable-5-1",
+      "role": "worker",
+      "host": "ssh://node-02.local (Worker 2)",
+      "coordinator": "Coordinator-1 (Claude Opus 4.5)"
     }
   ],
   "pollIntervalSec": 5,

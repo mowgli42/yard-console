@@ -40,3 +40,38 @@ function getGithubSummary(fleetData) {
   }
   return totalPrs > 0 ? (totalPrs + " open PRs") : "Clean";
 }
+
+function getWelfareSummary(fleetData) {
+  if (!fleetData || !fleetData.coordinator || !fleetData.coordinator.welfareAudit) {
+    return "Welfare: Nominal";
+  }
+  var audit = fleetData.coordinator.welfareAudit;
+  if (audit.stalled > 0) {
+    return "Welfare: " + audit.stalled + " Stalled Worker" + (audit.stalled > 1 ? "s" : "");
+  }
+  if (audit.warning > 0) {
+    return "Welfare: " + audit.warning + " Warning · " + audit.healthy + " Healthy";
+  }
+  return "Welfare: " + audit.healthy + "/" + audit.totalWorkers + " Healthy";
+}
+
+function getActiveWorkerHost(fleetData) {
+  if (!fleetData || !fleetData.allProjects || !fleetData.beads) return "local";
+  var p = fleetData.allProjects[fleetData.beads.activeProject];
+  return p && p.host ? p.host : "local";
+}
+
+function getActiveWorkerWelfare(fleetData) {
+  if (!fleetData || !fleetData.allProjects || !fleetData.beads) return "NOMINAL";
+  var p = fleetData.allProjects[fleetData.beads.activeProject];
+  return p && p.welfare && p.welfare.status ? p.welfare.status : "NOMINAL";
+}
+
+function getActiveWorkerPeek(fleetData) {
+  if (!fleetData || !fleetData.allProjects || !fleetData.beads) return "No active probe";
+  var p = fleetData.allProjects[fleetData.beads.activeProject];
+  if (p && p.welfare && p.welfare.peek && p.welfare.peek.summary) {
+    return p.welfare.peek.summary;
+  }
+  return "Heartbeat nominal";
+}

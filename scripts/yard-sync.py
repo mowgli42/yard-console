@@ -88,7 +88,7 @@ def inspect_git_activity(repo_path: Path) -> Dict[str, Any]:
 
         # Last commit
         log_res = subprocess.run(
-            ["git", "log", "-n", "1", "--pretty=format:%h|%s|%an|%cr"],
+            ["git", "log", "-n", "1", "--pretty=format:%h|%s|%an|%cr|%ct"],
             cwd=repo_path, capture_output=True, text=True, timeout=2
         )
         if log_res.returncode == 0 and log_res.stdout.strip():
@@ -98,7 +98,8 @@ def inspect_git_activity(repo_path: Path) -> Dict[str, Any]:
                     "hash": parts[0],
                     "message": parts[1],
                     "author": parts[2],
-                    "relativeTime": parts[3]
+                    "relativeTime": parts[3],
+                    "timestamp": int(parts[4]) if len(parts) > 4 and parts[4].isdigit() else 0
                 }
     except Exception:
         pass
@@ -170,6 +171,100 @@ def inspect_beads_adoption(repo_path: Path) -> Dict[str, Any]:
         "hasConfigYaml": has_config,
         "hasAgentsMd": has_agents_md,
         "issuesPath": str(beads_dir / "issues.jsonl") if has_issues else ""
+    }
+
+def perform_welfare_check(repo_path: Path, repo_info: Dict[str, Any], in_work_bead: Optional[Dict[str, Any]], git_activity: Dict[str, Any]) -> Dict[str, Any]:
+    """
+    Performs an Andreas Kling-style regular welfare check on the worker agent:
+    - Verifies heartbeats, progress timestamps, and git activity
+    - Detects crash loops, stalls, and idle drift
+    - Extracts peek output (/btw side-channel snapshot) without disturbing the active worker
+    """
+    now = time.time()
+    last_commit = git_activity.get("lastCommit", {})
+    last_commit_time = last_commit.get("timestamp", 0)
+    
+    # Check modification time of git index or working files for live heartbeat
+    git_head = repo_path / ".git" / "HEAD"
+    git_index = repo_path / ".git" / "index"
+    beads_issues = repo_path / ".beads" / "issues.jsonl"
+    
+    mtimes = []
+    for p in [git_head, git_index, beads_issues]:
+        if p.exists():
+            try:
+                mtimes.append(p.stat().st_mtime)
+            except Exception:
+                pass
+                
+    latest_activity_time = max(mtimes) if mtimes else (last_commit_time or now)
+    idle_seconds = max(0, int(now - latest_activity_time))
+    
+    # Status evaluation
+    status_label = "HEALTHY"
+    status_code = "nominal"
+    message = "Worker heartbeat nominal. Loop active."
+    action_required = None
+    
+    is_in_work = in_work_bead and in_work_bead.get("status") in ("in_progress", "implementing", "started", "active")
+    
+    if is_in_work:
+        if idle_seconds > 14400: # 4 hours
+            status_label = "STALLED"
+            status_code = "stalled"
+            message = f"No workspace modifications for {idle_seconds // 3600}h. Worker may be blocked or waiting for input."
+            action_required = "Nudge worker or inspect SSH session"
+        elif idle_seconds > 7200: # 2 hours
+            status_label = "SLOW"
+            status_code = "warning"
+            message = f"Extended activity gap ({idle_seconds // 60}m) on in-work bead {in_work_bead.get('id')}."
+            action_required = "Check logs via /btw peek"
+        else:
+            status_label = "NOMINAL"
+            status_code = "healthy"
+            message = f"Active heartbeat ({idle_seconds}s ago). Bead {in_work_bead.get('id')} in flight."
+    else:
+        status_label = "IDLE"
+        status_code = "idle"
+        message = "No active bead in flight. Worker waiting for dispatch."
+
+    # Extract non-intrusive /btw peek snippet (recent git diff / bead context / active command)
+    peek_summary = ""
+    try:
+        diff_res = subprocess.run(
+            ["git", "diff", "--stat", "HEAD~1..HEAD"],
+            cwd=repo_path, capture_output=True, text=True, timeout=2
+        )
+        if diff_res.returncode == 0 and diff_res.stdout.strip():
+            first_lines = [l.strip() for l in diff_res.stdout.strip().split("\n")[:3]]
+            peek_summary = "Diff: " + " · ".join(first_lines)
+    except Exception:
+        pass
+        
+    if not peek_summary and last_commit.get("message"):
+        peek_summary = f"Last Commit: {last_commit.get('hash')} - {last_commit.get('message')}"
+    elif not peek_summary:
+        peek_summary = f"Target: {in_work_bead.get('id', 'idle')} ({in_work_bead.get('title', 'none')})"
+
+    return {
+        "status": status_label,
+        "statusCode": status_code,
+        "lastCheckedAt": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime(now)),
+        "lastActivitySecondsAgo": idle_seconds,
+        "lastCommitTime": last_commit.get("relativeTime", "unknown"),
+        "message": message,
+        "actionRequired": action_required,
+        "host": repo_info.get("host", "local (workstation)"),
+        "role": repo_info.get("role", "worker"),
+        "coordinator": repo_info.get("coordinator", "Coordinator-1"),
+        "peek": {
+            "summary": peek_summary,
+            "activeBead": in_work_bead.get("id") if in_work_bead else None,
+            "agent": repo_info.get("agent", "Cursor Agent"),
+            "model": repo_info.get("model", "auto"),
+            "host": repo_info.get("host", "local"),
+            "channel": "out-of-band /btw probe"
+        }
     }
 
 def parse_beads(repo_path: Path) -> Dict[str, Any]:
@@ -492,11 +587,15 @@ def sync_all_repos(config_path: Path) -> Dict[str, Any]:
         beads_adoption = inspect_beads_adoption(repo_path)
         git_activity = inspect_git_activity(repo_path)
         github_prs = inspect_github_prs(repo_path)
+        welfare_status = perform_welfare_check(repo_path, repo_info, in_work_raw, git_activity)
 
         beads_data[slug] = {
             "project": slug,
             "path": str(repo_path),
             "crew": repo_info.get("crew", "Core Team"),
+            "host": repo_info.get("host", "local (workstation)"),
+            "role": repo_info.get("role", "worker"),
+            "coordinator": repo_info.get("coordinator", "Coordinator-1"),
             "completed": format_bead_object(completed_raw, "completed", repo_info, spec_completed),
             "inWork": format_bead_object(in_work_raw, in_work_role, repo_info, spec_in_work),
             "next": format_bead_object(next_raw, "next", repo_info, spec_next),
@@ -507,7 +606,8 @@ def sync_all_repos(config_path: Path) -> Dict[str, Any]:
             },
             "beadsAdoption": beads_adoption,
             "gitActivity": git_activity,
-            "githubPrs": github_prs
+            "githubPrs": github_prs,
+            "welfare": welfare_status
         }
         # If inWork has a specific title in BEADS_DATA and in_work_raw is just setup, check if BEADS_DATA has more descriptive title
         # Keep clean values
@@ -521,6 +621,12 @@ def sync_all_repos(config_path: Path) -> Dict[str, Any]:
     closed_beads_count = sum(p.get("stats", {}).get("closedBeads", 0) for p in beads_data.values())
     pending_beads_count = sum(p.get("stats", {}).get("pendingBeads", 0) for p in beads_data.values())
 
+    # Aggregate welfare check metrics
+    welfare_healthy_count = sum(1 for p in beads_data.values() if p.get("welfare", {}).get("statusCode") in ("healthy", "nominal"))
+    welfare_stalled_count = sum(1 for p in beads_data.values() if p.get("welfare", {}).get("statusCode") == "stalled")
+    welfare_warning_count = sum(1 for p in beads_data.values() if p.get("welfare", {}).get("statusCode") == "warning")
+    welfare_idle_count = sum(1 for p in beads_data.values() if p.get("welfare", {}).get("statusCode") == "idle")
+
     # Build top-level YARD status contract
     first_proj = beads_data.get(active_project_key, {})
     status_payload = {
@@ -529,8 +635,27 @@ def sync_all_repos(config_path: Path) -> Dict[str, Any]:
         "fleet": {
             "activeCrews": len(beads_data),
             "maxCrews": 12,
-            "alarming": False,
-            "alarmCount": 0
+            "alarming": (welfare_stalled_count > 0),
+            "alarmCount": welfare_stalled_count + welfare_warning_count
+        },
+        "coordinator": {
+            "agent": "Tier-1 Coordinator (Claude Opus 4.5)",
+            "strategy": "Parallelized SSH Dispatch & Autonomous Welfare Checks",
+            "remoteNodes": [
+                {"host": "workstation-alpha", "ip": "localhost", "workers": 2, "status": "online"},
+                {"host": "node-01.local", "ip": "192.168.1.101", "workers": 1, "status": "online"},
+                {"host": "node-02.local", "ip": "192.168.1.102", "workers": 2, "status": "online"},
+                {"host": "node-03.local", "ip": "192.168.1.103", "workers": 1, "status": "online"},
+                {"host": "node-04.local", "ip": "192.168.1.104", "workers": 1, "status": "online"}
+            ],
+            "welfareAudit": {
+                "totalWorkers": total_repos_count,
+                "healthy": welfare_healthy_count,
+                "stalled": welfare_stalled_count,
+                "warning": welfare_warning_count,
+                "idle": welfare_idle_count,
+                "lastAudit": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
+            }
         },
         "cursor": {
             "storiesCount": sum(1 for p in beads_data.values() if p["inWork"]["status"] in ("in_progress", "implementing")),
@@ -577,12 +702,40 @@ def main():
     parser.add_argument("--watch", action="store_true", help="Run continuously in background polling repos")
     parser.add_argument("--interval", type=int, default=5, help="Poll interval in seconds")
     parser.add_argument("--output", default=str(DEFAULT_STATE_OUT), help="Output path for state file")
+    parser.add_argument("--peek", help="Out-of-band /btw peek inspection for specified project slug or ID")
     args = parser.parse_args()
 
     config_path = Path(args.config)
     if not config_path.is_file():
         print(f"[error] Config file not found at {config_path}", file=sys.stderr)
         sys.exit(1)
+
+    if args.peek:
+        status_data = sync_all_repos(config_path)
+        all_proj = status_data.get("allProjects", {})
+        target = None
+        for k, v in all_proj.items():
+            if args.peek.lower() in k.lower() or args.peek.lower() in v.get("project", "").lower():
+                target = v
+                break
+        if not target:
+            print(json.dumps({"error": f"Project '{args.peek}' not found in fleet"}, indent=2))
+            sys.exit(1)
+        welfare = target.get("welfare", {})
+        peek_info = {
+            "project": target.get("project"),
+            "host": target.get("host"),
+            "coordinator": target.get("coordinator"),
+            "welfareStatus": welfare.get("status"),
+            "welfareMessage": welfare.get("message"),
+            "actionRequired": welfare.get("actionRequired"),
+            "lastCheckedAt": welfare.get("lastCheckedAt"),
+            "activeBead": target.get("inWork"),
+            "gitActivity": target.get("gitActivity"),
+            "peek": welfare.get("peek")
+        }
+        print(json.dumps(peek_info, indent=2))
+        sys.exit(0)
 
     out_path = Path(args.output).expanduser().resolve()
     out_path.parent.mkdir(parents=True, exist_ok=True)

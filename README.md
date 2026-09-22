@@ -91,9 +91,24 @@ The **Crews View (`3`)** manages autonomous agile crews working concurrently acr
 | **Local Watch Table (View 6)** | `Ollama / Qwen 2.5 Coder 14B`, `llama.cpp / DeepSeek R1 14B`, `Mistral NeMo` | Zero-egress local observer models watching heartbeats across repos (`appliance-keeper`, `fluffy-spoon`, `OnePage-PM`, `schwerpunkt`). |
 | **Beads Active Ribbon (Header)** | Current in-work bead ID (`appliance-keeper-o4o`, `fluffy-spoon-box`, `OnePage-PM-oppm`, `schwerpunkt-i0i.3.1`), assigned agent, live pulse | Continuous task attribution across multiple project repositories. |
 | **Beads & GitHub Matrix (View 1)** | Fleet adoption rate, issue backend (Dolt/JSONL), git dirty state, and open GitHub PRs per repo | Deep ecosystem adoption scorecard and pull request linkage. |
-| **OpenSpec Baseball Card (`b`)** | Assigned agent (`Claude Sonnet 3.7`, `gemini-3.8-flash`, `gpt-5.6-sol`), engine model, token burn, git branch, commit hash, and PR # | Glanceable athlete-card stats, formal `SHALL` spec requirement, Git metadata, and Gherkin BDD scenario. |
-| **Omarchy Quickshell HUD (`BarWidget.qml` / `Panel.qml`)** | Dynamic Bar button tooltip (`YARD [6/7 Beads] In-Work: ...`), Beads adoption score, agent state, and GitHub telemetry | Linux desktop integration via Omarchy shell status bar. |
+| **Coordinator & Welfare Monitor (View 1)** | Tier-1 Coordinator audit, distributed SSH worker hosts, liveness pulse, and stall warnings | Autonomous agent fleet health checks and multi-machine coordination. |
+| **OpenSpec Baseball Card (`b`)** | Assigned agent (`Claude Sonnet 3.7`, `gemini-3.8-flash`, `gpt-5.6-sol`), engine model, token burn, git branch, commit hash, PR #, and `/btw` peek | Glanceable athlete-card stats, formal `SHALL` spec requirement, Git metadata, Gherkin BDD scenario, and non-intrusive `/btw` side-channel peek. |
+| **Omarchy Quickshell HUD (`BarWidget.qml` / `Panel.qml`)** | Dynamic Bar button tooltip (`YARD [6/7 Beads · Welfare OK] In-Work: ...`), coordinator welfare audit, active worker host, and live `/btw` probe | Linux desktop integration via Omarchy shell status bar. |
 | **Persistent Footer Status Bar** | `Cursor Cloud Agent: Active`, `Grok Release Agent: Canary 10%`, `Local Watcher: 1 Alert` | Always-visible agent health LEDs across all views. |
+
+## Coordinator Welfare Checks & `/btw` Side-Channel Probing
+
+YARD implements the multi-agent coordinator pattern inspired by Andreas Kling's distributed fleet workflow:
+
+1. **Tier-1 Coordinator Welfare Audit:** The background daemon audits worker activity across distributed hosts (`workstation-alpha`, `ssh://node-01.local`, `ssh://node-02.local`, etc.), detecting idle drift (>2h warning), crash loops, and hard worker stalls (>4h alert).
+2. **Out-of-Band `/btw` Peeking:** Query active worker state, diffs, and in-flight beads without disturbing the long-running worker process:
+   ```bash
+   # Peek at an individual repository/agent out-of-band
+   ./bin/yard-status --peek appliance-keeper
+   # or via alias
+   ./bin/yard-status --btw fluffy-spoon
+   ```
+3. **Omarchy Bar & HUD Welfare Indicators:** The status bar icon and Quickshell popout panel (`Panel.qml`) display real-time worker host targets, welfare statuses, and `/btw` probe summaries.
 
 ## Live Operation & Repository Management
 

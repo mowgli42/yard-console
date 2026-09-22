@@ -4,7 +4,7 @@
   "name": "YARD Control Plane",
   "version": "0.2.0",
   "author": "YARD Team",
-  "description": "Control plane and HUD for Beads task pipelines, GitHub activity, agent status, and OpenSpec contracts.",
+  "description": "Control plane and HUD for Beads pipelines, coordinator welfare checks, out-of-band /btw peeks, and OpenSpec contracts.",
   "kinds": [
     "bar-widget"
   ],
@@ -13,7 +13,7 @@
   },
   "barWidget": {
     "displayName": "YARD & Beads Control Plane",
-    "description": "At-a-glance Beads adoption, current active in-work bead, GitHub PRs, agent status, and OpenSpec definitions.",
+    "description": "At-a-glance Beads adoption, coordinator welfare checks, /btw peek probes, in-work beads, and OpenSpec definitions.",
     "category": "AI",
     "defaultSection": "right",
     "allowMultiple": false,

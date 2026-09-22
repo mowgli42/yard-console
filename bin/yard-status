@@ -6,6 +6,15 @@ REPO_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
 
 STATUS_FILE="${XDG_STATE_HOME:-$HOME/.local/state}/yard/status.json"
 
+# Support --peek / -p <project> or --btw <project> out-of-band welfare peek
+if [[ "$1" == "--peek" || "$1" == "-p" || "$1" == "--btw" ]]; then
+  PROJECT="${2:-}"
+  if [[ -f "$REPO_DIR/scripts/yard-sync.py" ]]; then
+    python3 "$REPO_DIR/scripts/yard-sync.py" --peek "$PROJECT"
+    exit $?
+  fi
+fi
+
 # If status file doesn't exist or is stale (>60s), attempt a quick sync pass
 if [[ ! -f "$STATUS_FILE" && -f "$REPO_DIR/scripts/yard-sync.py" ]]; then
   python3 "$REPO_DIR/scripts/yard-sync.py" >/dev/null 2>&1 || true
@@ -82,6 +91,17 @@ else
     "totalBeads": 24,
     "closedBeads": 14,
     "pendingBeads": 10
+  },
+  "coordinator": {
+    "agent": "Tier-1 Coordinator (Claude Opus 4.5)",
+    "strategy": "Parallelized SSH Dispatch & Autonomous Welfare Checks",
+    "welfareAudit": {
+      "totalWorkers": 7,
+      "healthy": 6,
+      "stalled": 0,
+      "warning": 1,
+      "idle": 0
+    }
   }
 }
 EOF

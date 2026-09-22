@@ -55,7 +55,8 @@ BarWidget {
       var fd = item.fleetData
       var beadId = (fd.beads && fd.beads.inWork) ? fd.beads.inWork.id : "idle"
       var beadAdopt = (fd.beadsSystem) ? (fd.beadsSystem.adoptedRepos + "/" + fd.beadsSystem.totalRepos + " Beads") : ""
-      return "YARD [" + beadAdopt + "] In-Work: " + beadId
+      var welfare = (fd.coordinator && fd.coordinator.welfareAudit) ? (fd.coordinator.welfareAudit.stalled > 0 ? " · ⚠ " + fd.coordinator.welfareAudit.stalled + " Stalled" : " · Welfare OK") : ""
+      return "YARD [" + beadAdopt + welfare + "] In-Work: " + beadId
     }
     onPressed: function(mouseButton) {
       if (mouseButton === Qt.LeftButton) root.togglePanel()

@@ -479,6 +479,85 @@ Panel {
         }
       }
 
+      PanelSeparator { foreground: root.foreground }
+
+      // Coordinator Welfare Check & /btw Peek (Andreas Kling multi-agent pattern)
+      Column {
+        width: parent.width
+        spacing: Style.space(6)
+
+        PanelSectionHeader {
+          text: "COORDINATOR & /btw WELFARE CHECK"
+          foreground: root.foreground
+          fontFamily: root.fontFamily
+        }
+
+        Item {
+          width: parent.width
+          implicitHeight: Style.space(18)
+          Text {
+            text: "Fleet Welfare Audit"
+            color: root.foreground
+            font.family: root.fontFamily
+            font.pixelSize: Style.font.caption
+            anchors.left: parent.left
+          }
+          Text {
+            text: YardModel.getWelfareSummary(root.fleetData)
+            color: (root.fleetData && root.fleetData.coordinator && root.fleetData.coordinator.welfareAudit && root.fleetData.coordinator.welfareAudit.stalled > 0)
+              ? Color.urgent
+              : Color.accent || root.foreground
+            font.family: root.fontFamily
+            font.pixelSize: Style.font.caption
+            anchors.right: parent.right
+          }
+        }
+
+        Item {
+          width: parent.width
+          implicitHeight: Style.space(18)
+          Text {
+            text: "Active Worker Host"
+            color: root.foreground
+            font.family: root.fontFamily
+            font.pixelSize: Style.font.caption
+            anchors.left: parent.left
+          }
+          Text {
+            text: YardModel.getActiveWorkerHost(root.fleetData)
+            color: root.dim
+            font.family: root.fontFamily
+            font.pixelSize: Style.font.caption
+            anchors.right: parent.right
+            elide: Text.ElideRight
+            width: parent.width * 0.6
+            horizontalAlignment: Text.AlignRight
+          }
+        }
+
+        Item {
+          width: parent.width
+          implicitHeight: Style.space(18)
+          Text {
+            text: "/btw Peek Probe"
+            color: root.foreground
+            font.family: root.fontFamily
+            font.pixelSize: Style.font.caption
+            anchors.left: parent.left
+          }
+          Text {
+            text: YardModel.getActiveWorkerPeek(root.fleetData)
+            color: Color.accent || root.foreground
+            font.family: root.fontFamily
+            font.pixelSize: Style.font.caption
+            anchors.right: parent.right
+            elide: Text.ElideRight
+            width: parent.width * 0.65
+            horizontalAlignment: Text.AlignRight
+          }
+        }
+      }
+
       // Quick Launch Button
       Button {
         width: parent.width

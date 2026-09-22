@@ -1216,8 +1216,8 @@
             <thead>
               <tr>
                 <th>Project Repository</th>
-                <th>Beads Adoption</th>
-                <th>Issues & Backend</th>
+                <th>Host / Node</th>
+                <th>Welfare Check</th>
                 <th>Current Active Bead</th>
                 <th>Assigned Agent</th>
                 <th>Agent Status</th>
@@ -1228,8 +1228,8 @@
             <tbody>
               <tr>
                 <td><code>mowgli42/appliance-keeper</code></td>
-                <td><span class="badge badge-pass">100% Adopted</span></td>
-                <td>2 Beads · dolt</td>
+                <td><span style="font-family:var(--font-mono);font-size:11px;color:var(--accent-purple);">node-01 (Worker 1)</span></td>
+                <td><span class="badge badge-pass">● Welfare Nominal</span></td>
                 <td><code>appliance-keeper-o4o</code> (filter mark-changed)</td>
                 <td><span class="badge badge-info">Claude Sonnet 3.7</span></td>
                 <td><span style="color:var(--accent-green);">● Active Loop</span></td>
@@ -1238,8 +1238,8 @@
               </tr>
               <tr>
                 <td><code>mowgli42/fluffy-spoon</code></td>
-                <td><span class="badge badge-pass">100% Adopted</span></td>
-                <td>1 Bead · dolt</td>
+                <td><span style="font-family:var(--font-mono);font-size:11px;color:var(--accent-purple);">node-02 (Worker 2)</span></td>
+                <td><span class="badge badge-pass">● Welfare Nominal</span></td>
                 <td><code>fluffy-spoon-box</code> (recipe index)</td>
                 <td><span class="badge badge-info">Cursor (gemini-3.8-flash)</span></td>
                 <td><span style="color:var(--accent-green);">● Active Loop</span></td>
@@ -1248,8 +1248,8 @@
               </tr>
               <tr>
                 <td><code>mowgli42/OnePage-PM</code></td>
-                <td><span class="badge badge-pass">100% Adopted</span></td>
-                <td>1 Bead · dolt</td>
+                <td><span style="font-family:var(--font-mono);font-size:11px;color:var(--accent-purple);">node-03 (Worker 3)</span></td>
+                <td><span class="badge badge-pass">● Welfare Nominal</span></td>
                 <td><code>OnePage-PM-oppm</code> (matrix view)</td>
                 <td><span class="badge badge-info">Cursor (gpt-5.6-sol)</span></td>
                 <td><span style="color:var(--accent-green);">● Active Loop</span></td>
@@ -1258,8 +1258,8 @@
               </tr>
               <tr>
                 <td><code>mowgli42/schwerpunkt</code></td>
-                <td><span class="badge badge-pass">100% Adopted</span></td>
-                <td>31 Beads · dolt</td>
+                <td><span style="font-family:var(--font-mono);font-size:11px;color:var(--accent-purple);">local (workstation)</span></td>
+                <td><span class="badge badge-pass">● Welfare Nominal</span></td>
                 <td><code>schwerpunkt-i0i</code> (Boyd OODA)</td>
                 <td><span class="badge badge-info">Cursor (gemini-3.8-flash)</span></td>
                 <td><span style="color:var(--accent-green);">● Active Loop</span></td>
@@ -1268,8 +1268,8 @@
               </tr>
               <tr>
                 <td><code>mowgli42/yard-console</code></td>
-                <td><span class="badge badge-info">Control Plane</span></td>
-                <td>Live State Sync</td>
+                <td><span style="font-family:var(--font-mono);font-size:11px;color:var(--accent-blue);">local (Coordinator)</span></td>
+                <td><span class="badge badge-pass">● Welfare Nominal</span></td>
                 <td><code>yard-042</code> (Console HUD)</td>
                 <td><span class="badge badge-info">Cursor (gemini-3.8-flash)</span></td>
                 <td><span style="color:var(--accent-green);">● Active Loop</span></td>
@@ -2144,6 +2144,34 @@
   <span class="gh-step">AND</span> the next due date <span class="gh-kw">SHALL</span> be intervalDays after that date</div>
         </div>
 
+        <!-- Coordinator Welfare Check & /btw Side-Channel Peek Bar -->
+        <div class="bb-box" style="padding:10px 14px;background:rgba(26,27,38,0.9);border:1px solid var(--accent-purple);">
+          <div class="bb-box-title" style="margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;">
+            <div style="display:flex;align-items:center;gap:8px;">
+              <span style="color:var(--accent-purple);font-weight:bold;">COORDINATOR WELFARE CHECK & /btw PEEK</span>
+              <span class="badge badge-pass" id="bbWelfareBadge" style="font-size:9px;">NOMINAL</span>
+            </div>
+            <div style="font-size:10px;color:var(--fg-muted);" id="bbWelfareAuditTime">Checked: Just now</div>
+          </div>
+          <div style="display:grid;grid-template-columns:1.2fr 1fr;gap:12px;font-size:11px;">
+            <div>
+              <div style="color:var(--fg-muted);font-size:10px;text-transform:uppercase;">Host & Coordinator</div>
+              <div style="font-family:var(--font-mono);color:var(--fg-primary);margin-top:2px;" id="bbWelfareHost">ssh://node-01.local (Worker 1) · Coord: Claude Opus 4.5</div>
+              <div style="color:var(--fg-muted);font-size:10px;text-transform:uppercase;margin-top:6px;">Liveness Audit</div>
+              <div style="color:var(--accent-cyan);margin-top:2px;" id="bbWelfareMessage">Worker heartbeat nominal. Loop active.</div>
+            </div>
+            <div style="background:var(--bg-canvas);padding:6px 10px;border-radius:4px;border:1px solid var(--border-subtle);">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
+                <span style="font-size:10px;color:var(--accent-purple);font-family:var(--font-mono);font-weight:bold;">/btw OUT-OF-BAND PEEK</span>
+                <span style="font-size:9px;color:var(--fg-muted);">Non-intrusive probe</span>
+              </div>
+              <div style="font-family:var(--font-mono);font-size:10px;color:var(--fg-secondary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" id="bbWelfarePeek">
+                Diff: .cursor/rules/ponytail.mdc | 38 +++
+              </div>
+            </div>
+          </div>
+        </div>
+
         <!-- Connected 3-Step Beads Pipeline (Back of Card / Bottom Stepper) -->
         <div class="bb-box" style="padding:10px 14px;">
           <div class="bb-box-title" style="margin-bottom:6px;">
@@ -2852,6 +2880,32 @@
           beadsBackendEl.innerText = adopt ? `${adopt.backend.toUpperCase()} Ready` : 'DOLT Ready';
         }
 
+        // Update Welfare Check & /btw Peek Bar
+        const welfareBadgeEl = document.getElementById('bbWelfareBadge');
+        const welfareAuditTimeEl = document.getElementById('bbWelfareAuditTime');
+        const welfareHostEl = document.getElementById('bbWelfareHost');
+        const welfareMessageEl = document.getElementById('bbWelfareMessage');
+        const welfarePeekEl = document.getElementById('bbWelfarePeek');
+
+        const w = proj.welfare || {};
+        if (welfareBadgeEl) {
+          welfareBadgeEl.innerText = w.status || 'NOMINAL';
+          welfareBadgeEl.className = `badge ${w.statusCode === 'stalled' ? 'badge-alert' : w.statusCode === 'warning' ? 'badge-warn' : 'badge-pass'}`;
+        }
+        if (welfareAuditTimeEl) {
+          welfareAuditTimeEl.innerText = w.lastCheckedAt ? `Checked: ${w.lastCheckedAt.split('T')[1].replace('Z','')}` : 'Checked: live';
+        }
+        if (welfareHostEl) {
+          welfareHostEl.innerText = `${proj.host || 'local'} · Coord: ${proj.coordinator || 'Coordinator-1'}`;
+        }
+        if (welfareMessageEl) {
+          welfareMessageEl.innerText = w.message || 'Worker heartbeat nominal. Loop active.';
+        }
+        if (welfarePeekEl) {
+          const p = w.peek || {};
+          welfarePeekEl.innerText = p.summary || (bead.title ? `In-work: ${bead.id} (${bead.title})` : 'Active worker loop');
+        }
+
         document.getElementById('bbCliCmd').innerText = bead.cliCmd || 'bd show';
 
         baseballModal.classList.add('active');
@@ -3180,11 +3234,17 @@
                   if (liveProj.beadsAdoption) BEADS_DATA[key].beadsAdoption = liveProj.beadsAdoption;
                   if (liveProj.gitActivity) BEADS_DATA[key].gitActivity = liveProj.gitActivity;
                   if (liveProj.githubPrs) BEADS_DATA[key].githubPrs = liveProj.githubPrs;
+                  if (liveProj.welfare) BEADS_DATA[key].welfare = liveProj.welfare;
+                  if (liveProj.host) BEADS_DATA[key].host = liveProj.host;
+                  if (liveProj.coordinator) BEADS_DATA[key].coordinator = liveProj.coordinator;
                 }
               });
 
               // Update Overview adoption & GitHub badges if present
-              if (data.beadsSystem) {
+              if (data.coordinator && data.coordinator.welfareAudit) {
+                const bBadge = document.getElementById('overviewBeadsAdoptBadge');
+                if (bBadge) bBadge.innerText = `Welfare: ${data.coordinator.welfareAudit.healthy}/${data.coordinator.welfareAudit.totalWorkers} Healthy · ${data.coordinator.welfareAudit.stalled} Stalled`;
+              } else if (data.beadsSystem) {
                 const bBadge = document.getElementById('overviewBeadsAdoptBadge');
                 if (bBadge) bBadge.innerText = `Beads ${data.beadsSystem.adoptionPercent}% Adopted (${data.beadsSystem.adoptedRepos}/${data.beadsSystem.totalRepos})`;
               }

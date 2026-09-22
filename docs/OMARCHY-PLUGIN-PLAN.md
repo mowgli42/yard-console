@@ -74,6 +74,22 @@ The plugin monitors `~/.local/state/yard/status.json`:
     "activePr": "#42 Tokyo Night sync",
     "status": "nominal"
   },
+  "coordinator": {
+    "agent": "Tier-1 Coordinator (Claude Opus 4.5)",
+    "strategy": "Parallelized SSH Dispatch & Autonomous Welfare Checks",
+    "remoteNodes": [
+      { "host": "workstation-alpha", "ip": "localhost", "workers": 2, "status": "online" },
+      { "host": "node-01.local", "ip": "192.168.1.101", "workers": 1, "status": "online" },
+      { "host": "node-02.local", "ip": "192.168.1.102", "workers": 2, "status": "online" }
+    ],
+    "welfareAudit": {
+      "totalWorkers": 7,
+      "healthy": 6,
+      "stalled": 0,
+      "warning": 1,
+      "idle": 0
+    }
+  },
   "grok": {
     "canaryTag": "v1.4.2-rc1",
     "canaryPercent": 10,
@@ -135,4 +151,5 @@ The plugin monitors `~/.local/state/yard/status.json`:
 - **Phase 1 (Complete):** Core QML manifests and UI components validated at the repository root for direct `omarchy plugin add` compatibility.
 - **Phase 2 (Complete):** CLI helper script `yard-status` providing JSON bridge to Quickshell `Process` or `FileView`, with Beads ecosystem, Git activity, and agent state metrics.
 - **Phase 3 (Complete):** Beads adoption & GitHub activity HUD integration inside `Panel.qml` with dynamic tooltip status in `BarWidget.qml`.
-- **Phase 4:** Desktop notifications dispatch via `omarchy-shell` notification daemon when an urgent local watch card is raised.
+- **Phase 4 (Complete):** Tier-1 Coordinator welfare checks, autonomous worker liveness probes, stall detection, and out-of-band `/btw` side-channel peek integration across Web Console, CLI, and Omarchy HUD.
+- **Phase 5:** Desktop notifications dispatch via `omarchy-shell` notification daemon when an urgent local watch card is raised or a worker stall is detected.
