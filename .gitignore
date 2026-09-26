@@ -3,3 +3,7 @@
 node_modules/
 .idea/
 .vscode/
+
+# Secrets (never commit private keys)
+*-key.pem
+*.key
